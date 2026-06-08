@@ -2,301 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analytics Mastery - From Basic to Advanced</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Data Analytics Hub | Learn from Basics to Advanced</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js for interactive simulations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon">📊</span>
-                <span class="logo-text">DataAnalytics<span class="highlight">Mastery</span></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#courses" class="nav-link">Courses</a></li>
-                <li><a href="#resources" class="nav-link">Resources</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-toggle" id="navToggle">
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-                <span class="toggle-bar"></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Master <span class="gradient-text">Data Analytics</span><br>From Basic to Advanced</h1>
-            <p class="hero-subtitle">Learn data analytics with comprehensive courses, hands-on projects, and real-world resources. Start your journey today!</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="scrollToCourses()">Start Learning Now</button>
-                <button class="btn btn-secondary" onclick="showCourses()">Explore Courses</button>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Courses</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Students</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100+</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Support</span>
-                </div>
-            </div>
+<nav class="navbar">
+    <div class="container nav-flex">
+        <div class="logo">
+            <i class="fas fa-chart-line"></i> Data<span style="color:#1e3a8a;">Analytics</span>Hub
         </div>
-        <div class="hero-visual">
-            <div class="chart-animation">
-                <div class="chart-bar" style="height: 60%"></div>
-                <div class="chart-bar" style="height: 80%"></div>
-                <div class="chart-bar" style="height: 45%"></div>
-                <div class="chart-bar" style="height: 90%"></div>
-                <div class="chart-bar" style="height: 70%"></div>
-            </div>
-        </div>
-    </section>
+        <ul class="nav-links">
+            <li><a href="#basics">Basics</a></li>
+            <li><a href="#core">Core</a></li>
+            <li><a href="#advanced">Advanced</a></li>
+            <li><a href="#simulations">Simulations</a></li>
+            <li><a href="#resources">Resources</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <!-- Courses Section -->
-    <section id="courses" class="courses-section">
-        <div class="container">
-            <h2 class="section-title">Our <span class="gradient-text">Courses</span></h2>
-            <p class="section-subtitle">Comprehensive learning path from beginner to expert</p>
-            
-            <div class="course-filter">
-                <button class="filter-btn active" onclick="filterCourses('all')">All Courses</button>
-                <button class="filter-btn" onclick="filterCourses('basic')">Basic</button>
-                <button class="filter-btn" onclick="filterCourses('intermediate')">Intermediate</button>
-                <button class="filter-btn" onclick="filterCourses('advanced')">Advanced</button>
-            </div>
-
-            <div class="courses-grid" id="coursesGrid"></div>
-        </div>
-    </section>
-
-    <!-- Resources Section -->
-    <section id="resources" class="resources-section">
-        <div class="container">
-            <h2 class="section-title">Learning <span class="gradient-text">Resources</span></h2>
-            <p class="section-subtitle">Essential tools, datasets, and references for your analytics journey</p>
-            
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">📁</div>
-                    <h3>Free Datasets</h3>
-                    <p>Access 100+ real-world datasets for practice</p>
-                    <button class="btn btn-small" onclick="openResource('datasets')">Get Datasets</button>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">🛠️</div>
-                    <h3>Tools & Software</h3>
-                    <p>Download essential analytics tools</p>
-                    <button class="btn btn-small" onclick="openResource('tools')">View Tools</button>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">📚</div>
-                    <h3>Tutorials & Guides</h3>
-                    <p>Step-by-step tutorials for every topic</p>
-                    <button class="btn btn-small" onclick="openResource('tutorials')">Read Guides</button>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">💻</div>
-                    <h3>Code Examples</h3>
-                    <p>Ready-to-use code snippets</p>
-                    <button class="btn btn-small" onclick="openResource('code')">View Codes</button>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">🎓</div>
-                    <h3>Certification Prep</h3>
-                    <p>Prepare for industry certifications</p>
-                    <button class="btn btn-small" onclick="openResource('certification')">Start Prep</button>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-icon">👥</div>
-                    <h3>Community Forum</h3>
-                    <p>Connect with fellow learners</p>
-                    <button class="btn btn-small" onclick="openResource('community')">Join Forum</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="section-title">Why <span class="gradient-text">Choose Us</span></h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Structured Learning</h3>
-                    <p>Progressive curriculum from basics to advanced concepts</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👐</div>
-                    <h3>Hands-on Projects</h3>
-                    <p>Real-world projects to apply your knowledge</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
-                    <h3>Comprehensive Resources</h3>
-                    <p>Datasets, tools, and tutorials all in one place</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Certification</h3>
-                    <p>Get certified upon course completion</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍🏫</div>
-                    <h3>Expert Mentors</h3>
-                    <p>Learn from industry professionals</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Continuous Updates</h3>
-                    <p>New content added regularly</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2 class="section-title">About <span class="gradient-text">Platform</span></h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>We believe everyone should have access to quality data analytics education. Our platform provides comprehensive courses, practical resources, and community support to help you master data analytics at any level.</p>
-                    <p>Whether you're a student, professional, or enthusiast, our structured learning path will guide you from basic concepts to advanced analytics techniques.</p>
-                    <div class="about-stats">
-                        <div class="mini-stat"><span class="mini-number">50+</span><span class="mini-label">Courses</span></div>
-                        <div class="mini-stat"><span class="mini-number">200+</span><span class="mini-label">Tutorials</span></div>
-                        <div class="mini-stat"><span class="mini-number">10K+</span><span class="mini-label">Students</span></div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <span class="placeholder-icon">📊</span>
-                        <span class="placeholder-text">Data Analytics</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get in <span class="gradient-text">Touch</span></h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p>Have questions? We'd love to hear from you!</p>
-                    <div class="contact-details">
-                        <div class="contact-item"><span class="contact-icon">📧</span><span>support@dataanalyticsmastery.com</span></div>
-                        <div class="contact-item"><span class="contact-icon">📱</span><span>+91 98765 43210</span></div>
-                        <div class="contact-item"><span class="contact-icon">📍</span><span>Kolkata, West Bengal, India</span></div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link" onclick="openSocial('twitter')">🐦</a>
-                        <a href="#" class="social-link" onclick="openSocial('linkedin')">💼</a>
-                        <a href="#" class="social-link" onclick="openSocial('github')">🐱</a>
-                        <a href="#" class="social-link" onclick="openSocial('youtube')">📺</a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3>Send a Message</h3>
-                    <form id="contactForm" onsubmit="submitForm(event)">
-                        <input type="text" placeholder="Your Name" required id="name">
-                        <input type="email" placeholder="Your Email" required id="email">
-                        <select required id="subject">
-                            <option value="">Select Subject</option>
-                            <option value="course">Course Inquiry</option>
-                            <option value="resource">Resource Request</option>
-                            <option value="support">Technical Support</option>
-                            <option value="feedback">Feedback</option>
-                        </select>
-                        <textarea placeholder="Your Message" rows="5" required id="message"></textarea>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>DataAnalytics<span class="highlight">Mastery</span></h3>
-                    <p>Master data analytics from basic to advanced with comprehensive courses and resources.</p>
-                    <div class="footer-social">
-                        <a href="#" onclick="openSocial('twitter')">🐦</a>
-                        <a href="#" onclick="openSocial('linkedin')">💼</a>
-                        <a href="#" onclick="openSocial('github')">🐱</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home" onclick="scrollToSection('home')">Home</a></li>
-                        <li><a href="#courses" onclick="scrollToSection('courses')">Courses</a></li>
-                        <li><a href="#resources" onclick="scrollToSection('resources')">Resources</a></li>
-                        <li><a href="#about" onclick="scrollToSection('about')">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Courses</h4>
-                    <ul>
-                        <li><a href="#" onclick="filterCourses('basic')">Basic Analytics</a></li>
-                        <li><a href="#" onclick="filterCourses('intermediate')">Intermediate</a></li>
-                        <li><a href="#" onclick="filterCourses('advanced')">Advanced Analytics</a></li>
-                        <li><a href="#">Certification</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#" onclick="openResource('datasets')">Datasets</a></li>
-                        <li><a href="#" onclick="openResource('tools')">Tools</a></li>
-                        <li><a href="#" onclick="openResource('tutorials')">Tutorials</a></li>
-                        <li><a href="#" onclick="openResource('code')">Code Examples</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 DataAnalyticsMastery. All rights reserved. | Made with ❤️ for data learners</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Resource Title</h3>
-                <button class="modal-close" onclick="closeModal()">✕</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
+<main class="container">
+    <div class="hero">
+        <h1>📊 Learn Data Analytics · Zero to Hero</h1>
+        <p>Interactive lessons, live simulations & real-world datasets — master statistics, visualization, predictive analytics and more.</p>
+        <div style="margin-top: 1rem;">
+            <i class="fas fa-chart-bar"></i> Hands-on simulations | <i class="fas fa-brain"></i> Advanced ML insights | <i class="fas fa-certificate"></i> Career-ready
         </div>
     </div>
 
-    <!-- Notification -->
-    <div id="notification" class="notification"></div>
+    <!-- BASICS SECTION -->
+    <div id="basics" class="section-card">
+        <div class="section-title">
+            <i class="fas fa-seedling"></i> 
+            <span>📘 Foundation · Basics of Data Analytics</span>
+            <span class="badge">Beginner friendly</span>
+        </div>
+        <p>Understand data types, central tendency, variability, and why data-driven decisions matter.</p>
+        <div class="lessons-grid">
+            <div class="lesson-card"><h3>🔢 Data Types</h3><p>Nominal, Ordinal, Interval, Ratio — structured vs unstructured.</p></div>
+            <div class="lesson-card"><h3>📏 Descriptive Stats</h3><p>Mean, Median, Mode, Range, Standard Deviation — summary metrics.</p></div>
+            <div class="lesson-card"><h3>📊 Data Viz Principles</h3><p>Bar charts, histograms, scatterplots — telling story with data.</p></div>
+            <div class="lesson-card"><h3>🧹 Data Cleaning</h3><p>Missing values, outliers, normalization — 80% of analytics work.</p></div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- CORE ANALYTICS -->
+    <div id="core" class="section-card">
+        <div class="section-title">
+            <i class="fas fa-chart-simple"></i>
+            <span>🔍 Core Analytics · From Insights to Actions</span>
+        </div>
+        <p>EDA, correlation, regression basics, and hypothesis testing.</p>
+        <div class="lessons-grid">
+            <div class="lesson-card"><h3>📈 EDA Framework</h3><p>Exploratory Data Analysis: distributions, outliers, patterns.</p></div>
+            <div class="lesson-card"><h3>🧩 Correlation vs Causation</h3><p>Learn the difference with real examples and pitfalls.</p></div>
+            <div class="lesson-card"><h3>📉 Linear Regression</h3><p>Predict outcomes & understand relationships.</p></div>
+            <div class="lesson-card"><h3>🎲 Hypothesis Testing</h3><p>p-values, confidence intervals, A/B testing fundamentals.</p></div>
+        </div>
+    </div>
+
+    <!-- ADVANCED SECTION + SIMULATIONS INTERACTIVE -->
+    <div id="advanced" class="section-card">
+        <div class="section-title">
+            <i class="fas fa-robot"></i>
+            <span>🚀 Advanced Analytics · Machine Learning & Big Data</span>
+        </div>
+        <p>Predictive modeling, clustering, time series, and LLM-assisted analytics — modern stack.</p>
+        <div class="lessons-grid">
+            <div class="lesson-card"><h3>🤖 Supervised Learning</h3><p>Regression, classification, random forests.</p></div>
+            <div class="lesson-card"><h3>🌀 Unsupervised (Clustering)</h3><p>K-means, customer segmentation.</p></div>
+            <div class="lesson-card"><h3>⏱️ Time Series Forecasting</h3><p>ARIMA, trend & seasonality.</p></div>
+            <div class="lesson-card"><h3>⚙️ Big Data Tools</h3><p>SQL for analytics, Python (pandas), Power BI basics.</p></div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE SIMULATIONS SECTION (2 simulations) -->
+    <div id="simulations" class="section-card">
+        <div class="section-title">
+            <i class="fas fa-chalkboard-user"></i>
+            <span>🎮 Live Simulations · Learn by Doing</span>
+        </div>
+        <p>Adjust parameters and see instant results — interactive data science at your fingertips.</p>
+        
+        <!-- SIM 1: Histogram & Central Tendency Simulator -->
+        <div class="simulation-area">
+            <h3><i class="fas fa-chart-histogram"></i> 📊 Simulation 1: Mean & Median Explorer</h3>
+            <p>Adjust the slider to generate random data points. Watch how mean, median, and distribution change.</p>
+            <div class="sim-control">
+                <span>🔢 Number of data points: <span id="sampleSizeVal">50</span></span>
+                <input type="range" id="sampleSizeSlider" min="10" max="200" value="50" step="1">
+                <button id="refreshDataBtn"><i class="fas fa-sync-alt"></i> Generate new sample</button>
+            </div>
+            <canvas id="histogramCanvas" width="400" height="200" style="max-width:100%; height:auto;"></canvas>
+            <div style="margin-top: 12px; display: flex; gap: 20px; flex-wrap: wrap;">
+                <span>📌 <strong>Mean:</strong> <span id="meanVal">—</span></span>
+                <span>📍 <strong>Median:</strong> <span id="medianVal">—</span></span>
+                <span>📊 <strong>Std Dev:</strong> <span id="stdVal">—</span></span>
+            </div>
+            <p class="interactive-highlight"><i class="fas fa-lightbulb"></i> Insight: When distribution is skewed, median better represents "typical" value.</p>
+        </div>
+
+        <!-- SIM 2: Linear regression (predictive) simulation -->
+        <div class="simulation-area">
+            <h3><i class="fas fa-chart-line"></i> 📈 Simulation 2: Linear Regression · Predict Sales</h3>
+            <p>Adjust the <strong>slope (beta)</strong> and <strong>noise level</strong> to see how relationship changes between Ad Spend (X) and Sales (Y).</p>
+            <div class="sim-control">
+                <span>📈 Slope (β1): <span id="slopeVal">2.0</span></span>
+                <input type="range" id="slopeSlider" min="0" max="5" step="0.1" value="2.0">
+                <span>🌊 Noise level: <span id="noiseVal">1.5</span></span>
+                <input type="range" id="noiseSlider" min="0" max="3" step="0.1" value="1.5">
+                <button id="refreshRegBtn"><i class="fas fa-chart-simple"></i> Generate new data</button>
+            </div>
+            <canvas id="regressionCanvas" width="400" height="200" style="max-width:100%; height:auto;"></canvas>
+            <div style="margin-top: 12px;">
+                <span>📐 <strong>Fitted Regression line:</strong> y = <span id="interceptVal">5.0</span> + <span id="slopeDisplay">2.00</span> x</span>
+                <span style="margin-left: 1rem;">🎯 <strong>R²:</strong> <span id="rsquaredVal">—</span></span>
+            </div>
+            <p class="interactive-highlight"><i class="fas fa-chart-line"></i> Try increasing noise → weaker correlation, lower R². This mimics real messy data.</p>
+        </div>
+    </div>
+
+    <!-- RESOURCES SECTION -->
+    <div id="resources" class="section-card">
+        <div class="section-title">
+            <i class="fas fa-book-open"></i>
+            <span>📚 Free Learning Resources & Tools</span>
+        </div>
+        <p>Curated dataset repositories, cheatsheets, and interactive courses — boost your analytics career.</p>
+        <div class="resource-list">
+            <a href="https://www.kaggle.com/datasets" target="_blank" class="resource-link"><i class="fab fa-kaggle"></i> Kaggle Datasets</a>
+            <a href="https://github.com/ripuraj/Data-Analytics-Resources" target="_blank" class="resource-link"><i class="fab fa-github"></i> GitHub Analytics Repo</a>
+            <a href="https://www.youtube.com/c/StatQuest" target="_blank" class="resource-link"><i class="fab fa-youtube"></i> StatQuest (Statistics)</a>
+            <a href="https://www.dataquest.io/" target="_blank" class="resource-link"><i class="fas fa-chart-line"></i> Dataquest</a>
+            <a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" class="resource-link"><i class="fas fa-graduation-cap"></i> Khan Academy Stats</a>
+            <a href="https://pandas.pydata.org/docs/" target="_blank" class="resource-link"><i class="fas fa-code"></i> Pandas Docs</a>
+            <a href="https://public.tableau.com/" target="_blank" class="resource-link"><i class="fas fa-chart-pie"></i> Tableau Public</a>
+        </div>
+        <div style="margin-top: 1.5rem; background:#eef2ff; padding: 1rem; border-radius: 1rem;">
+            <i class="fas fa-database"></i> <strong>Pro tip:</strong> Practice with real-world open datasets (NYC taxi, Titanic, housing prices). Use python (pandas, seaborn) to repeat above simulations.
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p><i class="fas fa-chart-simple"></i> Data Analytics Hub — interactive education for everyone | Built with live simulations & modern curriculum</p>
+    <p style="margin-top: 0.5rem;">⭐ Explore, tweak, and learn the analytics mindset. No prior coding needed.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
