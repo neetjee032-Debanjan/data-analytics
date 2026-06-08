@@ -275,7 +275,7 @@ footer {
     color: #075985;
 }
 
-/* Modal Styles */
+/* Modal Styles - CRITICAL for popup to work */
 .modal {
     display: none;
     position: fixed;
