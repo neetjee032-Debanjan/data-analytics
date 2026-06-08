@@ -2,7 +2,6 @@
 const topicContent = {
     'eda': {
         title: '📈 Exploratory Data Analysis (EDA)',
-        icon: '📈',
         content: `
             <div class="topic-section">
                 <h4>What is EDA?</h4>
@@ -45,7 +44,6 @@ const topicContent = {
     },
     'correlation': {
         title: '🧩 Correlation vs Causation',
-        icon: '🧩',
         content: `
             <div class="topic-section">
                 <h4>Understanding the Difference</h4>
@@ -78,7 +76,6 @@ const topicContent = {
     },
     'regression': {
         title: '📉 Linear Regression',
-        icon: '📉',
         content: `
             <div class="topic-section">
                 <h4>What is Linear Regression?</h4>
@@ -117,7 +114,6 @@ const topicContent = {
     },
     'hypothesis': {
         title: '🎲 Hypothesis Testing',
-        icon: '🎲',
         content: `
             <div class="topic-section">
                 <h4>What is Hypothesis Testing?</h4>
@@ -130,57 +126,38 @@ const topicContent = {
                     <li><strong>Alternative Hypothesis (H₁):</strong> What you want to prove</li>
                     <li><strong>P-value:</strong> Probability of observing results as extreme as what you found, assuming H₀ is true</li>
                     <li><strong>Significance Level (α):</strong> Usually 0.05 (5%), the threshold for rejecting H₀</li>
-                    <li><strong>Confidence Interval:</strong> Range that likely contains the true population parameter</li>
                 </ul>
             </div>
-            <div class="topic-section">
-                <h4>Decision Rule:</h4>
-                <p>If p-value < α (0.05), reject H₀ → Results are statistically significant.<br>
-                If p-value ≥ α, fail to reject H₀ → Not enough evidence.</p>
-            </div>
             <div class="example-box">
-                <strong>🧪 A/B Testing Example:</strong> An e-commerce site tests two button colors. Null hypothesis: both colors have same conversion rate. If p-value < 0.05, the new color significantly improves conversions.
+                <strong>🧪 A/B Testing Example:</strong> An e-commerce site tests two button colors. If p-value < 0.05, the new color significantly improves conversions.
             </div>
             <div class="code-block">
-                <strong>Python Code (t-test example):</strong><br>
-                from scipy import stats<br><br>
-                # Two-sample t-test<br>
+                <strong>Python Code (t-test):</strong><br>
+                from scipy import stats<br>
                 t_stat, p_value = stats.ttest_ind(group_a, group_b)<br>
-                print(f"P-value: {p_value}")<br>
-                if p_value < 0.05:<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;print("Statistically significant difference!")
+                print(f"P-value: {p_value}")
             </div>
         `
     },
     'data-types': {
         title: '🔢 Data Types in Analytics',
-        icon: '🔢',
         content: `
             <div class="topic-section">
                 <h4>The Four Scales of Measurement</h4>
                 <ul style="margin-left: 1.5rem; color: #334155;">
-                    <li><strong>Nominal:</strong> Categories with no order (e.g., colors, genders, countries)</li>
-                    <li><strong>Ordinal:</strong> Categories with order but unequal intervals (e.g., movie ratings, education levels)</li>
-                    <li><strong>Interval:</strong> Numeric with equal intervals but no true zero (e.g., temperature in Celsius)</li>
-                    <li><strong>Ratio:</strong> Numeric with equal intervals and true zero (e.g., height, weight, age)</li>
+                    <li><strong>Nominal:</strong> Categories with no order (e.g., colors, genders)</li>
+                    <li><strong>Ordinal:</strong> Categories with order but unequal intervals (e.g., movie ratings)</li>
+                    <li><strong>Interval:</strong> Numeric with equal intervals but no true zero (e.g., temperature)</li>
+                    <li><strong>Ratio:</strong> Numeric with equal intervals and true zero (e.g., height, weight)</li>
                 </ul>
             </div>
             <div class="example-box">
-                <strong>💡 Why it matters:</strong> The data type determines which statistical tests and visualizations are appropriate. You can't calculate the mean of nominal data!
-            </div>
-            <div class="code-block">
-                <strong>Pandas Data Type Handling:</strong><br>
-                import pandas as pd<br><br>
-                # Convert to categorical<br>
-                df['category'] = df['category'].astype('category')<br>
-                # Check data types<br>
-                print(df.dtypes)
+                <strong>💡 Why it matters:</strong> The data type determines which statistical tests are appropriate.
             </div>
         `
     },
     'descriptive-stats': {
         title: '📏 Descriptive Statistics',
-        icon: '📏',
         content: `
             <div class="topic-section">
                 <h4>Measures of Central Tendency</h4>
@@ -194,7 +171,39 @@ const topicContent = {
                 <h4>Measures of Dispersion</h4>
                 <ul style="margin-left: 1.5rem; color: #334155;">
                     <li><strong>Range:</strong> Max - Min</li>
-                    <li><strong>Variance:</strong> Average squared deviation from mean</li>
-                    <li><strong>Standard Deviation:</strong> Square root of variance (in original units)</li>
-                    <li><strong>IQR:</strong> Interquartile range (Q3 - Q1)</li>
-               
+                    <li><strong>Standard Deviation:</strong> Average distance from mean</li>
+                </ul>
+            </div>
+        `
+    },
+    'data-viz': {
+        title: '📊 Data Visualization Principles',
+        content: `
+            <div class="topic-section">
+                <h4>Key Principles</h4>
+                <ul style="margin-left: 1.5rem; color: #334155;">
+                    <li>Choose the right chart type for your data</li>
+                    <li>Label axes clearly</li>
+                    <li>Avoid misleading scales</li>
+                    <li>Use color effectively</li>
+                </ul>
+            </div>
+        `
+    },
+    'data-cleaning': {
+        title: '🧹 Data Cleaning',
+        content: `
+            <div class="topic-section">
+                <h4>Essential Steps</h4>
+                <ul style="margin-left: 1.5rem; color: #334155;">
+                    <li>Handle missing values (remove or impute)</li>
+                    <li>Remove duplicates</li>
+                    <li>Fix structural errors</li>
+                    <li>Handle outliers appropriately</li>
+                </ul>
+            </div>
+        `
+    },
+    'supervised': {
+        title: '🤖 Supervised Learning',
+        content: `<div class="topic-section"><h4>What is Supervised Learning?</h4><p>Training models on labeled data to predict outcomes for new data.</p><div class="example-box"><strong>Examples:</strong> Spam detection, price prediction, image classification
