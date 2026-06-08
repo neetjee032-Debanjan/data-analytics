@@ -46,10 +46,26 @@
         </div>
         <p>Understand data types, central tendency, variability, and why data-driven decisions matter.</p>
         <div class="lessons-grid">
-            <div class="lesson-card"><h3>🔢 Data Types</h3><p>Nominal, Ordinal, Interval, Ratio — structured vs unstructured.</p></div>
-            <div class="lesson-card"><h3>📏 Descriptive Stats</h3><p>Mean, Median, Mode, Range, Standard Deviation — summary metrics.</p></div>
-            <div class="lesson-card"><h3>📊 Data Viz Principles</h3><p>Bar charts, histograms, scatterplots — telling story with data.</p></div>
-            <div class="lesson-card"><h3>🧹 Data Cleaning</h3><p>Missing values, outliers, normalization — 80% of analytics work.</p></div>
+            <div class="lesson-card" onclick="openTopic('data-types')">
+                <h3>🔢 Data Types</h3>
+                <p>Nominal, Ordinal, Interval, Ratio — structured vs unstructured.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('descriptive-stats')">
+                <h3>📏 Descriptive Stats</h3>
+                <p>Mean, Median, Mode, Range, Standard Deviation — summary metrics.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('data-viz')">
+                <h3>📊 Data Viz Principles</h3>
+                <p>Bar charts, histograms, scatterplots — telling story with data.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('data-cleaning')">
+                <h3>🧹 Data Cleaning</h3>
+                <p>Missing values, outliers, normalization — 80% of analytics work.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
         </div>
     </div>
 
@@ -61,14 +77,30 @@
         </div>
         <p>EDA, correlation, regression basics, and hypothesis testing.</p>
         <div class="lessons-grid">
-            <div class="lesson-card"><h3>📈 EDA Framework</h3><p>Exploratory Data Analysis: distributions, outliers, patterns.</p></div>
-            <div class="lesson-card"><h3>🧩 Correlation vs Causation</h3><p>Learn the difference with real examples and pitfalls.</p></div>
-            <div class="lesson-card"><h3>📉 Linear Regression</h3><p>Predict outcomes & understand relationships.</p></div>
-            <div class="lesson-card"><h3>🎲 Hypothesis Testing</h3><p>p-values, confidence intervals, A/B testing fundamentals.</p></div>
+            <div class="lesson-card" onclick="openTopic('eda')">
+                <h3>📈 EDA Framework</h3>
+                <p>Exploratory Data Analysis: distributions, outliers, patterns.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('correlation')">
+                <h3>🧩 Correlation vs Causation</h3>
+                <p>Learn the difference with real examples and pitfalls.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('regression')">
+                <h3>📉 Linear Regression</h3>
+                <p>Predict outcomes & understand relationships.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('hypothesis')">
+                <h3>🎲 Hypothesis Testing</h3>
+                <p>p-values, confidence intervals, A/B testing fundamentals.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
         </div>
     </div>
 
-    <!-- ADVANCED SECTION + SIMULATIONS INTERACTIVE -->
+    <!-- ADVANCED SECTION -->
     <div id="advanced" class="section-card">
         <div class="section-title">
             <i class="fas fa-robot"></i>
@@ -76,14 +108,30 @@
         </div>
         <p>Predictive modeling, clustering, time series, and LLM-assisted analytics — modern stack.</p>
         <div class="lessons-grid">
-            <div class="lesson-card"><h3>🤖 Supervised Learning</h3><p>Regression, classification, random forests.</p></div>
-            <div class="lesson-card"><h3>🌀 Unsupervised (Clustering)</h3><p>K-means, customer segmentation.</p></div>
-            <div class="lesson-card"><h3>⏱️ Time Series Forecasting</h3><p>ARIMA, trend & seasonality.</p></div>
-            <div class="lesson-card"><h3>⚙️ Big Data Tools</h3><p>SQL for analytics, Python (pandas), Power BI basics.</p></div>
+            <div class="lesson-card" onclick="openTopic('supervised')">
+                <h3>🤖 Supervised Learning</h3>
+                <p>Regression, classification, random forests.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('unsupervised')">
+                <h3>🌀 Unsupervised (Clustering)</h3>
+                <p>K-means, customer segmentation.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('timeseries')">
+                <h3>⏱️ Time Series Forecasting</h3>
+                <p>ARIMA, trend & seasonality.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
+            <div class="lesson-card" onclick="openTopic('bigdata')">
+                <h3>⚙️ Big Data Tools</h3>
+                <p>SQL for analytics, Python (pandas), Power BI basics.</p>
+                <span class="click-hint"><i class="fas fa-hand-pointer"></i> Click to learn more</span>
+            </div>
         </div>
     </div>
 
-    <!-- INTERACTIVE SIMULATIONS SECTION (2 simulations) -->
+    <!-- INTERACTIVE SIMULATIONS SECTION -->
     <div id="simulations" class="section-card">
         <div class="section-title">
             <i class="fas fa-chalkboard-user"></i>
@@ -109,7 +157,7 @@
             <p class="interactive-highlight"><i class="fas fa-lightbulb"></i> Insight: When distribution is skewed, median better represents "typical" value.</p>
         </div>
 
-        <!-- SIM 2: Linear regression (predictive) simulation -->
+        <!-- SIM 2: Linear regression simulation -->
         <div class="simulation-area">
             <h3><i class="fas fa-chart-line"></i> 📈 Simulation 2: Linear Regression · Predict Sales</h3>
             <p>Adjust the <strong>slope (beta)</strong> and <strong>noise level</strong> to see how relationship changes between Ad Spend (X) and Sales (Y).</p>
@@ -150,6 +198,14 @@
         </div>
     </div>
 </main>
+
+<!-- Modal for detailed topic content -->
+<div id="topicModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
 
 <footer>
     <p><i class="fas fa-chart-simple"></i> Data Analytics Hub — interactive education for everyone | Built with live simulations & modern curriculum</p>
