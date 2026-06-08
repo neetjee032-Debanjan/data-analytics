@@ -70,7 +70,7 @@ const courses = [
         duration: "5 weeks",
         lectures: 38,
         description: "Master advanced SQL techniques including window functions, stored procedures, and database optimization.",
-        topics: ["Window Functions", " Stored Procedures", "Database Optimization", "NoSQL"]
+        topics: ["Window Functions", "Stored Procedures", "Database Optimization", "NoSQL"]
     },
     {
         title: "Data Analytics Capstone Project",
@@ -82,16 +82,65 @@ const courses = [
     }
 ];
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
+// Resource Data
+const resources = {
+    datasets: [
+        { name: "Kaggle Datasets", description: "100,000+ free datasets for practice", link: "https://www.kaggle.com/datasets" },
+        { name: "UCI ML Repository", description: "Machine learning datasets", link: "https://archive.ics.uci.edu/ml/" },
+        { name: "Google Dataset Search", description: "Search any dataset online", link: "https://datasetsearch.research.google.com/" },
+        { name: "GitHub Public Datasets", description: "Open source datasets collection", link: "https://github.com/caesar0301/Free-Public-Datasets" },
+        { name: "AWS Public Datasets", description: "Large-scale datasets on AWS", link: "https://registry.opendata.aws/" }
+    ],
+    tools: [
+        { name: "Python Download", description: "Programming language for data science", link: "https://www.python.org/downloads/" },
+        { name: "RStudio", description: "R development environment", link: "https://www.rstudio.com/products/rstudio/download/" },
+        { name: "MySQL", description: "Database management system", link: "https://www.mysql.com/downloads/" },
+        { name: "Tableau Public", description: "Free data visualization tool", link: "https://www.tableau.com/products/public" },
+        { name: "Power BI Desktop", description: "Microsoft business analytics", link: "https://powerbi.microsoft.com/desktop/" },
+        { name: "Jupyter Notebook", description: "Interactive computing", link: "https://jupyter.org/install" }
+    ],
+    tutorials: [
+        { name: "Khan Academy Statistics", description: "Free statistics and probability course", link: "https://www.khanacademy.org/math/statistics-probability" },
+        { name: "DataCamp Free Courses", description: "Interactive data science learning", link: "https://www.datacamp.com/" },
+        { name: "Coursera Analytics", description: "Professional data analytics courses", link: "https://www.coursera.org/browse/data-science" },
+        { name: "FreeCode Camp", description: "Free coding tutorials and projects", link: "https://www.freecodecamp.org/" },
+        { name: "W3Schools SQL", description: "Learn SQL online", link: "https://www.w3schools.com/sql/" }
+    ],
+    code: [
+        { name: "Python Pandas Examples", description: "Data manipulation code snippets", link: "https://pandas.pydata.org/docs/getting_started/examples.html" },
+        { name: "SQL Query Templates", description: "Common SQL query examples", link: "https://www.sqltutorial.org/" },
+        { name: "Matplotlib Scripts", description: "Data visualization code", link: "https://matplotlib.org/stable/gallery/" },
+        { name: "Machine Learning Scripts", description: "ML algorithm implementations", link: "https://scikit-learn.org/stable/auto_examples/" },
+        { name: "NumPy Examples", description: "Numerical Python code samples", link: "https://numpy.org/devdocs/user/absolute_beginners.html" }
+    ],
+    certification: [
+        { name: "Google Data Analytics", description: "Professional certificate program", link: "https://www.coursera.org/professional-certificates/google-data-analytics" },
+        { name: "Microsoft Data Analyst", description: "PL-300 certification exam", link: "https://learn.microsoft.com/en-us/certifications/data-analyst-associate/" },
+        { name: "IBM Data Science", description: "Professional certificate", link: "https://www.coursera.org/professional-certificates/ibm-data-science" },
+        { name: "Coursera Data Science", description: "Johns Hopkins certification", link: "https://www.coursera.org/professional-certificates/jhu-data-science" }
+    ],
+    community: [
+        { name: "Reddit Data Science", description: "Active data science community", link: "https://www.reddit.com/r/datascience/" },
+        { name: "Stack Overflow", description: "Programming Q&A community", link: "https://stackoverflow.com/questions/tagged/data-analysis" },
+        { name: "DataCamp Community", description: "Learn and connect with peers", link: "https://www.datacamp.com/community/" },
+        { name: "Kaggle Community", description: "Data science competitions & forums", link: "https://www.kaggle.com/discussion" }
+    ]
+};
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
     loadCourses('all');
     setupNavigation();
     setupSmoothScroll();
+    updateActiveNav();
 });
 
-// Load Courses
+// Load Courses to the grid
 function loadCourses(filter) {
     const grid = document.getElementById('coursesGrid');
+    
+    if (!grid) return;
+    
     const filteredCourses = filter === 'all' 
         ? courses 
         : courses.filter(course => course.level === filter);
@@ -118,39 +167,68 @@ function loadCourses(filter) {
     `).join('');
 }
 
-// Filter Courses
+// Filter Courses when button clicked
 function filterCourses(level) {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
     event.target.classList.add('active');
     loadCourses(level);
 }
 
-// Navigation
+// Navigation Setup
 function setupNavigation() {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.querySelector('.nav-menu');
     
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+    }
     
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', function() {
             navMenu.classList.remove('active');
         });
     });
 }
 
-// Smooth Scroll
+// Smooth Scroll Setup
 function setupSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+}
+
+// Update Active Navigation
+function updateActiveNav() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
             }
         });
     });
@@ -158,7 +236,10 @@ function setupSmoothScroll() {
 
 // Scroll Functions
 function scrollToCourses() {
-    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+    const coursesSection = document.getElementById('courses');
+    if (coursesSection) {
+        coursesSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 function showCourses() {
@@ -166,45 +247,135 @@ function showCourses() {
 }
 
 function scrollToSection(section) {
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(section);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
-// Enroll Course
+// Enroll in Course
 function enrollCourse(courseTitle) {
-    showNotification(`✓ Successfully enrolled in "${courseTitle}"! Check your email for access.`);
+    showNotification(`✓ Successfully enrolled in "${courseTitle}"! Check your email for access details.`);
 }
 
-// Resource Data
-const resources = {
-    datasets: [
-        { name: "Kaggle Datasets", description: "100,000+ free datasets", link: "https://www.kaggle.com/datasets" },
-        { name: "UCI ML Repository", description: "Machine learning datasets", link: "https://archive.ics.uci.edu/ml/" },
-        { name: "Google Dataset Search", description: "Search any dataset", link: "https://datasetsearch.research.google.com/" },
-        { name: "GitHub Public Datasets", description: "Open source datasets", link: "https://github.com/caesar0301/Free-Public-Datasets" }
-    ],
-    tools: [
-        { name: "Python", description: "Programming language", link: "https://www.python.org/downloads/" },
-        { name: "RStudio", description: "R development environment", link: "https://www.rstudio.com/products/rstudio/download/" },
-        { name: "MySQL", description: "Database management", link: "https://www.mysql.com/downloads/" },
-        { name: "Tableau Public", description: "Data visualization", link: "https://www.tableau.com/products/public" },
-        { name: "Power BI Desktop", description: "Business analytics", link: "https://powerbi.microsoft.com/desktop/" }
-    ],
-    tutorials: [
-        { name: "Khan Academy Statistics", description: "Free statistics course", link: "https://www.khanacademy.org/math/statistics-probability" },
-        { name: "DataCamp Free Courses", description: "Interactive learning", link: "https://www.datacamp.com/" },
-        { name: "Coursera Analytics", description: "Professional courses", link: "https://www.coursera.org/browse/data-science" },
-        { name: "FreeCode Camp", description: "Free coding tutorials", link: "https://www.freecodecamp.org/" }
-    ],
-    code: [
-        { name: "Python Pandas Examples", description: "Data manipulation code", link: "#" },
-        { name: "SQL Query Templates", description: "Common SQL queries", link: "#" },
-        { name: "Matplotlib Scripts", description: "Visualization code", link: "#" },
-        { name: "Machine Learning Scripts", description: "ML algorithms", link: "#" }
-    ],
-    certification: [
-        { name: "Google Data Analytics", description: "Professional certificate", link: "https://www.google.com/certifications/data-analytics/" },
-        { name: "Microsoft Data Analyst", description: "PL-300 certification", link: "https://learn.microsoft.com/en-us/certifications/data-analyst-associate/" },
-        { name: "IBM Data Science", description: "Professional certificate", link: "https://www.ibm.com/certify/data-science-professional" }
-    ],
-    community: [
-        { name: "Reddit Data Science", description: "d
+// Open Resource Modal
+function openResource(type) {
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    
+    if (!modal || !modalTitle || !modalBody) return;
+    
+    const resourceData = resources[type];
+    
+    if (!resourceData) {
+        showNotification('❌ Resource not found');
+        return;
+    }
+    
+    modalTitle.textContent = type === 'datasets' ? '📁 Free Datasets' :
+                           type === 'tools' ? '🛠️ Tools & Software' :
+                           type === 'tutorials' ? '📚 Tutorials & Guides' :
+                           type === 'code' ? '💻 Code Examples' :
+                           type === 'certification' ? '🎓 Certification Prep' :
+                           '👥 Community Forum';
+    
+    modalBody.innerHTML = resourceData.map(item => `
+        <div class="resource-item">
+            <h4>${item.name}</h4>
+            <p>${item.description}</p>
+            <a href="${item.link}" target="_blank" onclick="showNotification('✓ Opening link...')">
+                🔗 Access Resource →
+            </a>
+        </div>
+    `).join('');
+    
+    modal.classList.add('active');
+}
+
+// Close Modal
+function closeModal() {
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('modal');
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+// Show Notification
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    if (!notification) return;
+    
+    notification.textContent = message;
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 4000);
+}
+
+// Open Social Link
+function openSocial(platform) {
+    const urls = {
+        twitter: 'https://twitter.com',
+        linkedin: 'https://www.linkedin.com',
+        github: 'https://github.com',
+        youtube: 'https://www.youtube.com'
+    };
+    
+    if (urls[platform]) {
+        showNotification(`✓ Opening ${platform}...`);
+        setTimeout(() => {
+            window.open(urls[platform], '_blank');
+        }, 500);
+    }
+}
+
+// Submit Contact Form
+function submitForm(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+    
+    if (!name || !email || !subject || !message) {
+        showNotification('❌ Please fill in all fields');
+        return;
+    }
+    
+    showNotification(`✓ Thank you ${name.value}! Your message has been sent. We'll respond to ${email.value} soon.`);
+    
+    document.getElementById('contactForm').reset();
+}
+
+// Animate elements on scroll
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.course-card, .resource-card, .feature-card');
+    
+    elements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+    });
+    
+    setTimeout(() => {
+        elements.forEach((element, index) => {
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 100);
+}
+
+// Run animation after courses load
+setTimeout(animateOnScroll, 500);
