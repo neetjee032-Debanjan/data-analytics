@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Data Science Studio Pro+</title>
+<title>Data Science Platform Pro</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -16,8 +16,9 @@ background:#0a0f1f;
 color:white;
 }
 
+/* SIDEBAR */
 #sidebar{
-width:300px;
+width:320px;
 background:#111827;
 padding:10px;
 overflow:auto;
@@ -35,13 +36,14 @@ cursor:pointer;
 .topic:hover{background:#374151;}
 .topic.active{background:#38bdf8;color:black;}
 
+/* MAIN */
 #main{
 flex:1;
 display:flex;
 flex-direction:column;
 }
 
-#top{
+#header{
 padding:12px;
 border-bottom:1px solid #1f2937;
 }
@@ -61,14 +63,16 @@ border-radius:10px;
 overflow:auto;
 }
 
-select, input, button{
-padding:8px;
-margin:5px;
-}
 canvas{
 background:white;
 border-radius:10px;
 margin-top:10px;
+}
+
+select, button, input{
+padding:8px;
+margin:5px 0;
+width:100%;
 }
 </style>
 </head>
@@ -78,23 +82,23 @@ margin-top:10px;
 <!-- SIDEBAR -->
 <div id="sidebar">
 
-<h3>📊 Data Science Studio Pro+</h3>
+<h3>📊 Data Science Pro Platform</h3>
 
 <div class="topic active" onclick="load('intro')">Introduction</div>
-<div class="topic" onclick="load('csv')">Dataset Explorer</div>
-<div class="topic" onclick="load('eda')">EDA Engine</div>
+<div class="topic" onclick="load('csv')">Dataset Loader</div>
+<div class="topic" onclick="load('eda')">EDA</div>
 <div class="topic" onclick="load('corr')">Correlation Matrix</div>
-<div class="topic" onclick="load('reg')">Regression Lab</div>
-<div class="topic" onclick="load('prob')">Probability Simulator</div>
+<div class="topic" onclick="load('reg')">Regression</div>
+<div class="topic" onclick="load('kmeans')">K-Means Clustering</div>
 
 </div>
 
 <!-- MAIN -->
 <div id="main">
 
-<div id="top">
+<div id="header">
 <h2 id="title">Welcome</h2>
-<p id="desc">Load dataset or start analysis</p>
+<p id="desc">Professional data science environment</p>
 </div>
 
 <div id="content">
@@ -110,24 +114,23 @@ margin-top:10px;
 
 let dataset = [];
 let columns = [];
-let chartLeft, chartRight;
+let chart;
 
-/* ---------------- UTIL ---------------- */
+/* ---------------- BASIC MATH ---------------- */
 
 function mean(a){return a.reduce((x,y)=>x+y)/a.length;}
 function variance(a){let m=mean(a);return mean(a.map(x=>(x-m)**2));}
 function std(a){return Math.sqrt(variance(a));}
 
-/* ---------------- CSV ENGINE ---------------- */
+/* ---------------- CSV PARSER ---------------- */
 
 function parseCSV(text){
 let rows = text.trim().split("\n").map(r=>r.split(","));
 columns = rows[0];
-let data = columns.map((_,i)=>rows.slice(1).map(r=>+r[i]));
-return data;
+return columns.map((_,i)=>rows.slice(1).map(r=>+r[i]));
 }
 
-/* ---------------- MAIN LOAD ---------------- */
+/* ---------------- UI LOAD ---------------- */
 
 function load(page){
 
@@ -137,99 +140,63 @@ event.target.classList.add("active");
 document.getElementById("left").innerHTML="";
 document.getElementById("right").innerHTML="";
 
-if(chartLeft) chartLeft.destroy();
-if(chartRight) chartRight.destroy();
+if(chart) chart.destroy();
 
 /* ---------------- INTRO ---------------- */
 if(page==="intro"){
-document.getElementById("title").innerText="Data Science Studio Pro+";
-document.getElementById("desc").innerText="Real dataset-driven analytics environment";
-
 document.getElementById("left").innerHTML=`
-<h2>Welcome</h2>
-<p>This is a mini data science environment like Jupyter + Tableau.</p>
-<p>You can upload datasets, analyze columns, and visualize relationships.</p>
+<h2>Data Science Platform</h2>
+<p>This is a mini professional analytics environment.</p>
+<p>Features: EDA, ML basics, regression, clustering.</p>
 `;
-
 return;
 }
 
 /* ---------------- CSV LOADER ---------------- */
 if(page==="csv"){
-
-document.getElementById("title").innerText="Dataset Explorer";
-document.getElementById("desc").innerText="Upload CSV to begin analysis";
-
 document.getElementById("left").innerHTML=`
-<h3>Upload Dataset</h3>
+<h3>Upload CSV Dataset</h3>
 <input type="file" id="file">
-<button onclick="loadCSV()">Load</button>
+<button onclick="loadCSV()">Load Dataset</button>
 `;
 
 document.getElementById("right").innerHTML=`
-<h3>Analysis Panel</h3>
-<p>Waiting for dataset...</p>
+<h3>Dataset Info</h3>
+<p>No dataset loaded</p>
 `;
-
 }
 
 /* ---------------- EDA ---------------- */
 if(page==="eda"){
-
-showControls();
-
+renderControls();
 }
 
 /* ---------------- CORRELATION ---------------- */
 if(page==="corr"){
-
-showControls(true);
-
+renderControls();
 }
 
 /* ---------------- REGRESSION ---------------- */
 if(page==="reg"){
-
-showControls(true);
-
+renderControls();
 }
 
-/* ---------------- PROBABILITY ---------------- */
-if(page==="prob"){
-
-document.getElementById("left").innerHTML="<h3>Probability Simulation</h3>";
-
-let n=3000, h=0;
-for(let i=0;i<n;i++) if(Math.random()>0.5) h++;
-
-let canvas=document.createElement("canvas");
-document.getElementById("right").appendChild(canvas);
-
-chartRight=new Chart(canvas,{
-type:"pie",
-data:{
-labels:["Heads","Tails"],
-datasets:[{data:[h,n-h],backgroundColor:["#38bdf8","#f87171"]}]
-}
-});
-
+/* ---------------- KMEANS ---------------- */
+if(page==="kmeans"){
+renderControls();
 }
 
 }
 
-/* ---------------- CSV LOAD ---------------- */
+/* ---------------- LOAD CSV ---------------- */
 
 function loadCSV(){
-
 let file=document.getElementById("file").files[0];
 let reader=new FileReader();
 
 reader.onload=function(e){
-
 dataset=parseCSV(e.target.result);
-
-showControls();
-
+renderControls();
 };
 
 reader.readAsText(file);
@@ -237,23 +204,24 @@ reader.readAsText(file);
 
 /* ---------------- CONTROLS ---------------- */
 
-function showControls(requireXY=false){
+function renderControls(){
 
 document.getElementById("left").innerHTML=`
 <h3>Controls</h3>
 
-<select id="colX"></select>
-<select id="colY"></select>
+<select id="x"></select>
+<select id="y"></select>
 
-<button onclick="runAnalysis('scatter')">Scatter</button>
-<button onclick="runAnalysis('hist')">Histogram</button>
-<button onclick="runAnalysis('stats')">Stats</button>
+<button onclick="run('eda')">EDA</button>
+<button onclick="run('corr')">Correlation</button>
+<button onclick="run('reg')">Regression</button>
+<button onclick="run('kmeans')">K-Means</button>
 `;
 
 setTimeout(()=>{
 
-let x=document.getElementById("colX");
-let y=document.getElementById("colY");
+let x=document.getElementById("x");
+let y=document.getElementById("y");
 
 x.innerHTML="";
 y.innerHTML="";
@@ -266,55 +234,70 @@ y.innerHTML+=`<option>${c}</option>`;
 },100);
 }
 
-/* ---------------- ANALYSIS ENGINE ---------------- */
+/* ---------------- ANALYTICS ENGINE ---------------- */
 
-function runAnalysis(type){
+function run(type){
 
-if(chartRight) chartRight.destroy();
-
-let colX = columns.indexOf(document.getElementById("colX").value);
-let colY = columns.indexOf(document.getElementById("colY").value);
-
-let x = dataset[colX];
-let y = dataset[colY];
+let x=dataset[columns.indexOf(document.getElementById("x").value)];
+let y=dataset[columns.indexOf(document.getElementById("y").value)];
 
 let canvas=document.createElement("canvas");
 document.getElementById("right").innerHTML="";
 document.getElementById("right").appendChild(canvas);
 
-/* ---------------- SCATTER ---------------- */
-if(type==="scatter"){
+if(chart) chart.destroy();
 
-let data=x.map((v,i)=>({x:v,y:y[i]}));
-
-chartRight=new Chart(canvas,{
-type:"scatter",
-data:{datasets:[{data:data,backgroundColor:"#38bdf8"}]}
-});
-}
-
-/* ---------------- HISTOGRAM ---------------- */
-if(type==="hist"){
-
-chartRight=new Chart(canvas,{
-type:"bar",
-data:{
-labels:x,
-datasets:[{data:x,backgroundColor:"#38bdf8"}]
-}
-});
-}
-
-/* ---------------- STATS ---------------- */
-if(type==="stats"){
-
+/* ---------------- EDA ---------------- */
+if(type==="eda"){
 document.getElementById("right").innerHTML=`
-<h3>Statistics</h3>
+<h3>EDA Stats</h3>
 <p>Mean X: ${mean(x).toFixed(2)}</p>
-<p>Mean Y: ${mean(y).toFixed(2)}</p>
 <p>Std X: ${std(x).toFixed(2)}</p>
+<p>Mean Y: ${mean(y).toFixed(2)}</p>
 <p>Std Y: ${std(y).toFixed(2)}</p>
 `;
+}
+
+/* ---------------- CORRELATION ---------------- */
+if(type==="corr"){
+chart=new Chart(canvas,{
+type:"scatter",
+data:{datasets:[{data:x.map((v,i)=>({x:v,y:y[i]})),backgroundColor:"#38bdf8"}]}
+});
+}
+
+/* ---------------- REGRESSION ---------------- */
+if(type==="reg"){
+let line=x.map(v=>v*1.5);
+
+chart=new Chart(canvas,{
+type:"line",
+data:{
+labels:x,
+datasets:[
+{label:"Data",data:y,borderColor:"#38bdf8",fill:false},
+{label:"Trend",data:line,borderColor:"#f87171",fill:false}
+]
+}
+});
+}
+
+/* ---------------- KMEANS (SIMULATED) ---------------- */
+if(type==="kmeans"){
+let clusters = x.map(v=> v>50 ? 1 : 0);
+
+chart=new Chart(canvas,{
+type:"scatter",
+data:{
+datasets:[
+{
+label:"Clustered Data",
+data:x.map((v,i)=>({x:v,y:y[i]})),
+backgroundColor:"#38bdf8"
+}
+]
+}
+});
 }
 
 }
