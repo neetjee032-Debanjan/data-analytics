@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Data Analytics Learning Platform</title>
+<title>Data Analytics Academy (Fixed)</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -16,9 +16,8 @@ background:#0b1020;
 color:white;
 }
 
-/* SIDEBAR */
 #sidebar{
-width:320px;
+width:300px;
 background:#111827;
 padding:10px;
 overflow:auto;
@@ -35,14 +34,13 @@ cursor:pointer;
 .topic:hover{background:#374151;}
 .topic.active{background:#38bdf8;color:black;}
 
-/* MAIN */
 #main{
 flex:1;
 display:flex;
 flex-direction:column;
 }
 
-#topbar{
+#top{
 padding:10px;
 border-bottom:1px solid #1f2937;
 }
@@ -58,10 +56,9 @@ padding:15px;
 overflow:auto;
 }
 
-button, input, textarea, select{
+button{
 padding:8px;
-margin:5px 0;
-width:100%;
+margin:5px;
 }
 
 canvas{
@@ -75,24 +72,26 @@ border-radius:10px;
 
 <!-- SIDEBAR -->
 <div id="sidebar">
+
 <h3>📊 Data Analytics Academy</h3>
 
-<div class="topic active" onclick="openTopic('intro')">Introduction</div>
-<div class="topic" onclick="openTopic('types')">Types of Data</div>
-<div class="topic" onclick="openTopic('collection')">Data Collection</div>
-<div class="topic" onclick="openTopic('cleaning')">Data Cleaning</div>
-<div class="topic" onclick="openTopic('stats')">Descriptive Stats</div>
-<div class="topic" onclick="openTopic('prob')">Probability</div>
-<div class="topic" onclick="openTopic('corr')">Correlation</div>
-<div class="topic" onclick="openTopic('reg')">Regression</div>
+<div class="topic" onclick="openTopic(this,'intro')">Introduction</div>
+<div class="topic" onclick="openTopic(this,'types')">Types of Data</div>
+<div class="topic" onclick="openTopic(this,'collection')">Data Collection</div>
+<div class="topic" onclick="openTopic(this,'cleaning')">Data Cleaning</div>
+<div class="topic" onclick="openTopic(this,'stats')">Descriptive Stats</div>
+<div class="topic" onclick="openTopic(this,'prob')">Probability</div>
+<div class="topic" onclick="openTopic(this,'corr')">Correlation</div>
+<div class="topic" onclick="openTopic(this,'reg')">Regression</div>
+
 </div>
 
 <!-- MAIN -->
 <div id="main">
 
-<div id="topbar">
+<div id="top">
 <h2 id="title">Welcome</h2>
-<p id="subtitle">Structured learning + interactive lab</p>
+<p>Structured learning platform</p>
 </div>
 
 <div id="content">
@@ -106,138 +105,159 @@ border-radius:10px;
 
 <script>
 
-/* ================= STATE ================= */
-
-let currentTopic = "intro";
-let page = 1;
-
-let dataset = [];
+let page = 0;
+let current = "intro";
 let chart = null;
 
-/* ================= THEORY (3 PAGES EACH TOPIC) ================= */
+/* ================= DEEP THEORY (REAL CONTENT) ================= */
 
-const theory = {
+const course = {
 
 intro:[
-`<h2>Introduction (Page 1)</h2>
-<p>Data Analytics is the process of analyzing raw data to extract meaningful insights.</p>
-<p>It is used in business, healthcare, finance, AI systems.</p>`,
+`<h2>Introduction to Data Analytics</h2>
+<p>Data Analytics is the science of examining raw data to extract meaningful insights.</p>
+<p>It combines statistics, programming, and domain knowledge.</p>
+<p><b>Core idea:</b> Data → Information → Insight → Decision</p>
+<p>It is used in industries like finance, healthcare, marketing, AI systems, and logistics.</p>`,
 
-`<h2>Introduction (Page 2)</h2>
-<p>Pipeline: Data → Cleaning → Analysis → Visualization → Decision</p>
-<p>There are 4 types: Descriptive, Diagnostic, Predictive, Prescriptive.</p>`,
+`<h2>Why Data Analytics Matters</h2>
+<p>Modern companies generate massive data every second.</p>
+<p>Without analytics, this data is useless noise.</p>
+<p>Analytics helps answer:</p>
+<ul>
+<li>What happened?</li>
+<li>Why did it happen?</li>
+<li>What will happen next?</li>
+</ul>`,
 
-`<h2>Introduction (Page 3)</h2>
-<p>Data analytics connects statistics, programming, and domain knowledge.</p>
-<p>It helps convert raw data into actionable decisions.</p>`
+`<h2>Real Example</h2>
+<p>Netflix uses analytics to recommend movies.</p>
+<p>Amazon uses it to predict what users will buy.</p>
+<p>Uber uses it to optimize pricing and routes.</p>`
 ],
 
 types:[
-`<h2>Types of Data (Page 1)</h2>
-<p>Qualitative data: categories like gender, color.</p>
-<p>Quantitative data: numerical values.</p>`,
+`<h2>Types of Data</h2>
+<p>Data is classified into qualitative and quantitative types.</p>
+<p>Qualitative = categories, labels</p>
+<p>Quantitative = numbers, measurable values</p>`,
 
-`<h2>Types of Data (Page 2)</h2>
-<p>Discrete data: countable values.</p>
-<p>Continuous data: measurable values.</p>`,
+`<h2>Subtypes of Data</h2>
+<p>Discrete data: number of students, cars</p>
+<p>Continuous data: height, weight, time</p>
+<p>Correct classification decides correct analysis methods.</p>`,
 
-`<h2>Types of Data (Page 3)</h2>
-<p>Data types determine which analysis methods are valid.</p>
-`
+`<h2>Why Types Matter</h2>
+<p>Wrong data type selection leads to wrong models.</p>
+<p>Example: You cannot average categories like “red, blue”.</p>`
 ],
 
 collection:[
-`<h2>Data Collection (Page 1)</h2>
-<p>Sources: APIs, sensors, surveys, scraping.</p>`,
+`<h2>Data Collection</h2>
+<p>Data comes from APIs, sensors, surveys, transactions, logs.</p>
+<p>Each source has noise and bias.</p>`,
 
-`<h2>Data Collection (Page 2)</h2>
-<p>Quality matters more than quantity.</p>`,
+`<h2>Data Quality</h2>
+<p>Good data = accurate, complete, consistent, timely.</p>
+<p>Poor data leads to misleading conclusions.</p>`,
 
-`<h2>Data Collection (Page 3)</h2>
-<p>Bad data leads to wrong decisions.</p>`
+`<h2>Real Industry Use</h2>
+<p>Google collects search logs.</p>
+<p>Banks collect transaction data.</p>
+<p>Hospitals collect patient records for diagnosis models.</p>`
 ],
 
 cleaning:[
-`<h2>Data Cleaning (Page 1)</h2>
-<p>Remove missing values and duplicates.</p>`,
+`<h2>Data Cleaning</h2>
+<p>Raw data is never clean.</p>
+<p>It contains missing values, duplicates, and errors.</p>`,
 
-`<h2>Data Cleaning (Page 2)</h2>
-<p>Normalize inconsistent formats.</p>`,
+`<h2>Cleaning Techniques</h2>
+<p>Remove nulls, fill missing values, normalize formats.</p>
+<p>Outlier detection is also important.</p>`,
 
-`<h2>Data Cleaning (Page 3)</h2>
-<p>Cleaning is 70% of real data work.</p>`
+`<h2>Why It Matters</h2>
+<p>80% of data science work is cleaning.</p>
+<p>Bad cleaning = wrong AI model results.</p>`
 ],
 
 stats:[
-`<h2>Descriptive Stats (Page 1)</h2>
-<p>Mean = average of values.</p>`,
+`<h2>Descriptive Statistics</h2>
+<p>Mean = average</p>
+<p>Median = middle value</p>
+<p>Mode = most frequent value</p>`,
 
-`<h2>Descriptive Stats (Page 2)</h2>
-<p>Variance measures spread of data.</p>`,
+`<h2>Spread of Data</h2>
+<p>Variance shows how data spreads.</p>
+<p>Standard deviation = square root of variance.</p>`,
 
-`<h2>Descriptive Stats (Page 3)</h2>
-<p>Standard deviation = square root of variance.</p>`
+`<h2>Usage</h2>
+<p>Used in finance, risk analysis, forecasting models.</p>`
 ],
 
 prob:[
-`<h2>Probability (Page 1)</h2>
-<p>Measures uncertainty of events.</p>`,
+`<h2>Probability</h2>
+<p>Measures uncertainty of events.</p>
+<p>0 = impossible, 1 = certain.</p>`,
 
-`<h2>Probability (Page 2)</h2>
-<p>Used in prediction models and AI.</p>`,
+`<h2>Real Meaning</h2>
+<p>Probability models randomness in real systems.</p>
+<p>Used in AI, weather forecasting, fraud detection.</p>`,
 
-`<h2>Probability (Page 3)</h2>
-<p>Law of large numbers explains stability of averages.</p>`
+`<h2>Law of Large Numbers</h2>
+<p>More trials → more stable probability results.</p>`
 ],
 
 corr:[
-`<h2>Correlation (Page 1)</h2>
-<p>Measures relationship between variables.</p>`,
+`<h2>Correlation</h2>
+<p>Measures relationship between variables.</p>
+<p>Range: -1 to +1</p>`,
 
-`<h2>Correlation (Page 2)</h2>
-<p>Ranges from -1 to +1.</p>`,
+`<h2>Interpretation</h2>
+<p>+1 = strong positive relationship</p>
+<p>-1 = strong negative relationship</p>`,
 
-`<h2>Correlation (Page 3)</h2>
-<p>Correlation does NOT mean causation.</p>`
+`<h2>Important Rule</h2>
+<p>Correlation does NOT mean causation.</p>
+<p>Two variables can move together without causing each other.</p>`
 ],
 
 reg:[
-`<h2>Regression (Page 1)</h2>
-<p>Used to predict numerical values.</p>`,
+`<h2>Regression</h2>
+<p>Used to predict numeric outcomes.</p>
+<p>Equation: y = mx + c</p>`,
 
-`<h2>Regression (Page 2)</h2>
-<p>Model: y = mx + c</p>`,
+`<h2>How It Works</h2>
+<p>Finds best fitting line through data points.</p>
+<p>Minimizes error between predicted and actual values.</p>`,
 
-`<h2>Regression (Page 3)</h2>
-<p>Used in forecasting and machine learning.</p>`
+`<h2>Real Use</h2>
+<p>Used in stock prediction, housing prices, sales forecasting.</p>`
 ]
 
 };
 
 /* ================= NAVIGATION ================= */
 
-function openTopic(t){
+function openTopic(el, topic){
+current = topic;
+page = 0;
 
-currentTopic = t;
-page = 1;
-
-document.querySelectorAll(".topic").forEach(x=>x.classList.remove("active"));
-event.target.classList.add("active");
+document.querySelectorAll(".topic").forEach(t=>t.classList.remove("active"));
+el.classList.add("active");
 
 render();
 }
 
-/* ================= PAGE CONTROL ================= */
-
-function nextPage(){
-if(page < 3){
+function next(){
+if(page < 2){
 page++;
 render();
 }
 }
 
-function prevPage(){
-if(page > 1){
+function prev(){
+if(page > 0){
 page--;
 render();
 }
@@ -248,39 +268,35 @@ render();
 function render(){
 
 document.getElementById("theory").innerHTML =
-(theory[currentTopic] && theory[currentTopic][page-1]) || "<h2>Coming Soon</h2>";
+course[current][page];
 
 document.getElementById("lab").innerHTML = `
-<h3>Lab Controls</h3>
+<h3>Lab</h3>
 
-<button onclick="prevPage()">⬅ Prev</button>
-<button onclick="nextPage()">Next ➡</button>
+<button onclick="prev()">⬅ Prev</button>
+<button onclick="next()">Next ➡</button>
 
 <hr>
 
-<h4>Mini Simulation</h4>
 <button onclick="runSim()">Run Simulation</button>
-
 <canvas id="chart"></canvas>
 `;
 }
 
-/* ================= SIMULATION ENGINE ================= */
+/* ================= SIMULATION ================= */
 
 function runSim(){
 
 if(chart) chart.destroy();
 
-let canvas = document.getElementById("chart");
+let data = Array.from({length:25},()=>Math.random()*100);
 
-let data = Array.from({length:20},()=>Math.random()*100);
-
-chart = new Chart(canvas,{
+chart = new Chart(document.getElementById("chart"),{
 type:"bar",
 data:{
 labels:data.map((_,i)=>i),
 datasets:[{
-label:"Dataset",
+label:"Sample Data",
 data:data,
 backgroundColor:"#38bdf8"
 }]
