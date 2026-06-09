@@ -15,43 +15,62 @@ export const course = {
 
           pages: [
             {
-              title: "1. Deep Concept: Why Floating Point Exists",
+              title: "1. Why Computers Need Floating Point (Deep Intuition)",
               content: `
-In real-world computation, numbers are not continuous inside computers.
-A computer has finite memory, which means it cannot represent infinite decimal expansions.
+In real-world mathematics, numbers are infinite in precision.
+For example, numbers like π or √2 have infinite decimal expansions.
 
-This leads to the need for approximation systems called floating point representation.
+However, computers have limited memory, which means they cannot store infinite precision values.
 
-Floating point numbers allow computers to represent extremely large and extremely small numbers using a structured format.
+To solve this, computers use floating point representation.
 
-This system is the backbone of all scientific computing, simulations, and machine learning systems today.
+This system allows representation of very large and very small numbers using a standardized format.
+
+👉 Example:
+Instead of storing 0.000000000123 directly,
+computer stores it as 1.23 × 10⁻¹⁰.
+
+This is similar to scientific notation used in physics and chemistry.
               `
             },
+
             {
-              title: "2. Mathematical Structure and Representation",
+              title: "2. Internal Structure of Floating Point Numbers",
               content: `
-A floating point number is represented in the form:
+A floating point number is divided into three components:
 
-Number = Sign × Mantissa × Base^Exponent
+1. Sign bit → determines positive or negative
+2. Mantissa → stores significant digits
+3. Exponent → defines scale or magnitude
 
-This structure is similar to scientific notation in mathematics.
+👉 General form:
 
-The mantissa stores precision digits while the exponent controls scale.
+Number = (-1)^sign × mantissa × base^exponent
 
-Because mantissa has limited bits, precision is always finite, which leads to small rounding errors even in simple arithmetic operations.
+This structure allows a wide range of values to be represented efficiently.
+
+However, since mantissa has limited bits, precision is always limited.
+
+👉 Example:
+0.1 in binary becomes an infinite repeating fraction,
+so it must be approximated, introducing small errors.
               `
             },
+
             {
-              title: "3. Real-world Implications and Limitations",
+              title: "3. Errors, Limitations and Real Impact",
               content: `
-Floating point errors accumulate over repeated computations.
+Floating point arithmetic introduces rounding errors.
 
-In simulations such as physics engines, weather models, or engineering systems,
-these small errors can grow significantly over time.
+These errors may seem tiny but accumulate during repeated calculations.
 
-This is why numerical stability is a critical topic in computational mathematics.
+👉 Example:
+In physics simulations or financial models,
+millions of operations can amplify small errors into significant deviations.
 
-Even modern systems like GPUs and AI models must account for floating point precision limitations.
+This is why numerical stability is extremely important in scientific computing.
+
+Even AI training processes rely heavily on controlled floating point precision.
               `
             }
           ]
@@ -63,37 +82,51 @@ Even modern systems like GPUs and AI models must account for floating point prec
 
           pages: [
             {
-              title: "1. Understanding Error in Computation",
+              title: "1. What is Numerical Error (Deep Meaning)",
               content: `
-In numerical computation, error refers to the difference between true value and computed value.
+Numerical error is the difference between the exact mathematical value
+and the computed approximate value.
 
-Since most real-world problems cannot be solved exactly, approximation is always involved.
+Since most real-world problems cannot be solved exactly,
+approximation is unavoidable.
 
-Therefore, understanding error behavior is essential in numerical methods.
+Thus, understanding error behavior is essential in numerical methods.
               `
             },
+
             {
-              title: "2. Types of Errors in Detail",
+              title: "2. Types of Errors with Meaning",
               content: `
-There are three major types of errors:
+There are three main types:
 
-1. Absolute Error → magnitude of deviation
-2. Relative Error → proportional deviation
-3. Truncation Error → loss due to approximation of infinite processes
+✔ Absolute Error:
+Difference between true and computed value.
 
-Each error type plays a different role in numerical accuracy analysis.
+✔ Relative Error:
+Absolute error divided by true value.
+
+✔ Truncation Error:
+Error introduced when infinite processes are cut short.
+
+👉 Example:
+Using only first 3 terms of a Taylor series creates truncation error.
               `
             },
+
             {
-              title: "3. Error Propagation and Stability",
+              title: "3. Error Propagation (Very Important Concept)",
               content: `
-Errors do not remain isolated.
+Errors do not stay isolated.
 
-In iterative computations, errors propagate and sometimes amplify.
+When multiple computations are performed,
+errors accumulate and propagate.
 
-This is why stable algorithms are preferred in scientific computing.
+👉 Example:
+In iterative methods like Newton-Raphson,
+each step depends on previous value,
+so errors can either shrink or grow.
 
-Numerical stability determines whether a method produces reliable results under small perturbations.
+This is why stable algorithms are preferred in numerical analysis.
               `
             }
           ]
@@ -115,43 +148,54 @@ Numerical stability determines whether a method produces reliable results under 
 
           pages: [
             {
-              title: "1. Core Idea and Intuition",
+              title: "1. Core Idea and Mathematical Foundation",
               content: `
-The Bisection Method is based on one fundamental principle:
+The Bisection Method is based on the Intermediate Value Theorem.
 
-If a continuous function changes sign between two points, then a root exists between them.
+If a continuous function changes sign between two points,
+it must cross zero in between.
 
-This is known as the Intermediate Value Theorem.
+This guarantees the existence of a root in that interval.
 
-The method repeatedly narrows the interval until the root is approximated.
+👉 Example:
+If f(a) = -2 and f(b) = +3,
+then a root exists between a and b.
               `
             },
+
             {
-              title: "2. Mathematical Logic Behind the Method",
+              title: "2. Step-by-Step Working Process",
               content: `
-We start with an interval [a, b] such that f(a) and f(b) have opposite signs.
+We start with interval [a, b].
 
-We compute midpoint c = (a + b)/2.
+Then we compute midpoint:
 
-Then evaluate f(c):
+c = (a + b) / 2
 
-- If f(a)*f(c) < 0 → root lies in [a, c]
-- Else → root lies in [c, b]
+We evaluate function at c:
 
-This ensures guaranteed convergence.
+- If f(c) is positive → replace b
+- If f(c) is negative → replace a
+
+This process is repeated until convergence.
               `
             },
-            {
-              title: "3. Algorithm and Convergence Behavior",
-              content: `
-Step 1: Choose interval [a, b]
-Step 2: Compute midpoint c
-Step 3: Evaluate function sign
-Step 4: Reduce interval
-Step 5: Repeat
 
-Each iteration halves the error interval,
-making it a very stable but slower convergence method.
+            {
+              title: "3. Accuracy, Strengths and Weaknesses",
+              content: `
+Bisection method always converges if conditions are satisfied.
+
+However, it converges slowly because it reduces interval linearly.
+
+👉 Strength:
+Guaranteed convergence
+
+👉 Weakness:
+Slower compared to Newton-Raphson method
+
+👉 Real Use:
+Used in systems where stability is more important than speed.
               `
             }
           ]
@@ -165,40 +209,53 @@ making it a very stable but slower convergence method.
 
           pages: [
             {
-              title: "1. Concept and Geometric Insight",
+              title: "1. Deep Intuition Behind the Method",
               content: `
-Newton-Raphson method is based on tangent line approximation.
+Newton-Raphson method is based on the idea of using tangent lines
+to approximate the root of a function.
 
-Instead of searching blindly for roots,
-we use local linear approximation of the function.
+Instead of searching blindly, we “follow the slope” toward zero.
 
-The tangent line at a point gives a better estimate of the root.
+This makes it extremely fast and powerful.
               `
             },
+
             {
-              title: "2. Mathematical Derivation from Taylor Series",
+              title: "2. Mathematical Derivation (Step-by-Step)",
               content: `
-Using Taylor expansion:
+We use Taylor expansion:
 
 f(x) ≈ f(xn) + f'(xn)(x - xn)
 
-Setting f(x) = 0 gives:
+At root, f(x) = 0:
+
+0 = f(xn) + f'(xn)(x - xn)
+
+Solving:
 
 xn+1 = xn - f(xn)/f'(xn)
 
-This is one of the most powerful iterative formulas in numerical analysis.
+This is one of the most important formulas in numerical analysis.
               `
             },
-            {
-              title: "3. Algorithm and Convergence Properties",
-              content: `
-Step 1: Choose initial guess x0
-Step 2: Compute f(xn) and f'(xn)
-Step 3: Update xn+1
-Step 4: Repeat until convergence
 
-This method converges very fast when the initial guess is close to the root,
-but may fail if derivative is zero or guess is poor.
+            {
+              title: "3. Algorithm + Practical Behavior",
+              content: `
+Step 1: Choose initial guess
+Step 2: Compute function and derivative
+Step 3: Apply update formula
+Step 4: Repeat
+
+👉 Example:
+For f(x) = x² - 4,
+starting at x=2.5:
+
+2.5 → 2.05 → 2.0006 → 2
+
+Converges extremely fast.
+
+However, poor initial guess can cause divergence.
               `
             }
           ]
@@ -208,7 +265,7 @@ but may fail if derivative is zero or guess is poor.
 
     {
       id: "m3",
-      title: "Interpolation Methods",
+      title: "Interpolation",
 
       lessons: [
 
@@ -220,31 +277,37 @@ but may fail if derivative is zero or guess is poor.
 
           pages: [
             {
-              title: "1. Concept of Curve Reconstruction",
+              title: "1. Concept of Interpolation",
               content: `
-Interpolation is the process of constructing a function
-that passes through a given set of data points.
+Interpolation is the process of estimating values between known data points.
 
-Lagrange interpolation builds a polynomial that exactly fits all points.
+Instead of guessing values randomly,
+we construct a polynomial that fits all points exactly.
               `
             },
+
             {
               title: "2. Mathematical Construction",
               content: `
-The Lagrange polynomial is constructed using basis functions:
+Lagrange interpolation builds basis polynomials.
 
-Each basis polynomial is zero at all points except one.
+Each basis polynomial contributes to one point
+and becomes zero at all others.
 
-This ensures exact fitting of all given points.
+This ensures exact curve fitting.
               `
             },
-            {
-              title: "3. Applications and Limitations",
-              content: `
-Used in data science, physics modeling, and numerical prediction.
 
-However, higher degree polynomials can oscillate,
-making it unstable for large datasets.
+            {
+              title: "3. Applications and Example",
+              content: `
+Used in physics simulations, curve fitting, and data modeling.
+
+👉 Example:
+Points (1,1), (2,4), (3,9)
+produce a quadratic curve y = x²
+
+However, high-degree polynomials can oscillate unpredictably.
               `
             }
           ]
@@ -268,29 +331,33 @@ making it unstable for large datasets.
             {
               title: "1. Idea of Numerical Integration",
               content: `
-When exact integration is impossible,
-we approximate area under curve using geometric shapes.
+When functions are difficult to integrate analytically,
+we approximate area under curve.
 
-Trapezoidal rule uses trapezoids to estimate area.
+Trapezoidal rule divides region into trapezoids.
               `
             },
+
             {
-              title: "2. Mathematical Formulation",
+              title: "2. Mathematical Structure",
               content: `
-The area is divided into multiple trapezoids.
+Each segment contributes area:
 
-Each segment contributes partial area based on function values.
+Area ≈ sum of trapezoids
 
-This improves accuracy compared to simple rectangle methods.
+This improves accuracy compared to rectangle methods.
               `
             },
-            {
-              title: "3. Accuracy and Applications",
-              content: `
-Accuracy depends on number of segments.
 
-Used in physics, engineering, and statistical modeling
-where analytical integration is not possible.
+            {
+              title: "3. Example and Applications",
+              content: `
+Used in physics, engineering, and numerical modeling.
+
+👉 Example:
+Estimating area under y = x² from 0 to 5.
+
+More segments → higher accuracy.
               `
             }
           ]
@@ -312,29 +379,37 @@ where analytical integration is not possible.
 
           pages: [
             {
-              title: "1. Concept of Differential Approximation",
+              title: "1. Concept of Differential Equations",
               content: `
-Differential equations describe systems that change continuously.
+Differential equations describe how systems change over time.
 
-Euler method approximates solutions step-by-step using small increments.
+Exact solutions are often impossible,
+so numerical methods are required.
               `
             },
+
             {
-              title: "2. Mathematical Basis",
+              title: "2. Euler Method Logic",
               content: `
-Using slope approximation:
+We approximate next value using slope:
 
 y(n+1) = y(n) + h * f(xn, yn)
 
-This transforms continuous problems into discrete steps.
+This converts continuous systems into stepwise computation.
               `
             },
-            {
-              title: "3. Stability and Limitations",
-              content: `
-Euler method is simple but not very accurate for large step sizes.
 
-More advanced methods like Runge-Kutta improve accuracy significantly.
+            {
+              title: "3. Example and Limitations",
+              content: `
+Used in motion simulation and growth models.
+
+👉 Example:
+dy/dx = y
+y(0)=1 gives exponential growth approximation.
+
+Limitation:
+Accuracy decreases with large step size.
               `
             }
           ]
