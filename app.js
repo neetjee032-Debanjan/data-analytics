@@ -26,7 +26,7 @@ function router() {
 
     const moduleId = parts[0];
     const lessonId = parts[1];
-    const pageIndex = parseInt(parts[2] || "0");
+    const pageIndex = Number(parts[2] || 0);
 
     renderLesson(app, course, moduleId, lessonId, pageIndex);
   }
