@@ -1,64 +1,81 @@
 export function runNewton(container) {
 
   container.innerHTML = `
-    <h3>Newton-Raphson Interactive Simulator</h3>
+    <div style="padding:15px; border-radius:12px; background:rgba(255,255,255,0.04);">
 
-    <div style="margin-bottom:10px;">
-      <label>Initial Guess:</label>
-      <input id="x0" value="2" />
+      <h3>Newton-Raphson Interactive Solver</h3>
+
+      <!-- FUNCTION INPUT -->
+      <div style="margin-top:10px;">
+        <label>Function f(x):</label><br/>
+        <input id="fnInput" type="text" value="x*x - 4"
+          style="padding:8px; width:250px; margin-top:5px;" />
+      </div>
+
+      <!-- DERIVATIVE NOTE -->
+      <p style="opacity:0.7; font-size:12px; margin-top:5px;">
+        (Derivative is computed automatically using numerical approximation)
+      </p>
+
+      <!-- GUESS INPUT -->
+      <div style="margin-top:10px;">
+        <label>Initial Guess x₀:</label><br/>
+        <input id="guessInput" type="number" value="2"
+          style="padding:8px; width:100px; margin-top:5px;" />
+      </div>
+
+      <button id="runBtn" style="margin-top:10px;">
+        Run Newton-Raphson
+      </button>
+
+      <div id="output" style="margin-top:15px;"></div>
     </div>
-
-    <button id="run">Run Step-by-Step</button>
-
-    <div id="steps" style="margin-top:15px;"></div>
-    <canvas id="chart"></canvas>
   `;
 
-  document.getElementById("run").onclick = function () {
+  const output = container.querySelector("#output");
 
-    let x = parseFloat(document.getElementById("x0").value);
+  function f(expr, x) {
+    return Function("x", `return ${expr}`)(x);
+  }
 
-    function f(x) {
-      return x*x - 4;
-    }
+  function derivative(expr, x) {
+    const h = 0.00001;
+    return (f(expr, x + h) - f(expr, x - h)) / (2 * h);
+  }
 
-    function df(x) {
-      return 2*x;
-    }
+  container.querySelector("#runBtn").onclick = () => {
 
-    const stepsDiv = document.getElementById("steps");
+    const expr = container.querySelector("#fnInput").value;
+    let x = parseFloat(container.querySelector("#guessInput").value);
 
-    const values = [];
-
-    stepsDiv.innerHTML = "";
+    let resultHTML = "<h4>Iterations:</h4><table border='1' cellpadding='6'>";
+    resultHTML += "<tr><th>n</th><th>x</th><th>f(x)</th></tr>";
 
     for (let i = 0; i < 8; i++) {
 
-      let fx = f(x);
-      let dfx = df(x);
+      const fx = f(expr, x);
+      const dfx = derivative(expr, x);
 
-      let nextX = x - fx / dfx;
+      if (Math.abs(dfx) < 1e-8) {
+        resultHTML += `<tr><td>${i}</td><td colspan='2'>Derivative too small</td></tr>`;
+        break;
+      }
 
-      stepsDiv.innerHTML += `
-        <div style="margin-bottom:8px;">
-          Step ${i+1}: x = ${x.toFixed(5)} → ${nextX.toFixed(5)}
-        </div>
-      `;
+      resultHTML += `<tr>
+        <td>${i}</td>
+        <td>${x.toFixed(6)}</td>
+        <td>${fx.toFixed(6)}</td>
+      </tr>`;
 
-      values.push(x);
-      x = nextX;
+      x = x - fx / dfx;
     }
 
-    new Chart(document.getElementById("chart"), {
-      type: "line",
-      data: {
-        labels: values.map((_, i) => i),
-        datasets: [{
-          label: "Convergence Path",
-          data: values,
-          borderColor: "#22c55e"
-        }]
-      }
-    });
+    resultHTML += "</table>";
+
+    resultHTML += `<p style="margin-top:10px;">
+      Approx Root ≈ <b>${x.toFixed(6)}</b>
+    </p>`;
+
+    output.innerHTML = resultHTML;
   };
 }
