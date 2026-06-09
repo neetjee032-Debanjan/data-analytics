@@ -1,150 +1,248 @@
-/* -----------------------
-   GLOBAL THEME
------------------------- */
-body {
+
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #0f172a;
-  color: #e2e8f0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* -----------------------
-   NAVBAR
------------------------- */
+body {
+  font-family: "Inter", sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* animated background glow */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.15), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(34,197,94,0.12), transparent 40%);
+  z-index: -1;
+}
+
+/* =========================
+   NAVBAR (GLASS EFFECT)
+========================= */
 .navbar {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 15px 20px;
-  font-size: 18px;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
   position: sticky;
   top: 0;
+  padding: 16px 24px;
+  font-weight: 600;
+  font-size: 18px;
+
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 10;
 }
 
-/* -----------------------
-   MAIN LAYOUT
------------------------- */
+/* =========================
+   MAIN CONTAINER
+========================= */
 .container {
   display: flex;
   height: calc(100vh - 60px);
 }
 
-/* -----------------------
-   SIDEBAR
------------------------- */
+/* =========================
+   SIDEBAR (ULTRA MODERN)
+========================= */
 .sidebar {
-  width: 280px;
-  background: rgba(255, 255, 255, 0.03);
-  border-right: 1px solid rgba(255,255,255,0.1);
-  padding: 15px;
+  width: 300px;
+  padding: 18px;
+
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+
+  border-right: 1px solid rgba(255,255,255,0.08);
+
   overflow-y: auto;
 }
 
 .sidebar h3 {
-  margin-top: 0;
-  color: #93c5fd;
+  color: #60a5fa;
+  margin-bottom: 12px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
+/* =========================
+   MODERN CARDS
+========================= */
 .card {
-  background: rgba(255,255,255,0.05);
+  padding: 14px;
   margin: 10px 0;
-  padding: 12px;
-  border-radius: 10px;
-  transition: 0.3s;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+
+  transition: all 0.25s ease;
+
   cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(59,130,246,0.2), transparent);
+  transition: 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
 }
 
 .card:hover {
-  background: rgba(59,130,246,0.15);
-  transform: translateX(5px);
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(59,130,246,0.4);
 }
 
-/* ACTIVE STATE */
+/* active lesson */
 .card.active {
   border-left: 4px solid #3b82f6;
-  background: rgba(59,130,246,0.2);
+  background: rgba(59,130,246,0.12);
 }
 
-/* -----------------------
+/* =========================
    CONTENT AREA
------------------------- */
+========================= */
 .content {
   flex: 1;
-  padding: 30px;
+  padding: 40px;
+
   overflow-y: auto;
-  animation: fadeIn 0.3s ease-in-out;
+
+  animation: fadeIn 0.3s ease;
 }
 
 .content h1 {
-  font-size: 28px;
-  color: #60a5fa;
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #93c5fd;
 }
 
-/* -----------------------
-   BUTTONS
------------------------- */
+.content p {
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+/* =========================
+   BUTTONS (MODERN)
+========================= */
 button {
-  background: #3b82f6;
+  padding: 10px 16px;
+  border-radius: 10px;
+
   border: none;
-  padding: 10px 15px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
   color: white;
-  border-radius: 8px;
+  font-weight: 500;
+
   cursor: pointer;
-  transition: 0.3s;
+
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 20px rgba(59,130,246,0.2);
 }
 
 button:hover {
-  background: #2563eb;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(59,130,246,0.35);
 }
 
 button:disabled {
-  background: #334155;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* -----------------------
-   SIMULATION BOX
------------------------- */
+/* =========================
+   SIMULATION PANEL
+========================= */
 #sim {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
+  margin-top: 25px;
+  padding: 18px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
 }
 
-/* -----------------------
+/* =========================
+   HOME CARDS GRID
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* =========================
    PROGRESS BAR
------------------------- */
+========================= */
 .progress {
   height: 6px;
-  background: #1e293b;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50px;
   overflow: hidden;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #22c55e);
   width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #22c55e);
   transition: width 0.4s ease;
 }
 
-/* -----------------------
-   ANIMATION
------------------------- */
+/* =========================
+   ANIMATIONS
+========================= */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* -----------------------
-   TEXT STYLING
------------------------- */
-p {
-  line-height: 1.7;
-  color: #cbd5e1;
+/* smooth scrollbar */
+.sidebar::-webkit-scrollbar,
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.content::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
 }
