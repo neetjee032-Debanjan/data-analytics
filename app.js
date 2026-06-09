@@ -4,7 +4,7 @@ import { renderLesson } from "./pages/lesson.js";
 const app = document.getElementById("app");
 
 /* -----------------------------
-   STATE
+   STATE (SAFE GLOBAL STATE)
 ------------------------------ */
 let state = {
   moduleId: null,
@@ -30,11 +30,16 @@ function router() {
     state.lessonId = parts[2];
     state.pageIndex = parseInt(parts[3] || "0");
 
-    const module = findModule(state.moduleId);
-    const lesson = findLesson(module, state.lessonId);
+    const module = getModule(state.moduleId);
+    const lesson = getLesson(module, state.lessonId);
 
     if (!module || !lesson) {
-      app.innerHTML = "<h2>Content not found</h2>";
+      app.innerHTML = `
+        <div style="padding:20px;">
+          <h2>Content Not Found</h2>
+          <button onclick="goHome()">Go Home</button>
+        </div>
+      `;
       return;
     }
 
@@ -43,9 +48,25 @@ function router() {
 }
 
 /* -----------------------------
-   HOME PAGE (ALL MODULES FIXED)
+   HOME PAGE (ALL MODULES SAFE RENDER)
 ------------------------------ */
 function renderHome() {
+
+  const modulesHTML = course.modules
+    .map((module) => {
+
+      const lessonCount = Array.isArray(module.lessons)
+        ? module.lessons.length
+        : 0;
+
+      return `
+        <div class="card" onclick="openModule('${module.id}')">
+          <h3>${module.title}</h3>
+          <p>${lessonCount} lessons</p>
+        </div>
+      `;
+    })
+    .join("");
 
   app.innerHTML = `
     <div class="navbar">
@@ -56,27 +77,20 @@ function renderHome() {
 
       <h1>Welcome to Your Learning Lab</h1>
 
-      <p>Structured modules with deep theory + simulations</p>
+      <p>Deep structured learning + simulations + theory engine</p>
 
       <div class="progress">
-        <div class="progress-bar" style="width:70%"></div>
+        <div class="progress-bar" style="width:75%"></div>
       </div>
 
       <h2>Modules</h2>
 
       <div style="
         display:grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap:15px;
       ">
-
-        ${course.modules.map((m) => `
-          <div class="card" onclick="openModule('${m.id}')">
-            <h3>${m.title}</h3>
-            <p>${m.lessons ? m.lessons.length : 0} lessons</p>
-          </div>
-        `).join("")}
-
+        ${modulesHTML}
       </div>
 
     </div>
@@ -84,16 +98,29 @@ function renderHome() {
 }
 
 /* -----------------------------
-   OPEN MODULE (FIXED FULL LIST)
+   OPEN MODULE (FULL SAFE VERSION)
 ------------------------------ */
 window.openModule = function(moduleId) {
 
-  const module = findModule(moduleId);
+  const module = getModule(moduleId);
 
   if (!module) {
-    app.innerHTML = "<h2>Module not found</h2>";
+    app.innerHTML = `
+      <div style="padding:20px;">
+        <h2>Module Not Found</h2>
+        <button onclick="goHome()">Go Home</button>
+      </div>
+    `;
     return;
   }
+
+  const lessonsHTML = (module.lessons || [])
+    .map((lesson) => `
+      <div class="card" onclick="openLesson('${module.id}','${lesson.id}',0)">
+        ${lesson.title}
+      </div>
+    `)
+    .join("");
 
   app.innerHTML = `
     <div class="navbar">
@@ -105,13 +132,7 @@ window.openModule = function(moduleId) {
 
       <div class="sidebar">
         <h3>Lessons</h3>
-
-        ${module.lessons.map((lesson) => `
-          <div class="card" onclick="openLesson('${module.id}','${lesson.id}',0)">
-            ${lesson.title}
-          </div>
-        `).join("")}
-
+        ${lessonsHTML}
       </div>
 
       <div class="content">
@@ -124,33 +145,33 @@ window.openModule = function(moduleId) {
 };
 
 /* -----------------------------
-   OPEN LESSON
+   LESSON NAVIGATION
 ------------------------------ */
 window.openLesson = function(moduleId, lessonId, pageIndex = 0) {
   window.location.hash = `lesson-${moduleId}-${lessonId}-${pageIndex}`;
 };
 
 /* -----------------------------
-   HOME
+   HOME BUTTON
 ------------------------------ */
 window.goHome = function() {
   window.location.hash = "";
 };
 
 /* -----------------------------
-   HELPERS
+   SAFE DATA HELPERS
 ------------------------------ */
-function findModule(moduleId) {
+function getModule(moduleId) {
   return course.modules.find(m => m.id === moduleId);
 }
 
-function findLesson(module, lessonId) {
-  if (!module) return null;
+function getLesson(module, lessonId) {
+  if (!module || !module.lessons) return null;
   return module.lessons.find(l => l.id === lessonId);
 }
 
 /* -----------------------------
-   ROUTE LISTENERS
+   ROUTER EVENTS
 ------------------------------ */
 window.addEventListener("hashchange", router);
 window.addEventListener("load", router);
