@@ -5,84 +5,65 @@ import { runLagrange } from "./lagrange.js";
 import { runDE } from "./differential.js";
 
 /**
- * ===============================
- * SIMULATION REGISTRY (CORE ENGINE)
- * ===============================
- * ONLY THESE KEYS ARE VALID:
- * (must match lesson.simulation exactly)
+ * =========================
+ * SIMULATION REGISTRY CORE
+ * =========================
+ * All lesson.simulation keys must match EXACTLY here
  */
 
 const Simulations = {
 
-  // ================= ROOT FINDING =================
+  // Root Finding
   "newton-raphson": runNewton,
   "bisection": runBisection,
 
-  // ================= NUMERICAL INTEGRATION =================
+  // Numerical Integration
   "integration": runIntegration,
 
-  // ================= INTERPOLATION =================
+  // Interpolation
   "lagrange": runLagrange,
 
-  // ================= DIFFERENTIAL EQUATIONS =================
+  // Differential Equations
   "differential": runDE
 };
 
 /**
- * ===============================
+ * =========================
  * SAFE SIMULATION LOADER
- * ===============================
- * This prevents blank screens & crashes
+ * =========================
+ * Prevents crashes and blank screens
  */
 
 export function loadSimulation(key, container) {
 
-  // normalize key (prevents casing/spacing issues)
   const cleanKey = (key || "").trim().toLowerCase();
 
-  console.log("▶ Loading simulation:", cleanKey);
+  console.log("Loading simulation:", cleanKey);
 
   const sim = Simulations[cleanKey];
 
-  // ---------------- NOT FOUND ----------------
   if (!sim) {
     container.innerHTML = `
-      <div style="
-        color:#ff4d4d;
-        padding:20px;
-        font-family:Arial;
-        background:#111827;
-        border-radius:10px;
-      ">
-        <h2>⚠ Simulation Not Found</h2>
+      <div style="color:#ff4d4d;padding:20px;font-family:Arial;background:#111827;border-radius:10px;">
+        <h2>Simulation Not Found</h2>
         <p><b>Key:</b> ${cleanKey}</p>
-        <p>
-          This simulation is not registered in the system.
-          <br/>Check lesson.simulation value or registry mapping.
-        </p>
-
-        <hr style="margin:10px 0; opacity:0.2"/>
-
-        <small style="opacity:0.7">
-          Allowed keys: newton-raphson, bisection, integration, lagrange, differential
+        <p>Check if this key exists in sims/index.js and matches lesson.simulation exactly.</p>
+        <hr style="opacity:0.2"/>
+        <small>
+          Valid keys: newton-raphson, bisection, integration, lagrange, differential
         </small>
       </div>
     `;
     return;
   }
 
-  // ---------------- EXECUTE SIMULATION ----------------
   try {
     sim(container);
   } catch (err) {
-    console.error("Simulation error:", err);
+    console.error(err);
 
     container.innerHTML = `
-      <div style="
-        color:red;
-        padding:20px;
-        font-family:Arial;
-      ">
+      <div style="color:red;padding:20px;font-family:Arial;">
         <h2>Simulation Crashed</h2>
         <pre>${err.message}</pre>
       </div>
@@ -91,6 +72,6 @@ export function loadSimulation(key, container) {
 }
 
 /**
- * Export registry (optional use)
+ * Export registry (optional debug use)
  */
 export { Simulations };
