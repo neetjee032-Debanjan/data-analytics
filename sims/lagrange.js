@@ -1,21 +1,22 @@
 export function runLagrange(container) {
 
   container.innerHTML = `
-    <h3>Lagrange Interpolation</h3>
+    <h3>Lagrange Interpolation (Interactive)</h3>
 
     <p>Points: (1,1), (2,4), (3,9)</p>
 
-    <button id="run">Plot Curve</button>
+    <button id="run">Generate Curve</button>
 
     <canvas id="chart"></canvas>
   `;
 
   document.getElementById("run").onclick = function () {
 
-    const x = [1, 2, 3];
-    const y = [1, 4, 9];
+    const x = [1,2,3];
+    const y = [1,4,9];
 
-    function lagrange(xi) {
+    function L(xi) {
+
       let sum = 0;
 
       for (let i = 0; i < x.length; i++) {
@@ -36,10 +37,10 @@ export function runLagrange(container) {
     const xs = [];
     const ys = [];
 
-    for (let i = 0; i <= 50; i++) {
-      let xi = 1 + i * 0.04;
+    for (let i = 0; i < 60; i++) {
+      let xi = 1 + i * 0.03;
       xs.push(xi);
-      ys.push(lagrange(xi));
+      ys.push(L(xi));
     }
 
     new Chart(document.getElementById("chart"), {
@@ -48,7 +49,8 @@ export function runLagrange(container) {
         labels: xs,
         datasets: [{
           label: "Interpolation Curve",
-          data: ys
+          data: ys,
+          borderColor: "#a855f7"
         }]
       }
     });
