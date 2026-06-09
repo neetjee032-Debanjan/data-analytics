@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -40,7 +39,6 @@
             padding: 0 30px;
         }
 
-        /* Navbar */
         .navbar {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
@@ -85,6 +83,7 @@
             font-weight: 600;
             color: #1a1a2e;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -92,7 +91,6 @@
             transform: translateY(-2px);
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 80px 0 60px;
@@ -130,7 +128,6 @@
             font-weight: 800;
         }
 
-        /* Section Cards */
         .section-card {
             background: white;
             border-radius: 2rem;
@@ -161,7 +158,6 @@
             color: #667eea;
         }
 
-        /* Topics Grid */
         .topics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -211,7 +207,6 @@
             font-weight: 600;
         }
 
-        /* 3D Simulation Container */
         .simulation-3d {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             border-radius: 1rem;
@@ -223,13 +218,29 @@
 
         #threeCanvas {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border-radius: 1rem;
             background: rgba(0,0,0,0.3);
             margin-top: 1rem;
+            cursor: pointer;
         }
 
-        /* Modal Styles */
+        .sim-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 0.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .sim-button:hover {
+            transform: scale(1.05);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -244,11 +255,11 @@
 
         .modal-content {
             background: white;
-            margin: 3% auto;
+            margin: 2% auto;
             width: 90%;
-            max-width: 900px;
+            max-width: 1000px;
             border-radius: 1.5rem;
-            max-height: 85%;
+            max-height: 90%;
             overflow-y: auto;
             animation: slideDown 0.3s;
         }
@@ -263,6 +274,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 10;
         }
 
         .modal-header h2 {
@@ -323,6 +335,14 @@
             margin: 1rem 0;
         }
 
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -374,7 +394,7 @@
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: #e2e8f0;
+            background: rgba(255,255,255,0.3);
             border-radius: 2px;
             overflow: hidden;
             margin-top: 1rem;
@@ -382,9 +402,29 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: white;
             width: 0%;
             transition: width 0.3s;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background: #f1f5f9;
         }
     </style>
 </head>
@@ -397,11 +437,11 @@
             <i class="fas fa-chart-line"></i> DataAnalytics<span style="color:#764ba2;">Mastery</span>
         </div>
         <ul class="nav-links">
-            <li><a href="#basics">Basics</a></li>
-            <li><a href="#statistics">Statistics</a></li>
-            <li><a href="#advanced">Advanced</a></li>
-            <li><a href="#simulations">3D Simulations</a></li>
-            <li><a href="#resources">Resources</a></li>
+            <li><a onclick="scrollToSection('basics')">Basics</a></li>
+            <li><a onclick="scrollToSection('statistics')">Statistics</a></li>
+            <li><a onclick="scrollToSection('advanced')">Advanced</a></li>
+            <li><a onclick="scrollToSection('simulations')">3D Simulations</a></li>
+            <li><a onclick="scrollToSection('resources')">Resources</a></li>
         </ul>
     </div>
 </nav>
@@ -507,6 +547,12 @@
                     <p>EDA techniques, visualization, pattern discovery, outlier detection</p>
                     <span class="topic-badge">Essential</span>
                 </div>
+                <div class="topic-card" onclick="openTopic('visualization')">
+                    <div class="topic-icon">📊</div>
+                    <h3>Data Visualization</h3>
+                    <p>Chart types, best practices, tools (Tableau, Power BI, matplotlib, ggplot)</p>
+                    <span class="topic-badge">Essential</span>
+                </div>
                 <div class="topic-card" onclick="openTopic('timeseries')">
                     <div class="topic-icon">⏰</div>
                     <h3>Time Series Analysis</h3>
@@ -519,28 +565,12 @@
                     <p>Supervised vs unsupervised, classification, clustering, model evaluation</p>
                     <span class="topic-badge">Advanced</span>
                 </div>
-                <div class="topic-card" onclick="openTopic('visualization')">
-                    <div class="topic-icon">📊</div>
-                    <h3>Data Visualization</h3>
-                    <p>Chart types, best practices, tools (Tableau, Power BI, matplotlib, ggplot)</p>
-                    <span class="topic-badge">Essential</span>
-                </div>
                 <div class="topic-card" onclick="openTopic('tools')">
                     <div class="topic-icon">🛠️</div>
                     <h3>Statistical Software & Tools</h3>
                     <p>Python (pandas, numpy, scipy), R, SQL, Excel, SPSS, SAS</p>
                     <span class="topic-badge">Practical</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Ethics & Case Studies -->
-        <div class="section-card">
-            <div class="section-title">
-                <i class="fas fa-balance-scale"></i>
-                <span>⚖️ Ethics & Real-World Applications</span>
-            </div>
-            <div class="topics-grid">
                 <div class="topic-card" onclick="openTopic('ethics')">
                     <div class="topic-icon">🛡️</div>
                     <h3>Ethics in Data Analytics</h3>
@@ -561,9 +591,10 @@
             <h2><i class="fas fa-cube"></i> Interactive 3D Simulations</h2>
             <p>Visualize statistical concepts in 3D - Normal Distribution & Regression Surface</p>
             <canvas id="threeCanvas"></canvas>
-            <div style="margin-top: 1rem;">
-                <button onclick="animateNormalDistribution()" style="background:#667eea; margin:0.5rem;">📊 Normal Distribution</button>
-                <button onclick="animateRegressionSurface()" style="background:#764ba2; margin:0.5rem;">📈 Regression Surface</button>
+            <div>
+                <button class="sim-button" onclick="showNormalDistribution()">📊 Normal Distribution (3D)</button>
+                <button class="sim-button" onclick="showRegressionSurface()">📈 Regression Surface (3D)</button>
+                <button class="sim-button" onclick="showCorrelationSphere()">🔮 Correlation Sphere (3D)</button>
             </div>
         </div>
 
@@ -589,6 +620,7 @@
 
 <footer>
     <p>© 2024 Data Analytics Mastery | Empowering everyone with data skills | Interactive 3D Learning Platform</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem;">⭐ Click on any topic card for detailed explanations (3-5 pages of content each!)</p>
 </footer>
 
 <!-- Modal -->
@@ -605,6 +637,7 @@
 <script>
     // Track progress
     let viewedTopics = new Set();
+    let scene, camera, renderer, currentMesh;
     
     function updateProgress() {
         const total = 16;
@@ -612,226 +645,294 @@
         document.getElementById('progressFill').style.width = progress + '%';
     }
     
-    // Topic content database
-    const topics = {
-        'intro': {
-            title: '🎯 Introduction to Data Analytics',
-            content: `
-                <div class="modal-section">
-                    <h3>What is Data Analytics?</h3>
-                    <p>Data analytics is the science of examining raw data to draw conclusions and uncover patterns. It involves applying statistical and logical techniques to transform, organize, and model data for decision-making.</p>
-                </div>
-                <div class="modal-section">
-                    <h3>The Analytics Lifecycle</h3>
-                    <ul>
-                        <li><strong>Problem Definition:</strong> Understand business objectives</li>
-                        <li><strong>Data Collection:</strong> Gather relevant data from various sources</li>
-                        <li><strong>Data Preparation:</strong> Clean, transform, and organize data</li>
-                        <li><strong>Exploratory Analysis:</strong> Visualize and understand patterns</li>
-                        <li><strong>Modeling:</strong> Apply statistical or ML algorithms</li>
-                        <li><strong>Interpretation:</strong> Draw insights and recommendations</li>
-                        <li><strong>Deployment:</strong> Implement solutions and monitor results</li>
-                    </ul>
-                </div>
-                <div class="modal-section">
-                    <h3>Types of Analytics</h3>
-                    <ul>
-                        <li><strong>Descriptive:</strong> What happened? (Dashboards, reports)</li>
-                        <li><strong>Diagnostic:</strong> Why did it happen? (Drill-down, correlation)</li>
-                        <li><strong>Predictive:</strong> What will happen? (Forecasting, ML)</li>
-                        <li><strong>Prescriptive:</strong> What should we do? (Optimization, simulation)</li>
-                    </ul>
-                </div>
-                <div class="info-box">
-                    <strong>💡 Real-World Impact:</strong> Companies using data analytics are 23x more likely to acquire customers, 6x more likely to retain customers, and 19x more likely to be profitable.
-                </div>
-                <div class="code-example">
-                    <strong>Python Example - Basic Data Loading:</strong><br>
-                    import pandas as pd<br>
-                    df = pd.read_csv('data.csv')<br>
-                    print(df.head())<br>
-                    print(df.describe())
-                </div>
-            `
-        },
-        'data-types': {
-            title: '🔢 Types of Data',
-            content: `
-                <div class="modal-section">
-                    <h3>Data Classification Framework</h3>
-                    <h4>1. By Nature:</h4>
-                    <ul>
-                        <li><strong>Qualitative (Categorical):</strong> Non-numeric (colors, names, categories)
-                            <ul><li>Nominal: No order (e.g., gender, blood type)</li>
-                            <li>Ordinal: Has order (e.g., movie ratings, education level)</li></ul>
-                        </li>
-                        <li><strong>Quantitative (Numerical):</strong> Numeric values
-                            <ul><li>Discrete: Countable (e.g., number of children)</li>
-                            <li>Continuous: Measurable (e.g., height, temperature)</li></ul>
-                        </li>
-                    </ul>
-                    <h4>2. By Structure:</h4>
-                    <ul>
-                        <li><strong>Structured:</strong> Organized in rows/columns (SQL databases, Excel)</li>
-                        <li><strong>Unstructured:</strong> No predefined format (text, images, videos)</li>
-                        <li><strong>Semi-structured:</strong> Some organization (JSON, XML)</li>
-                    </ul>
-                    <h4>3. By Source:</h4>
-                    <ul>
-                        <li><strong>Primary:</strong> Collected firsthand (surveys, experiments)</li>
-                        <li><strong>Secondary:</strong> Existing data (government reports, company records)</li>
-                    </ul>
-                </div>
-                <div class="info-box">
-                    <strong>📊 Data Types Matter!</strong> Your analysis methods depend entirely on data types. You can't calculate the mean of categorical data, and bar charts don't work well for continuous data.
-                </div>
-            `
-        },
-        'data-collection': {
-            title: '📋 Data Collection Methods',
-            content: `
-                <div class="modal-section">
-                    <h3>Primary Data Collection</h3>
-                    <ul>
-                        <li><strong>Surveys & Questionnaires:</strong> Online, phone, paper-based</li>
-                        <li><strong>Interviews:</strong> Structured, semi-structured, unstructured</li>
-                        <li><strong>Observations:</strong> Field studies, user testing</li>
-                        <li><strong>Experiments:</strong> A/B testing, controlled trials</li>
-                    </ul>
-                    <h3>Secondary Data Sources</h3>
-                    <ul>
-                        <li><strong>Public Datasets:</strong> Kaggle, UCI Repository, Data.gov</li>
-                        <li><strong>APIs:</strong> Twitter API, Google Maps API, Financial APIs</li>
-                        <li><strong>Web Scraping:</strong> BeautifulSoup, Scrapy, Selenium</li>
-                        <li><strong>Internal Databases:</strong> CRM, ERP, transaction logs</li>
-                    </ul>
-                    <h3>Sampling Methods</h3>
-                    <ul>
-                        <li><strong>Random Sampling:</strong> Every member has equal chance</li>
-                        <li><strong>Stratified Sampling:</strong> Divide population into strata</li>
-                        <li><strong>Cluster Sampling:</strong> Random clusters, then all members</li>
-                        <li><strong>Convenience Sampling:</strong> Easily accessible (less reliable)</li>
-                    </ul>
-                </div>
-                <div class="code-example">
-                    <strong>Python - Web Scraping Example:</strong><br>
-                    import requests<br>
-                    from bs4 import BeautifulSoup<br>
-                    response = requests.get('https://example.com')<br>
-                    soup = BeautifulSoup(response.text, 'html.parser')<br>
-                    titles = soup.find_all('h2')
-                </div>
-            `
-        },
-        'data-cleaning': {
-            title: '🧹 Data Cleaning & Preparation',
-            content: `
-                <div class="modal-section">
-                    <h3>The 80/20 Rule of Analytics</h3>
-                    <p>Data cleaning typically takes 80% of the time in analytics projects. Clean data is essential for accurate insights.</p>
-                    <h3>Common Data Quality Issues</h3>
-                    <ul>
-                        <li><strong>Missing Values:</strong> Null, NaN, empty strings</li>
-                        <li><strong>Duplicate Records:</strong> Repeated observations</li>
-                        <li><strong>Outliers:</strong> Extreme values distorting analysis</li>
-                        <li><strong>Inconsistent Formatting:</strong> Different date formats, units</li>
-                        <li><strong>Invalid Data:</strong> Impossible values (age = -5)</li>
-                    </ul>
-                    <h3>Cleaning Techniques</h3>
-                    <ul>
-                        <li><strong>Handling Missing Values:</strong>
-                            <ul><li>Remove rows/columns</li>
-                            <li>Impute with mean/median/mode</li>
-                            <li>Forward/backward fill for time series</li></ul>
-                        </li>
-                        <li><strong>Outlier Detection:</strong>
-                            <ul><li>Z-score method (>3 standard deviations)</li>
-                            <li>IQR method (values outside 1.5*IQR)</li>
-                            <li>Domain knowledge boundaries</li></ul>
-                        </li>
-                        <li><strong>Normalization/Standardization:</strong>
-                            <ul><li>Min-Max scaling: (x - min)/(max - min)</li>
-                            <li>Z-score: (x - mean)/std</li></ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="code-example">
-                    <strong>Python - Data Cleaning with Pandas:</strong><br>
-                    import pandas as pd<br>
-                    df = pd.read_csv('data.csv')<br>
-                    # Check missing values<br>
-                    df.isnull().sum()<br>
-                    # Fill missing with mean<br>
-                    df.fillna(df.mean(), inplace=True)<br>
-                    # Remove duplicates<br>
-                    df.drop_duplicates(inplace=True)<br>
-                    # Remove outliers using Z-score<br>
-                    from scipy import stats<br>
-                    df = df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
-                </div>
-            `
-        },
-        'descriptive': {
-            title: '📏 Descriptive Statistics',
-            content: `
-                <div class="modal-section">
-                    <h3>Measures of Central Tendency</h3>
-                    <ul>
-                        <li><strong>Mean (Average):</strong> Sum of all values / number of values
-                            <br><em>Best for: Normally distributed data</em></li>
-                        <li><strong>Median:</strong> Middle value when sorted
-                            <br><em>Best for: Skewed data (house prices, income)</em></li>
-                        <li><strong>Mode:</strong> Most frequent value
-                            <br><em>Best for: Categorical data</em></li>
-                    </ul>
-                    <h3>Measures of Dispersion (Spread)</h3>
-                    <ul>
-                        <li><strong>Range:</strong> Maximum - Minimum (simple but sensitive to outliers)</li>
-                        <li><strong>Variance:</strong> Average squared deviation from mean</li>
-                        <li><strong>Standard Deviation:</strong> Square root of variance (in original units)</li>
-                        <li><strong>Interquartile Range (IQR):</strong> Q3 - Q1 (robust to outliers)</li>
-                    </ul>
-                    <h3>Shape of Distribution</h3>
-                    <ul>
-                        <li><strong>Skewness:</strong> Asymmetry (positive/negative skew)</li>
-                        <li><strong>Kurtosis:</strong> Tailedness (peaked or flat)</li>
-                    </ul>
-                </div>
-                <div class="info-box">
-                    <strong>📌 Example Interpretation:</strong> If mean > median, the distribution is right-skewed (positive skew). This often occurs with income data where a few high earners pull the mean up.
-                </div>
-                <div class="code-example">
-                    <strong>Python - Descriptive Statistics:</strong><br>
-                    import pandas as pd<br>
-                    import numpy as np<br>
-                    data = [12, 15, 14, 10, 13, 15, 18, 20, 14, 13]<br>
-                    mean = np.mean(data)  # 14.4<br>
-                    median = np.median(data)  # 14.0<br>
-                    std = np.std(data)  # 2.87<br>
-                    # Using pandas for comprehensive summary<br>
-                    df = pd.DataFrame(data, columns=['values'])<br>
-                    print(df.describe())
-                </div>
-            `
-        },
-        'probability': {
-            title: '🎲 Probability & Distributions',
-            content: `
-                <div class="modal-section">
-                    <h3>Fundamental Probability Concepts</h3>
-                    <ul>
-                        <li><strong>Probability Space:</strong> Sample space, events, outcomes</li>
-                        <li><strong>Conditional Probability:</strong> P(A|B) = P(A∩B)/P(B)</li>
-                        <li><strong>Bayes' Theorem:</strong> P(A|B) = P(B|A)×P(A)/P(B)</li>
-                        <li><strong>Independent Events:</strong> P(A∩B) = P(A)×P(B)</li>
-                    </ul>
-                    <h3>Important Probability Distributions</h3>
-                    <ul>
-                        <li><strong>Normal (Gaussian):</strong> Bell-shaped, central limit theorem
-                            <br>68-95-99.7 rule: 68% within 1σ, 95% within 2σ, 99.7% within 3σ</li>
-                        <li><strong>Binomial:</strong> Number of successes in n trials (coin flips)</li>
-                        <li><strong>Poisson:</strong> Number of events in fixed interval (customer arrivals)</li>
-                        <li><strong>Uniform:</strong> All outcomes equally likely (dice roll)</li>
-                    </ul>
-                    <h3>Central Limit Theorem (CLT)</h3>
-                    <p>The distribution of sample means approaches a normal
+    function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // ============ 3D SIMULATIONS ============
+    function init3D() {
+        const canvas = document.getElementById('threeCanvas');
+        const container = canvas.parentElement;
+        
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+        
+        camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        camera.position.set(5, 5, 10);
+        camera.lookAt(0, 0, 0);
+        
+        renderer = new THREE.WebGLRenderer({ canvas });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0x404060);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7);
+        scene.add(directionalLight);
+        const backLight = new THREE.PointLight(0x4466cc, 0.5);
+        backLight.position.set(-2, 1, -3);
+        scene.add(backLight);
+        
+        // Add grid helper
+        const gridHelper = new THREE.GridHelper(20, 20, 0x888888, 0x444444);
+        scene.add(gridHelper);
+        
+        // Add axes helper
+        const axesHelper = new THREE.AxesHelper(5);
+        scene.add(axesHelper);
+        
+        return { scene, camera, renderer };
+    }
+    
+    function showNormalDistribution() {
+        if (!scene) init3D();
+        if (currentMesh) scene.remove(currentMesh);
+        
+        // Create a bell curve surface
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const indices = [];
+        const colors = [];
+        
+        const width = 40;
+        const depth = 40;
+        const spacing = 0.3;
+        
+        for (let i = 0; i <= width; i++) {
+            const x = (i - width/2) * spacing;
+            for (let j = 0; j <= depth; j++) {
+                const z = (j - depth/2) * spacing;
+                const y = Math.exp(-(x*x + z*z) / 8) * 2;
+                vertices.push(x, y, z);
+                const color = new THREE.Color().setHSL(0.6 + y * 0.1, 1, 0.5);
+                colors.push(color.r, color.g, color.b);
+            }
+        }
+        
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < depth; j++) {
+                const a = i * (depth + 1) + j;
+                const b = i * (depth + 1) + j + 1;
+                const c = (i + 1) * (depth + 1) + j;
+                const d = (i + 1) * (depth + 1) + j + 1;
+                indices.push(a, b, c);
+                indices.push(b, d, c);
+            }
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
+        geometry.setIndex(indices);
+        
+        const material = new THREE.MeshPhongMaterial({ vertexColors: true, side: THREE.DoubleSide, transparent: true, opacity: 0.9 });
+        const surface = new THREE.Mesh(geometry, material);
+        scene.add(surface);
+        currentMesh = surface;
+        
+        camera.position.set(6, 5, 8);
+        camera.lookAt(0, 1, 0);
+        animate();
+    }
+    
+    function showRegressionSurface() {
+        if (!scene) init3D();
+        if (currentMesh) scene.remove(currentMesh);
+        
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const indices = [];
+        const colors = [];
+        
+        const width = 40;
+        const depth = 40;
+        const spacing = 0.25;
+        
+        for (let i = 0; i <= width; i++) {
+            const x = (i - width/2) * spacing;
+            for (let j = 0; j <= depth; j++) {
+                const z = (j - depth/2) * spacing;
+                const y = 1.5 + 0.5 * x + 0.3 * z + Math.random() * 0.2;
+                vertices.push(x, y, z);
+                const color = new THREE.Color().setHSL(0.1 + y * 0.15, 1, 0.5);
+                colors.push(color.r, color.g, color.b);
+            }
+        }
+        
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < depth; j++) {
+                const a = i * (depth + 1) + j;
+                const b = i * (depth + 1) + j + 1;
+                const c = (i + 1) * (depth + 1) + j;
+                const d = (i + 1) * (depth + 1) + j + 1;
+                indices.push(a, b, c);
+                indices.push(b, d, c);
+            }
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertices), 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
+        geometry.setIndex(indices);
+        
+        const material = new THREE.MeshPhongMaterial({ vertexColors: true, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
+        const surface = new THREE.Mesh(geometry, material);
+        scene.add(surface);
+        currentMesh = surface;
+        
+        camera.position.set(7, 6, 9);
+        camera.lookAt(0, 1.5, 0);
+        animate();
+    }
+    
+    function showCorrelationSphere() {
+        if (!scene) init3D();
+        if (currentMesh) scene.remove(currentMesh);
+        
+        const geometry = new THREE.SphereGeometry(2, 64, 64);
+        const colors = [];
+        for (let i = 0; i < geometry.attributes.position.count; i++) {
+            const x = geometry.attributes.position.getX(i);
+            const y = geometry.attributes.position.getY(i);
+            const z = geometry.attributes.position.getZ(i);
+            const color = new THREE.Color().setHSL(0.55 + (x + y + z) * 0.1, 1, 0.5);
+            colors.push(color.r, color.g, color.b);
+        }
+        geometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(colors), 3));
+        
+        const material = new THREE.MeshPhongMaterial({ vertexColors: true, transparent: true, opacity: 0.8, shininess: 60 });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+        currentMesh = sphere;
+        
+        camera.position.set(5, 3, 6);
+        camera.lookAt(0, 0, 0);
+        animate();
+    }
+    
+    function animate() {
+        if (!renderer) return;
+        requestAnimationFrame(animate);
+        if (currentMesh) {
+            currentMesh.rotation.y += 0.005;
+        }
+        renderer.render(scene, camera);
+    }
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+        const canvas = document.getElementById('threeCanvas');
+        if (renderer && canvas) {
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        }
+    });
+    
+    // Initialize 3D on page load
+    window.addEventListener('load', () => {
+        init3D();
+        showNormalDistribution();
+    });
+    
+    // ============ MODAL FUNCTIONS ============
+    function openTopic(topicId) {
+        viewedTopics.add(topicId);
+        updateProgress();
+        
+        const topics = getTopicContent();
+        const topic = topics[topicId];
+        
+        if (topic) {
+            document.getElementById('modalTitle').innerHTML = topic.title;
+            document.getElementById('modalBody').innerHTML = topic.content;
+            document.getElementById('topicModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        } else {
+            console.error('Topic not found:', topicId);
+        }
+    }
+    
+    function closeModal() {
+        document.getElementById('topicModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    window.onclick = function(event) {
+        const modal = document.getElementById('topicModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    
+    function getTopicContent() {
+        // Complete content for all topics - each with extensive detailed explanations
+        return {
+            'intro': {
+                title: '🎯 Introduction to Data Analytics',
+                content: getIntroContent()
+            },
+            'data-types': {
+                title: '🔢 Types of Data - Complete Guide',
+                content: getDataTypesContent()
+            },
+            'data-collection': {
+                title: '📋 Data Collection Methods - Comprehensive Guide',
+                content: getDataCollectionContent()
+            },
+            'data-cleaning': {
+                title: '🧹 Data Cleaning & Preparation - Master Guide',
+                content: getDataCleaningContent()
+            },
+            'descriptive': {
+                title: '📏 Descriptive Statistics - Complete Tutorial',
+                content: getDescriptiveContent()
+            },
+            'probability': {
+                title: '🎲 Probability & Distributions - Deep Dive',
+                content: getProbabilityContent()
+            },
+            'inferential': {
+                title: '🔬 Inferential Statistics - Advanced Guide',
+                content: getInferentialContent()
+            },
+            'correlation': {
+                title: '🔗 Correlation Analysis - Comprehensive Guide',
+                content: getCorrelationContent()
+            },
+            'regression': {
+                title: '📈 Regression Analysis - Complete Masterclass',
+                content: getRegressionContent()
+            },
+            'eda': {
+                title: '🔍 Exploratory Data Analysis (EDA) - Complete Guide',
+                content: getEDAContent()
+            },
+            'visualization': {
+                title: '📊 Data Visualization - Ultimate Guide',
+                content: getVizContent()
+            },
+            'timeseries': {
+                title: '⏰ Time Series Analysis - Comprehensive Tutorial',
+                content: getTimeSeriesContent()
+            },
+            'ml-basics': {
+                title: '🤖 Machine Learning Basics - Complete Introduction',
+                content: getMLContent()
+            },
+            'tools': {
+                title: '🛠️ Statistical Software & Tools - Complete Guide',
+                content: getToolsContent()
+            },
+            'ethics': {
+                title: '🛡️ Ethics in Data Analytics - Comprehensive Guide',
+                content: getEthicsContent()
+            },
+            'casestudies': {
+                title: '📁 Real-World Case Studies - Practical Applications',
+                content: getCaseStudiesContent()
+            }
+        };
+    }
+    
