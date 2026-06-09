@@ -1,5 +1,4 @@
 import { course } from "./data/course.js";
-
 import { renderHome } from "./pages/home.js";
 import { renderModule } from "./pages/module.js";
 import { renderLesson } from "./pages/lesson.js";
@@ -11,14 +10,22 @@ function router() {
 
   if (!hash || hash === "#home") {
     renderHome(app, course);
+    return;
   }
 
-  else if (hash.startsWith("#module")) {
-    renderModule(app, course);
+  if (hash.startsWith("#module-")) {
+    const moduleId = hash.replace("#module-", "");
+    renderModule(app, course, moduleId);
+    return;
   }
 
-  else if (hash.startsWith("#lesson")) {
-    renderLesson(app, course);
+  if (hash.startsWith("#lesson-")) {
+    const parts = hash.replace("#lesson-", "").split("-");
+    const moduleId = parts[0];
+    const lessonId = parts[1];
+
+    renderLesson(app, course, moduleId, lessonId);
+    return;
   }
 }
 
