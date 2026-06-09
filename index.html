@@ -2,428 +2,349 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Data Analytics Master Lab</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Analytics Learning Hub</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: Arial;
   display: flex;
   height: 100vh;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #0b1020;
+  color: white;
 }
 
 /* Sidebar */
-.sidebar {
-  width: 300px;
+#sidebar {
+  width: 320px;
   background: #111827;
-  padding: 20px;
   overflow-y: auto;
-  border-right: 1px solid #1f2937;
-}
-
-.sidebar h2 {
-  color: #38bdf8;
-  margin-bottom: 15px;
+  padding: 15px;
 }
 
 .topic {
   padding: 12px;
   margin: 6px 0;
   background: #1f2937;
-  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 8px;
 }
 
 .topic:hover {
-  background: #334155;
+  background: #374151;
 }
 
 .topic.active {
   background: #38bdf8;
   color: black;
-  font-weight: bold;
 }
 
-/* Main Content */
-.main {
+/* Main */
+#main {
   flex: 1;
-  padding: 30px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  background: #1e293b;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
 }
 
 h1 {
   color: #38bdf8;
-  margin-bottom: 15px;
 }
 
-p {
+.section {
+  margin-bottom: 20px;
   line-height: 1.7;
-  margin-bottom: 12px;
   color: #cbd5e1;
 }
 
-.badge {
-  display: inline-block;
-  padding: 5px 10px;
-  background: #38bdf8;
-  color: black;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  font-size: 12px;
+/* 3D */
+#canvasContainer {
+  height: 320px;
+  background: black;
+  border-top: 2px solid #38bdf8;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-  <h2>📊 Data Analytics</h2>
+<div id="sidebar">
+  <h2>📊 Data Analytics Lab</h2>
 
   <div class="topic active" onclick="loadTopic('intro')">Introduction</div>
   <div class="topic" onclick="loadTopic('types')">Types of Data</div>
-  <div class="topic" onclick="loadTopic('collection')">Data Collection</div>
-  <div class="topic" onclick="loadTopic('cleaning')">Data Cleaning</div>
-  <div class="topic" onclick="loadTopic('descriptive')">Descriptive Statistics</div>
+  <div class="topic" onclick="loadTopic('eda')">EDA</div>
   <div class="topic" onclick="loadTopic('probability')">Probability</div>
-  <div class="topic" onclick="loadTopic('inferential')">Inferential Statistics</div>
-  <div class="topic" onclick="loadTopic('regression')">Regression Analysis</div>
-  <div class="topic" onclick="loadTopic('correlation')">Correlation</div>
-  <div class="topic" onclick="loadTopic('eda')">Exploratory Data Analysis</div>
-  <div class="topic" onclick="loadTopic('tools')">Tools & Software</div>
-  <div class="topic" onclick="loadTopic('visualization')">Data Visualization</div>
-  <div class="topic" onclick="loadTopic('timeseries')">Time Series Analysis</div>
-  <div class="topic" onclick="loadTopic('ml')">Machine Learning Basics</div>
-  <div class="topic" onclick="loadTopic('ethics')">Ethics in Data</div>
-  <div class="topic" onclick="loadTopic('case')">Case Studies</div>
-  <div class="topic" onclick="loadTopic('resources')">Resources</div>
+  <div class="topic" onclick="loadTopic('regression')">Regression</div>
+  <div class="topic" onclick="loadTopic('ml')">Machine Learning</div>
 </div>
 
-<div class="main">
-  <div class="card" id="content">
-    <div class="badge">Welcome</div>
-    <h1>Introduction to Data Analytics</h1>
-    <p>
-      Data Analytics is the science of examining raw data to extract meaningful insights,
-      patterns, and conclusions that support decision-making. It combines statistics,
-      programming, and domain knowledge to transform data into actionable intelligence.
-    </p>
-    <p>
-      In today’s digital world, every click, transaction, and interaction produces data.
-      Data analytics helps organizations understand customer behavior, improve performance,
-      reduce risks, and predict future outcomes.
-    </p>
-  </div>
+<div id="main">
+
+<div id="content">
+<h1>Welcome to Data Analytics Master Lab</h1>
+
+<div class="section">
+This platform teaches Data Analytics from absolute basics to advanced level.
+Each topic includes:
+<ul>
+<li>Deep theoretical explanation</li>
+<li>Real-world intuition</li>
+<li>Mathematical reasoning</li>
+<li>Interactive 3D visualization</li>
+</ul>
+</div>
+
+<div class="section">
+Select a topic from the left to begin.
+</div>
+
+</div>
+
+<div id="canvasContainer"></div>
+
 </div>
 
 <script>
 
+/* -----------------------------
+   LONG FORM CONTENT (EXTENDED)
+------------------------------*/
+
 const topics = {
-intro: {
-title: "Introduction to Data Analytics",
-text: `
-Data Analytics is the process of inspecting, cleaning, transforming, and modeling data
-to discover useful information. It is widely used in business, healthcare, finance,
-sports, and technology.
 
-There are four main types of analytics:
-1. Descriptive (what happened)
-2. Diagnostic (why it happened)
-3. Predictive (what will happen)
-4. Prescriptive (what should be done)
+intro: `
+INTRODUCTION TO DATA ANALYTICS (DETAILED CHAPTER)
 
-Modern data analytics uses tools like Python, SQL, Excel, Power BI, and Tableau.
-`
-},
+Data Analytics is the structured process of examining raw data to extract meaningful insights.
+It is the backbone of modern decision-making systems used in companies like Google, Amazon, Netflix, and banking systems.
 
-types: {
-title: "Types of Data",
-text: `
-Data is mainly classified into:
+SECTION 1: WHY DATA MATTERS
+Every digital action generates data:
+- Searches
+- Purchases
+- Social media activity
+- Sensor readings
 
-1. Qualitative Data (Categorical)
-   - Represents categories or labels
-   - Example: Gender, Colors, Cities
+This data is useless until processed.
 
-2. Quantitative Data (Numerical)
-   - Represents numbers and measurable quantities
-   - Example: Age, Salary, Temperature
+SECTION 2: DATA PIPELINE
+1. Data Collection
+2. Data Cleaning
+3. Data Transformation
+4. Data Analysis
+5. Decision Making
 
-Further classification:
-- Discrete Data: Countable values (e.g., number of students)
-- Continuous Data: Infinite values in a range (e.g., weight, height)
-`
-},
+SECTION 3: TYPES OF ANALYTICS
+- Descriptive → What happened?
+- Diagnostic → Why did it happen?
+- Predictive → What will happen?
+- Prescriptive → What should be done?
 
-collection: {
-title: "Data Collection",
-text: `
-Data collection is the process of gathering information from different sources.
+SECTION 4: REAL WORLD EXAMPLE
+Netflix analyzes billions of viewing records to recommend shows.
 
-Methods include:
-- Surveys and questionnaires
-- Interviews
-- Observational studies
-- Sensors and IoT devices
-- Web scraping
-- APIs from platforms
+SECTION 5: CORE IDEA
+Data Analytics turns chaos into structured knowledge.
+`,
 
-Good data collection ensures accuracy, reliability, and relevance.
-`
-},
+types: `
+TYPES OF DATA (FULL CHAPTER)
 
-cleaning: {
-title: "Data Cleaning & Preparation",
-text: `
-Data cleaning is one of the most important steps in analytics.
+SECTION 1: INTRODUCTION
+Data is classified based on structure and measurement.
 
-It involves:
-- Removing missing values
-- Handling duplicates
-- Fixing inconsistent formats
-- Detecting outliers
-- Standardizing data
+SECTION 2: QUALITATIVE DATA
+Non-numerical information:
+- Colors
+- Names
+- Categories
 
-Without clean data, analysis results can be misleading or completely wrong.
-`
-},
+Used in classification problems.
 
-descriptive: {
-title: "Descriptive Statistics",
-text: `
-Descriptive statistics summarize and describe data.
+SECTION 3: QUANTITATIVE DATA
+Numerical data:
+- Height
+- Weight
+- Salary
 
-Key measures:
-- Mean (average)
-- Median (middle value)
-- Mode (most frequent value)
-- Standard deviation (spread of data)
-- Variance (data variability)
+SECTION 4: DISCRETE VS CONTINUOUS
+Discrete:
+- Countable values (students in class)
 
-These help understand the structure of data before deeper analysis.
-`
-},
+Continuous:
+- Measurable values (temperature, height)
 
-probability: {
-title: "Probability & Distributions",
-text: `
-Probability measures uncertainty and likelihood of events.
+SECTION 5: IMPORTANCE
+Choosing correct data type is essential for:
+- Model selection
+- Visualization
+- Statistical methods
+`,
 
-Important concepts:
+eda: `
+EXPLORATORY DATA ANALYSIS (EDA)
+
+SECTION 1: WHAT IS EDA?
+EDA is the process of understanding data before modeling.
+
+SECTION 2: STEPS
+- Understand dataset shape
+- Detect missing values
+- Identify outliers
+- Visualize distributions
+
+SECTION 3: TOOLS USED
+- Histograms
+- Box plots
+- Scatter plots
+
+SECTION 4: GOAL
+To discover patterns BEFORE applying machine learning.
+
+SECTION 5: IMPORTANCE
+Without EDA, models often fail due to hidden biases.
+`,
+
+probability: `
+PROBABILITY THEORY
+
+SECTION 1: INTRODUCTION
+Probability measures uncertainty.
+
+SECTION 2: BASIC FORMULA
+P(Event) = Favorable outcomes / Total outcomes
+
+SECTION 3: KEY CONCEPTS
 - Sample space
 - Events
 - Conditional probability
-- Bayes' theorem
 
-Common distributions:
-- Normal distribution
+SECTION 4: DISTRIBUTIONS
+- Normal distribution (bell curve)
 - Binomial distribution
 - Poisson distribution
 
-Probability is the foundation of predictive analytics.
-`
-},
-
-inferential: {
-title: "Inferential Statistics",
-text: `
-Inferential statistics allow us to make predictions about a population
-based on sample data.
-
-Key techniques:
-- Hypothesis testing
-- Confidence intervals
-- T-tests and Chi-square tests
-
-It helps analysts draw conclusions beyond observed data.
-`
-},
-
-regression: {
-title: "Regression Analysis",
-text: `
-Regression is used to model relationships between variables.
-
-Types:
-- Linear regression
-- Multiple regression
-
-It helps predict outcomes such as:
-- Sales forecasting
-- Price prediction
-- Risk analysis
-`
-},
-
-correlation: {
-title: "Correlation",
-text: `
-Correlation measures the strength and direction of a relationship between variables.
-
-- Positive correlation: both variables increase together
-- Negative correlation: one increases while the other decreases
-- Zero correlation: no relationship
-
-Correlation does NOT imply causation.
-`
-},
-
-eda: {
-title: "Exploratory Data Analysis (EDA)",
-text: `
-EDA is the process of analyzing datasets to summarize their main characteristics.
-
-Steps:
-- Understanding structure
-- Finding patterns
-- Detecting anomalies
-- Visual exploration
-
-EDA is often the first step before modeling.
-`
-},
-
-tools: {
-title: "Statistical Tools & Software",
-text: `
-Popular tools used in data analytics:
-
-- Python (Pandas, NumPy, Matplotlib)
-- R programming
-- SQL databases
-- Excel
-- Power BI
-- Tableau
-
-Each tool serves different stages of analysis.
-`
-},
-
-visualization: {
-title: "Data Visualization",
-text: `
-Data visualization represents data graphically.
-
-Common charts:
-- Bar charts
-- Line charts
-- Scatter plots
-- Histograms
-- Heatmaps
-
-Good visualization makes complex data easy to understand.
-`
-},
-
-timeseries: {
-title: "Time Series Analysis",
-text: `
-Time series analysis deals with data collected over time.
-
+SECTION 5: APPLICATIONS
 Used in:
-- Stock market prediction
-- Weather forecasting
+- Risk analysis
+- Weather prediction
+- AI models
+`,
+
+regression: `
+REGRESSION ANALYSIS
+
+SECTION 1: WHAT IS REGRESSION?
+It models relationship between dependent and independent variables.
+
+SECTION 2: LINEAR REGRESSION
+y = mx + c
+
+Used to predict continuous values.
+
+SECTION 3: USE CASES
+- House price prediction
 - Sales forecasting
+- Stock prediction
 
-Key concepts:
-- Trends
-- Seasonality
-- Cyclic patterns
-`
-},
+SECTION 4: IMPORTANCE
+It is one of the most fundamental machine learning techniques.
+`,
 
-ml: {
-title: "Machine Learning Basics",
-text: `
-Machine learning enables systems to learn from data.
+ml: `
+MACHINE LEARNING BASICS
 
-Types:
-- Supervised learning
-- Unsupervised learning
-- Reinforcement learning
+SECTION 1: INTRODUCTION
+Machine Learning allows systems to learn patterns from data.
 
-Applications include:
+SECTION 2: TYPES
+- Supervised Learning
+- Unsupervised Learning
+- Reinforcement Learning
+
+SECTION 3: EXAMPLES
+- Spam detection
 - Recommendation systems
-- Fraud detection
 - Image recognition
+
+SECTION 4: CORE IDEA
+Instead of programming rules, we train models using data.
 `
-},
-
-ethics: {
-title: "Ethics in Data Analytics",
-text: `
-Ethical data practices are essential.
-
-Key principles:
-- Data privacy
-- Transparency
-- Bias prevention
-- Responsible usage
-
-Misuse of data can lead to unfair decisions and privacy violations.
-`
-},
-
-case: {
-title: "Case Studies",
-text: `
-Real-world applications of data analytics:
-
-- Netflix recommendation system
-- Amazon product suggestions
-- Healthcare disease prediction
-- Uber route optimization
-
-Case studies help connect theory with real applications.
-`
-},
-
-resources: {
-title: "Learning Resources",
-text: `
-To master data analytics, use:
-
-- Kaggle datasets
-- Coursera courses
-- YouTube tutorials
-- Google Data Analytics Certificate
-- Practice projects
-
-Consistency and practice are key to mastery.
-`
-}
 };
 
-function loadTopic(key) {
-  const content = document.getElementById("content");
+/* -----------------------------
+   3D SCENE SYSTEM
+------------------------------*/
 
-  document.querySelectorAll(".topic").forEach(t => {
-    t.classList.remove("active");
-  });
+let scene, camera, renderer, points;
 
-  event.target.classList.add("active");
+function init3D(type){
 
-  content.innerHTML = `
-    <div class="badge">Data Analytics</div>
-    <h1>${topics[key].title}</h1>
-    <p>${topics[key].text.replace(/\n/g, "<br>")}</p>
-  `;
+const container = document.getElementById("canvasContainer");
+container.innerHTML = "";
+
+scene = new THREE.Scene();
+camera = new THREE.PerspectiveCamera(75, container.clientWidth/container.clientHeight, 0.1, 1000);
+
+renderer = new THREE.WebGLRenderer();
+renderer.setSize(container.clientWidth, 320);
+container.appendChild(renderer.domElement);
+
+/* DATA POINTS VISUALIZATION */
+const geometry = new THREE.BufferGeometry();
+const vertices = [];
+
+for(let i=0;i<200;i++){
+  let x = (Math.random()-0.5)*10;
+  let y = (Math.random()-0.5)*10;
+  let z = (Math.random()-0.5)*10;
+  vertices.push(x,y,z);
+}
+
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices,3));
+
+const material = new THREE.PointsMaterial({color:0x38bdf8, size:0.1});
+points = new THREE.Points(geometry, material);
+scene.add(points);
+
+camera.position.z = 8;
+
+animate();
+}
+
+function animate(){
+requestAnimationFrame(animate);
+if(points){
+  points.rotation.x += 0.002;
+  points.rotation.y += 0.003;
+}
+renderer.render(scene,camera);
+}
+
+/* -----------------------------
+   LOAD TOPIC
+------------------------------*/
+
+function loadTopic(key){
+
+document.querySelectorAll(".topic").forEach(t=>t.classList.remove("active"));
+event.target.classList.add("active");
+
+document.getElementById("content").innerHTML = `
+<h1>${key.toUpperCase()}</h1>
+<div class="section">${topics[key].replace(/\n/g,"<br>")}</div>
+`;
+
+init3D(key);
 }
 
 </script>
