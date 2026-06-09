@@ -4,39 +4,93 @@ import { runIntegration } from "./integration.js";
 import { runLagrange } from "./lagrange.js";
 import { runDE } from "./differential.js";
 
+/**
+ * ===============================
+ * SIMULATION REGISTRY (CORE ENGINE)
+ * ===============================
+ * ONLY THESE KEYS ARE VALID:
+ * (must match lesson.simulation exactly)
+ */
+
 const Simulations = {
+
+  // ================= ROOT FINDING =================
   "newton-raphson": runNewton,
-  bisection: runBisection,
-  integration: runIntegration,
-  lagrange: runLagrange,
-  differential: runDE
+  "bisection": runBisection,
+
+  // ================= NUMERICAL INTEGRATION =================
+  "integration": runIntegration,
+
+  // ================= INTERPOLATION =================
+  "lagrange": runLagrange,
+
+  // ================= DIFFERENTIAL EQUATIONS =================
+  "differential": runDE
 };
+
+/**
+ * ===============================
+ * SAFE SIMULATION LOADER
+ * ===============================
+ * This prevents blank screens & crashes
+ */
 
 export function loadSimulation(key, container) {
 
-  console.log("Loading simulation:", key);
+  // normalize key (prevents casing/spacing issues)
+  const cleanKey = (key || "").trim().toLowerCase();
 
-  const sim = Simulations[key];
+  console.log("▶ Loading simulation:", cleanKey);
 
+  const sim = Simulations[cleanKey];
+
+  // ---------------- NOT FOUND ----------------
   if (!sim) {
     container.innerHTML = `
-      <div style="color:white;padding:20px">
-        <h2>Simulation not found</h2>
-        <p>Key: ${key}</p>
+      <div style="
+        color:#ff4d4d;
+        padding:20px;
+        font-family:Arial;
+        background:#111827;
+        border-radius:10px;
+      ">
+        <h2>⚠ Simulation Not Found</h2>
+        <p><b>Key:</b> ${cleanKey}</p>
+        <p>
+          This simulation is not registered in the system.
+          <br/>Check lesson.simulation value or registry mapping.
+        </p>
+
+        <hr style="margin:10px 0; opacity:0.2"/>
+
+        <small style="opacity:0.7">
+          Allowed keys: newton-raphson, bisection, integration, lagrange, differential
+        </small>
       </div>
     `;
     return;
   }
 
+  // ---------------- EXECUTE SIMULATION ----------------
   try {
     sim(container);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error("Simulation error:", err);
+
     container.innerHTML = `
-      <div style="color:red;padding:20px">
-        <h2>Simulation crashed</h2>
-        <pre>${e.message}</pre>
+      <div style="
+        color:red;
+        padding:20px;
+        font-family:Arial;
+      ">
+        <h2>Simulation Crashed</h2>
+        <pre>${err.message}</pre>
       </div>
     `;
   }
 }
+
+/**
+ * Export registry (optional use)
+ */
+export { Simulations };
