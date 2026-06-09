@@ -11,7 +11,7 @@ export function runNewton(container) {
         <div>
           <label>Function f(x):</label><br/>
           <input id="fnInput" value="x*x - 4"
-            style="padding:8px; width:200px;" />
+            style="padding:8px; width:220px;" />
         </div>
 
         <div>
@@ -23,21 +23,34 @@ export function runNewton(container) {
       </div>
 
       <button id="runBtn" style="margin-top:12px;">
-        Run Visual Simulation
+        Run Simulation
       </button>
 
       <!-- GRAPH -->
-      <canvas id="graph" width="600" height="300"
+      <canvas id="graph" width="650" height="320"
         style="margin-top:15px; background:#0b1220; border-radius:10px;"></canvas>
+
+      <!-- LEGEND -->
+      <div style="margin-top:10px; font-size:13px;">
+        <span style="color:#60a5fa;">■ Function</span> |
+        <span style="color:#f59e0b;">■ Tangent</span> |
+        <span style="color:#22c55e;">■ Current Point</span>
+      </div>
 
       <!-- OUTPUT -->
       <div id="output" style="margin-top:10px;"></div>
+
+      <!-- ITERATION TABLE -->
+      <div id="table" style="margin-top:15px;"></div>
+
     </div>
   `;
 
   const canvas = container.querySelector("#graph");
   const ctx = canvas.getContext("2d");
+
   const output = container.querySelector("#output");
+  const tableDiv = container.querySelector("#table");
 
   const W = canvas.width;
   const H = canvas.height;
@@ -55,14 +68,25 @@ export function runNewton(container) {
   }
 
   // --------------------------
-  // DRAW GRID
+  // SCALE FUNCTIONS
+  // --------------------------
+  function scaleX(x) {
+    return (x + 5) * (W / 10);
+  }
+
+  function scaleY(y) {
+    return H/2 - y * 40;
+  }
+
+  // --------------------------
+  // DRAW GRID + AXES
   // --------------------------
   function drawGrid() {
+
     ctx.clearRect(0, 0, W, H);
 
+    // grid
     ctx.strokeStyle = "rgba(255,255,255,0.05)";
-    ctx.lineWidth = 1;
-
     for (let i = 0; i < W; i += 50) {
       ctx.beginPath();
       ctx.moveTo(i, 0);
@@ -77,27 +101,21 @@ export function runNewton(container) {
       ctx.stroke();
     }
 
-    // axis
-    ctx.strokeStyle = "rgba(255,255,255,0.2)";
+    // axes
+    ctx.strokeStyle = "rgba(255,255,255,0.25)";
     ctx.beginPath();
     ctx.moveTo(0, H/2);
     ctx.lineTo(W, H/2);
     ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(W/2, 0);
+    ctx.lineTo(W/2, H);
+    ctx.stroke();
   }
 
   // --------------------------
-  // MAP X/Y TO CANVAS
-  // --------------------------
-  function scaleX(x) {
-    return (x + 5) * (W / 10);
-  }
-
-  function scaleY(y) {
-    return H/2 - y * 40;
-  }
-
-  // --------------------------
-  // DRAW FUNCTION GRAPH
+  // DRAW FUNCTION CURVE
   // --------------------------
   function drawFunction(expr) {
 
@@ -113,24 +131,14 @@ export function runNewton(container) {
   }
 
   // --------------------------
-  // DRAW POINT
-  // --------------------------
-  function drawPoint(x, color = "red") {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(scaleX(x), scaleY(f(exprGlobal, x)), 5, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  let exprGlobal = "";
-
-  // --------------------------
-  // ANIMATION
+  // ANIMATION ENGINE
   // --------------------------
   function animate(expr, x0) {
 
     let x = x0;
     let step = 0;
+
+    let rows = [];
 
     function frame() {
 
@@ -140,13 +148,13 @@ export function runNewton(container) {
       let fx = f(expr, x);
       let dfx = derivative(expr, x);
 
-      // draw current point
+      // CURRENT POINT
       ctx.fillStyle = "#22c55e";
       ctx.beginPath();
       ctx.arc(scaleX(x), scaleY(fx), 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // draw tangent line
+      // TANGENT LINE
       let x1 = x - 1;
       let x2 = x + 1;
 
@@ -159,14 +167,43 @@ export function runNewton(container) {
       ctx.lineTo(scaleX(x2), scaleY(y2));
       ctx.stroke();
 
-      // iteration update
+      // iteration data
       let nextX = x - fx / dfx;
 
+      rows.push({
+        step,
+        x: x.toFixed(6),
+        fx: fx.toFixed(6),
+        next: nextX.toFixed(6)
+      });
+
+      // OUTPUT INFO
       output.innerHTML = `
-        <b>Iteration:</b> ${step}<br/>
+        <b>Current Step:</b> ${step}<br/>
         x = ${x.toFixed(6)}<br/>
         f(x) = ${fx.toFixed(6)}<br/>
         next x = ${nextX.toFixed(6)}
+      `;
+
+      // TABLE RENDER (RESTORED)
+      tableDiv.innerHTML = `
+        <h4>Iteration Table</h4>
+        <table border="1" cellpadding="6" style="border-collapse:collapse;">
+          <tr>
+            <th>Step</th>
+            <th>x</th>
+            <th>f(x)</th>
+            <th>Next x</th>
+          </tr>
+          ${rows.map(r => `
+            <tr>
+              <td>${r.step}</td>
+              <td>${r.x}</td>
+              <td>${r.fx}</td>
+              <td>${r.next}</td>
+            </tr>
+          `).join("")}
+        </table>
       `;
 
       x = nextX;
@@ -181,17 +218,13 @@ export function runNewton(container) {
   }
 
   // --------------------------
-  // BUTTON EVENT
+  // BUTTON
   // --------------------------
   container.querySelector("#runBtn").onclick = () => {
 
     const expr = container.querySelector("#fnInput").value;
     const x0 = parseFloat(container.querySelector("#guessInput").value);
 
-    exprGlobal = expr;
     animate(expr, x0);
   };
-
-  // initial render
-  drawGrid();
 }
