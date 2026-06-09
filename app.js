@@ -6,6 +6,7 @@ import { renderLesson } from "./pages/lesson.js";
 const app = document.getElementById("app");
 
 function router() {
+
   const hash = window.location.hash;
 
   if (!hash || hash === "#home") {
@@ -20,12 +21,14 @@ function router() {
   }
 
   if (hash.startsWith("#lesson-")) {
+
     const parts = hash.replace("#lesson-", "").split("-");
+
     const moduleId = parts[0];
     const lessonId = parts[1];
+    const pageIndex = parseInt(parts[2] || "0");
 
-    renderLesson(app, course, moduleId, lessonId);
-    return;
+    renderLesson(app, course, moduleId, lessonId, pageIndex);
   }
 }
 
