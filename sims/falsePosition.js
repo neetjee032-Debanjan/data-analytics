@@ -1,106 +1,196 @@
-export function falsePositionSimulation(container) {
+export function runFalsePosition(container) {
 
   container.innerHTML = `
+    <div style="color:white; padding:15px; font-family:Arial;">
+      <h2>False Position Method Simulator</h2>
 
-    <h2>False Position Method Simulator</h2>
+      <label>f(x):</label>
+      <input id="fn" value="x*x*x - x - 2" />
 
-    <p>
-      Find the root of:
-      <b>f(x) = x³ − x − 2</b>
-    </p>
+      <label>a:</label>
+      <input id="a" type="number" value="1" />
 
-    <label>a:</label>
-    <input id="fp-a" type="number" value="1" step="0.1">
+      <label>b:</label>
+      <input id="b" type="number" value="2" />
 
-    <label>b:</label>
-    <input id="fp-b" type="number" value="2" step="0.1">
+      <button id="run">Run</button>
 
-    <button id="fp-run">
-      Run False Position
-    </button>
+      <canvas
+        id="canvas"
+        width="700"
+        height="350"
+        style="background:#0b1220; margin-top:10px;">
+      </canvas>
 
-    <div id="fp-output"
-         style="
-         margin-top:20px;
-         white-space:pre-wrap;
-         ">
+      <table border="1" style="width:100%; margin-top:10px;">
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>f(c)</th>
+          </tr>
+        </thead>
+
+        <tbody id="table"></tbody>
+      </table>
     </div>
-
   `;
 
-  const runBtn =
-    container.querySelector("#fp-run");
+  const canvas = container.querySelector("#canvas");
+  const ctx = canvas.getContext("2d");
 
-  runBtn.onclick = () => {
+  const fn = container.querySelector("#fn");
+  const aIn = container.querySelector("#a");
+  const bIn = container.querySelector("#b");
+  const table = container.querySelector("#table");
 
-    let a =
-      parseFloat(
-        container.querySelector("#fp-a").value
-      );
+  function f(expr, x) {
+    return Function(
+      "x",
+      `return ${expr}`
+    )(x);
+  }
 
-    let b =
-      parseFloat(
-        container.querySelector("#fp-b").value
-      );
+  const W = canvas.width;
+  const H = canvas.height;
 
-    const output =
-      container.querySelector("#fp-output");
+  const sx = x => (x + 5) * (W / 10);
+  const sy = y => H / 2 - y * 40;
 
-    function f(x) {
-      return x * x * x - x - 2;
+  let rows = [];
+
+  function draw(expr, a, b, c) {
+
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.strokeStyle = "#4cc9f0";
+    ctx.beginPath();
+
+    let first = true;
+
+    for (let x = -5; x <= 5; x += 0.05) {
+
+      const px = sx(x);
+      const py = sy(f(expr, x));
+
+      if (first) {
+        ctx.moveTo(px, py);
+        first = false;
+      } else {
+        ctx.lineTo(px, py);
+      }
     }
 
-    if (f(a) * f(b) >= 0) {
+    ctx.stroke();
 
-      output.innerHTML =
-        "Interval must contain a sign change.";
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(sx(a), H / 2, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.arc(sx(b), H / 2, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = "yellow";
+    ctx.beginPath();
+    ctx.arc(
+      sx(c),
+      sy(f(expr, c)),
+      6,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+  }
+
+  function renderTable() {
+
+    table.innerHTML = rows.map(r => `
+      <tr>
+        <td>${r.step}</td>
+        <td>${r.a}</td>
+        <td>${r.b}</td>
+        <td>${r.c}</td>
+        <td>${r.fc}</td>
+      </tr>
+    `).join("");
+  }
+
+  container.querySelector("#run").onclick = () => {
+
+    const expr = fn.value;
+
+    let a = +aIn.value;
+    let b = +bIn.value;
+
+    rows = [];
+
+    if (f(expr, a) * f(expr, b) >= 0) {
+
+      table.innerHTML = `
+        <tr>
+          <td colspan="5">
+            Interval must contain a sign change.
+          </td>
+        </tr>
+      `;
 
       return;
     }
 
-    let log = "";
+    let step = 0;
 
-    let c = a;
+    function iterate() {
 
-    for (let i = 1; i <= 15; i++) {
+      const fa = f(expr, a);
+      const fb = f(expr, b);
 
-      c =
+      const c =
         (
-          a * f(b)
-          -
-          b * f(a)
-        )
-        /
+          a * fb -
+          b * fa
+        ) /
         (
-          f(b)
-          -
-          f(a)
+          fb - fa
         );
 
-      log +=
-        `Iteration ${i}\n` +
-        `c = ${c.toFixed(8)}\n\n`;
+      const fc = f(expr, c);
+
+      rows.push({
+        step,
+        a: a.toFixed(4),
+        b: b.toFixed(4),
+        c: c.toFixed(6),
+        fc: fc.toFixed(6)
+      });
+
+      draw(expr, a, b, c);
+      renderTable();
 
       if (
-        Math.abs(f(c))
-        < 0.000001
+        Math.abs(fc) > 0.0001 &&
+        step < 12
       ) {
-        break;
-      }
 
-      if (
-        f(a) * f(c)
-        < 0
-      ) {
-        b = c;
-      } else {
-        a = c;
+        if (fa * fc < 0) {
+          b = c;
+        } else {
+          a = c;
+        }
+
+        step++;
+
+        setTimeout(
+          iterate,
+          600
+        );
       }
     }
 
-    log +=
-      `Estimated Root = ${c.toFixed(8)}`;
-
-    output.textContent = log;
+    iterate();
   };
 }
