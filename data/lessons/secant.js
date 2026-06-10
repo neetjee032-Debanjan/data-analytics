@@ -2,7 +2,7 @@ export const secantLesson = {
   id: "l8",
   title: "Secant Method",
 
-  simulation: "",
+  simulation: "secant",
 
   pages: [
     {
