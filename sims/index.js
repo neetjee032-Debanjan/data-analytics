@@ -19,4 +19,9 @@ export const Simulations = {
   "integration": runIntegration,
   "trapezoid": runIntegration,
 
- 
+  "lagrange": runLagrange,
+
+  "differential": runDE,
+  "euler": runDE
+
+};
