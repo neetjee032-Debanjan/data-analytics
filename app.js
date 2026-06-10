@@ -1,6 +1,9 @@
 import { course } from "./data/course.js";
 import { renderLesson } from "./pages/lesson.js";
-import { getProgress } from "./progress.js";
+import {
+  getProgress,
+  getLastVisited
+} from "./progress.js";
 
 const app = document.getElementById("app");
 
@@ -158,6 +161,9 @@ function renderHome() {
           100
         );
 
+  const lastVisited =
+    getLastVisited();
+
   app.innerHTML = `
     <div class="navbar">
       🧠 Numerical Methods Learning Platform
@@ -172,6 +178,36 @@ function renderHome() {
         from fundamentals to advanced
         computational techniques.
       </p>
+
+      ${
+        lastVisited
+          ? `
+          <div class="card">
+
+            <h2>
+              Continue Learning
+            </h2>
+
+            <p>
+              Resume where you left off.
+            </p>
+
+            <button
+              onclick="
+                openLesson(
+                  '${lastVisited.moduleId}',
+                  '${lastVisited.lessonId}',
+                  ${lastVisited.pageIndex}
+                )
+              "
+            >
+              Continue
+            </button>
+
+          </div>
+          `
+          : ""
+      }
 
       <div class="card">
 
