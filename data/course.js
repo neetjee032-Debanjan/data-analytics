@@ -1,9 +1,15 @@
 import { floatingPointLesson } from "./lessons/floatingPoint.js";
 import { numericalErrorsLesson } from "./lessons/numericalErrors.js";
+
 import { bisectionLesson } from "./lessons/bisection.js";
 import { newtonLesson } from "./lessons/newton.js";
+import { secantLesson } from "./lessons/secant.js";
+import { falsePositionLesson } from "./lessons/falsePosition.js";
+
 import { lagrangeLesson } from "./lessons/lagrange.js";
+
 import { trapezoidalLesson } from "./lessons/trapezoidal.js";
+
 import { eulerLesson } from "./lessons/euler.js";
 
 export const course = {
@@ -27,7 +33,9 @@ export const course = {
 
       lessons: [
         bisectionLesson,
-        newtonLesson
+        newtonLesson,
+        secantLesson,
+        falsePositionLesson
       ]
     },
 
