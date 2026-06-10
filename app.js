@@ -1,6 +1,11 @@
 import { course } from "./data/course.js";
 import { renderLesson } from "./pages/lesson.js";
-import { getProgress } from "./progress.js";
+
+import {
+  getProgress,
+  calculateOverallProgress,
+  calculateModuleProgress
+} from "./progress.js";
 
 const app = document.getElementById("app");
 
@@ -85,9 +90,7 @@ function renderHome() {
   const completedPages = getCompletedPages();
 
   const percentage =
-    totalPages === 0
-      ? 0
-      : Math.round((completedPages / totalPages) * 100);
+    calculateOverallProgress(course);
 
   app.innerHTML = `
     <div class="navbar">
@@ -115,11 +118,21 @@ function renderHome() {
         <div
           class="progress-bar"
           id="progressBar"
-          style="width:${percentage}%">
+          style="
+            width:${percentage}%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+          "
+        >
+          ${percentage}%
         </div>
       </div>
 
-      <p>${percentage}% Complete</p>
+      <p>
+        Overall Course Completion:
+        <strong>${percentage}%</strong>
+      </p>
 
       <h2>Modules</h2>
 
@@ -140,6 +153,12 @@ function renderHome() {
               0
             );
 
+          const moduleProgress =
+            calculateModuleProgress(
+              course,
+              m.id
+            );
+
           return `
             <div
               class="card"
@@ -155,6 +174,13 @@ function renderHome() {
               <p>
                 ${pagesInModule}
                 pages
+              </p>
+
+              <p>
+                Progress:
+                <strong>
+                  ${moduleProgress}%
+                </strong>
               </p>
             </div>
           `;
@@ -177,6 +203,12 @@ window.openModule = function(moduleId) {
     );
 
   if (!module) return;
+
+  const moduleProgress =
+    calculateModuleProgress(
+      course,
+      moduleId
+    );
 
   app.innerHTML = `
     <div class="navbar">
@@ -216,6 +248,13 @@ window.openModule = function(moduleId) {
       <div class="content">
 
         <h1>${module.title}</h1>
+
+        <p>
+          Module Progress:
+          <strong>
+            ${moduleProgress}%
+          </strong>
+        </p>
 
         <p>
           Select a lesson from the sidebar.
