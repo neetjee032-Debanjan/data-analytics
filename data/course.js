@@ -19,6 +19,7 @@ import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
 
 import { eulerLesson } from "./lessons/euler.js";
+import { rungeKutta4Lesson } from "./lessons/rungeKutta4.js";
 
 import { gaussEliminationLesson } from "./lessons/gaussElimination.js";
 
@@ -30,6 +31,7 @@ export const course = {
     {
       id: "m1",
       title: "Numbers, Precision & Errors",
+
       lessons: [
         floatingPointLesson,
         numericalErrorsLesson
@@ -39,6 +41,7 @@ export const course = {
     {
       id: "m2",
       title: "Root Finding Methods",
+
       lessons: [
         bisectionLesson,
         newtonLesson,
@@ -51,6 +54,7 @@ export const course = {
     {
       id: "m3",
       title: "Interpolation",
+
       lessons: [
         lagrangeLesson,
         newtonForwardInterpolationLesson,
@@ -61,6 +65,7 @@ export const course = {
     {
       id: "m4",
       title: "Numerical Differentiation",
+
       lessons: [
         forwardDifferenceLesson,
         backwardDifferenceLesson,
@@ -71,6 +76,7 @@ export const course = {
     {
       id: "m5",
       title: "Numerical Integration",
+
       lessons: [
         trapezoidalLesson,
         simpson13Lesson
@@ -80,14 +86,17 @@ export const course = {
     {
       id: "m6",
       title: "Differential Equations",
+
       lessons: [
-        eulerLesson
+        eulerLesson,
+        rungeKutta4Lesson
       ]
     },
 
     {
       id: "m7",
       title: "Linear Algebraic Equations",
+
       lessons: [
         gaussEliminationLesson
       ]
