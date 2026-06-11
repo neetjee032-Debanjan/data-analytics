@@ -9,12 +9,11 @@ import { runSecant } from "./secant.js";
 import { runSimpson13 } from "./simpson13.js";
 import { runFixedPoint } from "./fixedPoint.js";
 
+import { runGauss } from "./gauss.js";
+
 export const Simulations = {
 
-  /* =========================
-     ROOT FINDING METHODS
-  ========================= */
-
+  /* Root Finding */
   "newton": runNewton,
   "newton-raphson": runNewton,
 
@@ -28,18 +27,11 @@ export const Simulations = {
 
   "fixedpoint": runFixedPoint,
   "fixed-point": runFixedPoint,
-  "fixed_point": runFixedPoint,
 
-  /* =========================
-     INTERPOLATION
-  ========================= */
-
+  /* Interpolation */
   "lagrange": runLagrange,
 
-  /* =========================
-     NUMERICAL INTEGRATION
-  ========================= */
-
+  /* Integration */
   "integration": runIntegration,
   "trapezoid": runIntegration,
 
@@ -47,11 +39,12 @@ export const Simulations = {
   "simpson-1-3": runSimpson13,
   "simpson": runSimpson13,
 
-  /* =========================
-     DIFFERENTIAL EQUATIONS
-  ========================= */
-
+  /* Differential Equations */
   "differential": runDE,
-  "euler": runDE
+  "euler": runDE,
+
+  /* Linear Algebra */
+  "gauss": runGauss,
+  "gauss-elimination": runGauss
 
 };
