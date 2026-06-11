@@ -21,6 +21,7 @@ import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
 
 import { eulerLesson } from "./lessons/euler.js";
+import { modifiedEulerLesson } from "./lessons/modifiedEuler.js";
 import { rungeKutta2Lesson } from "./lessons/rungeKutta2.js";
 import { rungeKutta4Lesson } from "./lessons/rungeKutta4.js";
 
@@ -98,6 +99,7 @@ export const course = {
 
       lessons: [
         eulerLesson,
+        modifiedEulerLesson,
         rungeKutta2Lesson,
         rungeKutta4Lesson
       ]
