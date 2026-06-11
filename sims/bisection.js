@@ -1,7 +1,10 @@
+import { drawAxes, drawLegend } from "./graph-utils.js";
+
 export function runBisection(container) {
 
   container.innerHTML = `
     <div style="color:white; padding:15px; font-family:Arial;">
+
       <h2>Bisection Method Simulator</h2>
 
       <label>f(x):</label>
@@ -15,29 +18,30 @@ export function runBisection(container) {
 
       <button id="run">Run</button>
 
-      <div style="margin-top:10px;">
-        <span style="color:#4cc9f0;">■ Function Curve</span>
-        &nbsp;&nbsp;
-        <span style="color:red;">■ a (Left Bound)</span>
-        &nbsp;&nbsp;
-        <span style="color:lime;">■ b (Right Bound)</span>
-        &nbsp;&nbsp;
-        <span style="color:yellow;">■ Midpoint</span>
+      <div id="status"
+           style="margin-top:10px;
+                  font-size:16px;
+                  color:#4cc9f0;">
       </div>
 
       <canvas
         id="canvas"
-        width="700"
-        height="350"
-        style="background:#0b1220; margin-top:10px;">
+        width="800"
+        height="450"
+        style="
+          background:#0b1220;
+          margin-top:10px;
+          border:1px solid #333;
+        ">
       </canvas>
 
-      <div
-        id="rootInfo"
-        style="margin-top:10px;font-weight:bold;">
-      </div>
-
-      <table border="1" style="width:100%; margin-top:10px;">
+      <table
+        border="1"
+        style="
+          width:100%;
+          margin-top:10px;
+          color:white;
+        ">
         <thead>
           <tr>
             <th>Step</th>
@@ -50,190 +54,228 @@ export function runBisection(container) {
 
         <tbody id="table"></tbody>
       </table>
+
     </div>
   `;
 
-  const canvas = container.querySelector("#canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas =
+    container.querySelector("#canvas");
 
-  const fn = container.querySelector("#fn");
-  const aIn = container.querySelector("#a");
-  const bIn = container.querySelector("#b");
-  const table = container.querySelector("#table");
-  const rootInfo = container.querySelector("#rootInfo");
+  const ctx =
+    canvas.getContext("2d");
 
-  function f(expr, x) {
-    return Function("x", `return ${expr}`)(x);
-  }
+  const fn =
+    container.querySelector("#fn");
+
+  const aIn =
+    container.querySelector("#a");
+
+  const bIn =
+    container.querySelector("#b");
+
+  const table =
+    container.querySelector("#table");
+
+  const status =
+    container.querySelector("#status");
 
   const W = canvas.width;
   const H = canvas.height;
 
-  const sx = x => (x + 5) * (W / 10);
-  const sy = y => H / 2 - y * 40;
+  function f(expr, x) {
+    return Function(
+      "x",
+      `return ${expr}`
+    )(x);
+  }
+
+  const sx =
+    x => (x + 5) * (W / 10);
+
+  const sy =
+    y => H/2 - y*40;
 
   let rows = [];
 
-  function draw(expr, a, b, m) {
+  function draw(expr,a,b,m){
 
-    ctx.clearRect(0, 0, W, H);
+    ctx.clearRect(0,0,W,H);
 
-    /* AXES */
-
-    ctx.strokeStyle = "#666";
-    ctx.lineWidth = 1;
-
-    ctx.beginPath();
-    ctx.moveTo(0, H / 2);
-    ctx.lineTo(W, H / 2);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(W / 2, 0);
-    ctx.lineTo(W / 2, H);
-    ctx.stroke();
-
-    ctx.fillStyle = "#aaa";
-    ctx.fillText("X Axis", W - 50, H / 2 - 5);
-    ctx.fillText("Y Axis", W / 2 + 8, 15);
+    drawAxes(ctx,W,H);
 
     /* FUNCTION CURVE */
-
     ctx.strokeStyle = "#4cc9f0";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
 
     ctx.beginPath();
 
     let first = true;
 
-    for (let x = -5; x <= 5; x += 0.05) {
+    for(let x=-5;x<=5;x+=0.05){
 
-      let y = f(expr, x);
+      const px = sx(x);
+      const py = sy(f(expr,x));
 
-      if (first) {
-        ctx.moveTo(sx(x), sy(y));
+      if(first){
+        ctx.moveTo(px,py);
         first = false;
       } else {
-        ctx.lineTo(sx(x), sy(y));
+        ctx.lineTo(px,py);
       }
     }
 
     ctx.stroke();
 
-    /* A POINT */
-
+    /* INTERVAL START */
     ctx.fillStyle = "red";
 
     ctx.beginPath();
-    ctx.arc(sx(a), H / 2, 6, 0, Math.PI * 2);
+    ctx.arc(
+      sx(a),
+      H/2,
+      6,
+      0,
+      Math.PI*2
+    );
     ctx.fill();
 
-    ctx.fillText(
-      `a=${a.toFixed(2)}`,
-      sx(a) + 8,
-      H / 2 - 10
-    );
-
-    /* B POINT */
-
+    /* INTERVAL END */
     ctx.fillStyle = "lime";
 
     ctx.beginPath();
-    ctx.arc(sx(b), H / 2, 6, 0, Math.PI * 2);
+    ctx.arc(
+      sx(b),
+      H/2,
+      6,
+      0,
+      Math.PI*2
+    );
     ctx.fill();
 
-    ctx.fillText(
-      `b=${b.toFixed(2)}`,
-      sx(b) + 8,
-      H / 2 - 10
-    );
-
     /* MIDPOINT */
-
-    const fy = f(expr, m);
-
     ctx.fillStyle = "yellow";
 
     ctx.beginPath();
     ctx.arc(
       sx(m),
-      sy(fy),
+      sy(f(expr,m)),
       7,
       0,
-      Math.PI * 2
+      Math.PI*2
     );
     ctx.fill();
 
+    /* LABELS */
+    ctx.fillStyle = "white";
+    ctx.font = "14px Arial";
+
     ctx.fillText(
-      `mid=${m.toFixed(4)}`,
-      sx(m) + 8,
-      sy(fy) - 8
+      `a = ${a.toFixed(3)}`,
+      sx(a)-20,
+      H/2+25
     );
 
-    /* DOTTED GUIDE */
+    ctx.fillText(
+      `b = ${b.toFixed(3)}`,
+      sx(b)-20,
+      H/2+25
+    );
 
-    ctx.setLineDash([5, 5]);
+    ctx.fillText(
+      `mid`,
+      sx(m)+10,
+      sy(f(expr,m))
+    );
 
-    ctx.strokeStyle = "yellow";
-
-    ctx.beginPath();
-    ctx.moveTo(sx(m), H / 2);
-    ctx.lineTo(sx(m), sy(fy));
-    ctx.stroke();
-
-    ctx.setLineDash([]);
+    /* LEGEND */
+    drawLegend(ctx,[
+      {
+        color:"#4cc9f0",
+        label:"Function Curve"
+      },
+      {
+        color:"red",
+        label:"Left Interval Endpoint (a)"
+      },
+      {
+        color:"lime",
+        label:"Right Interval Endpoint (b)"
+      },
+      {
+        color:"yellow",
+        label:"Current Midpoint"
+      }
+    ]);
   }
 
-  function renderTable() {
+  function renderTable(){
 
-    table.innerHTML = rows.map(r => `
-      <tr>
-        <td>${r.step}</td>
-        <td>${r.a}</td>
-        <td>${r.b}</td>
-        <td>${r.mid}</td>
-        <td>${r.fmid}</td>
-      </tr>
-    `).join("");
+    table.innerHTML =
+      rows.map(r => `
+        <tr>
+          <td>${r.step}</td>
+          <td>${r.a}</td>
+          <td>${r.b}</td>
+          <td>${r.mid}</td>
+          <td>${r.fmid}</td>
+        </tr>
+      `).join("");
   }
 
   container.querySelector("#run").onclick = () => {
 
     let expr = fn.value;
+
     let a = +aIn.value;
     let b = +bIn.value;
 
     rows = [];
+
     let step = 0;
 
-    function iterate() {
+    function iterate(){
 
-      const mid = (a + b) / 2;
-      const fmid = f(expr, mid);
+      let mid = (a+b)/2;
+
+      let fmid =
+        f(expr,mid);
 
       rows.push({
+
         step,
-        a: a.toFixed(4),
-        b: b.toFixed(4),
-        mid: mid.toFixed(4),
-        fmid: fmid.toFixed(6)
+
+        a:a.toFixed(4),
+
+        b:b.toFixed(4),
+
+        mid:mid.toFixed(4),
+
+        fmid:fmid.toFixed(6)
+
       });
 
-      draw(expr, a, b, mid);
+      draw(expr,a,b,mid);
 
       renderTable();
 
-      rootInfo.innerHTML =
-        `Current Root Approximation: <span style="color:yellow">${mid.toFixed(6)}</span>`;
+      status.innerHTML = `
+        Iteration ${step}
+        |
+        Current Root Estimate:
+        <b>${mid.toFixed(6)}</b>
+        |
+        f(mid)=
+        ${fmid.toFixed(6)}
+      `;
 
-      if (
+      if(
         Math.abs(fmid) > 0.0001 &&
         step < 12
-      ) {
+      ){
 
-        if (
-          f(expr, a) * fmid < 0
-        ) {
+        if(
+          f(expr,a) * fmid < 0
+        ){
           b = mid;
         } else {
           a = mid;
@@ -241,7 +283,21 @@ export function runBisection(container) {
 
         step++;
 
-        setTimeout(iterate, 600);
+        setTimeout(
+          iterate,
+          800
+        );
+      }
+      else {
+
+        status.innerHTML = `
+          ✅ Converged
+
+          <br>
+
+          Approximate Root:
+          <b>${mid.toFixed(8)}</b>
+        `;
       }
     }
 
