@@ -11,6 +11,7 @@ import { lagrangeLesson } from "./lessons/lagrange.js";
 import { newtonForwardInterpolationLesson } from "./lessons/newtonForwardInterpolation.js";
 import { newtonBackwardInterpolationLesson } from "./lessons/newtonBackwardInterpolation.js";
 import { newtonDividedDifferenceLesson } from "./lessons/newtonDividedDifference.js";
+import { cubicSplineLesson } from "./lessons/cubicSpline.js";
 
 import { forwardDifferenceLesson } from "./lessons/forwardDifference.js";
 import { backwardDifferenceLesson } from "./lessons/backwardDifference.js";
@@ -64,7 +65,8 @@ export const course = {
         lagrangeLesson,
         newtonForwardInterpolationLesson,
         newtonBackwardInterpolationLesson,
-        newtonDividedDifferenceLesson
+        newtonDividedDifferenceLesson,
+        cubicSplineLesson
       ]
     },
 
