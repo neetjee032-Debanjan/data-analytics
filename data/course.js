@@ -21,6 +21,7 @@ import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
 
 import { eulerLesson } from "./lessons/euler.js";
+import { rungeKutta2Lesson } from "./lessons/rungeKutta2.js";
 import { rungeKutta4Lesson } from "./lessons/rungeKutta4.js";
 
 import { gaussEliminationLesson } from "./lessons/gaussElimination.js";
@@ -97,6 +98,7 @@ export const course = {
 
       lessons: [
         eulerLesson,
+        rungeKutta2Lesson,
         rungeKutta4Lesson
       ]
     },
