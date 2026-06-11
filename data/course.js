@@ -19,6 +19,7 @@ import { centralDifferenceLesson } from "./lessons/centralDifference.js";
 
 import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
+import { simpson38Lesson } from "./lessons/simpson38.js";
 
 import { eulerLesson } from "./lessons/euler.js";
 import { modifiedEulerLesson } from "./lessons/modifiedEuler.js";
@@ -89,7 +90,8 @@ export const course = {
 
       lessons: [
         trapezoidalLesson,
-        simpson13Lesson
+        simpson13Lesson,
+        simpson38Lesson
       ]
     },
 
