@@ -25,6 +25,7 @@ import { gaussEliminationLesson } from "./lessons/gaussElimination.js";
 import { gaussJordanLesson } from "./lessons/gaussJordan.js";
 import { luDecompositionLesson } from "./lessons/luDecomposition.js";
 import { jacobiIterationLesson } from "./lessons/jacobiIteration.js";
+import { gaussSeidelLesson } from "./lessons/gaussSeidel.js";
 
 export const course = {
   title: "Numerical Methods",
@@ -104,7 +105,8 @@ export const course = {
         gaussEliminationLesson,
         gaussJordanLesson,
         luDecompositionLesson,
-        jacobiIterationLesson
+        jacobiIterationLesson,
+        gaussSeidelLesson
       ]
     }
 
