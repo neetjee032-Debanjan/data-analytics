@@ -10,6 +10,7 @@ import { fixedPointLesson } from "./lessons/fixedPoint.js";
 import { lagrangeLesson } from "./lessons/lagrange.js";
 import { newtonForwardInterpolationLesson } from "./lessons/newtonForwardInterpolation.js";
 import { newtonBackwardInterpolationLesson } from "./lessons/newtonBackwardInterpolation.js";
+import { newtonDividedDifferenceLesson } from "./lessons/newtonDividedDifference.js";
 
 import { forwardDifferenceLesson } from "./lessons/forwardDifference.js";
 import { backwardDifferenceLesson } from "./lessons/backwardDifference.js";
@@ -59,12 +60,17 @@ export const course = {
       id: "m3",
       title: "Interpolation",
 
-      lessons: [
-        lagrangeLesson,
-        newtonForwardInterpolationLesson,
-        newtonBackwardInterpolationLesson
-      ]
-    },
+ {
+  id: "m3",
+  title: "Interpolation",
+
+  lessons: [
+    lagrangeLesson,
+    newtonForwardInterpolationLesson,
+    newtonBackwardInterpolationLesson,
+    newtonDividedDifferenceLesson
+  ]
+},
 
     {
       id: "m4",
