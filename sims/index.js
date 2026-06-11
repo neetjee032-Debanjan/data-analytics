@@ -7,10 +7,14 @@ import { runDE } from "./differential.js";
 import { runFalsePosition } from "./falsePosition.js";
 import { runSecant } from "./secant.js";
 import { runSimpson13 } from "./simpson13.js";
+import { runFixedPoint } from "./fixedPoint.js";
 
 export const Simulations = {
 
-  /* Root Finding */
+  /* =========================
+     ROOT FINDING METHODS
+  ========================= */
+
   "newton": runNewton,
   "newton-raphson": runNewton,
 
@@ -22,10 +26,20 @@ export const Simulations = {
 
   "secant": runSecant,
 
-  /* Interpolation */
+  "fixedpoint": runFixedPoint,
+  "fixed-point": runFixedPoint,
+  "fixed_point": runFixedPoint,
+
+  /* =========================
+     INTERPOLATION
+  ========================= */
+
   "lagrange": runLagrange,
 
-  /* Integration */
+  /* =========================
+     NUMERICAL INTEGRATION
+  ========================= */
+
   "integration": runIntegration,
   "trapezoid": runIntegration,
 
@@ -33,7 +47,10 @@ export const Simulations = {
   "simpson-1-3": runSimpson13,
   "simpson": runSimpson13,
 
-  /* Differential Equations */
+  /* =========================
+     DIFFERENTIAL EQUATIONS
+  ========================= */
+
   "differential": runDE,
   "euler": runDE
 
