@@ -9,10 +9,11 @@ import { fixedPointLesson } from "./lessons/fixedPoint.js";
 
 import { lagrangeLesson } from "./lessons/lagrange.js";
 
+import { forwardDifferenceLesson } from "./lessons/forwardDifference.js";
+import { backwardDifferenceLesson } from "./lessons/backwardDifference.js";
+
 import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
-
-import { forwardDifferenceLesson } from "./lessons/forwardDifference.js";
 
 import { eulerLesson } from "./lessons/euler.js";
 
@@ -60,7 +61,8 @@ export const course = {
       title: "Numerical Differentiation",
 
       lessons: [
-        forwardDifferenceLesson
+        forwardDifferenceLesson,
+        backwardDifferenceLesson
       ]
     },
 
