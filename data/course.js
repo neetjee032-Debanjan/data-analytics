@@ -12,6 +12,8 @@ import { lagrangeLesson } from "./lessons/lagrange.js";
 import { trapezoidalLesson } from "./lessons/trapezoidal.js";
 import { simpson13Lesson } from "./lessons/simpson13.js";
 
+import { forwardDifferenceLesson } from "./lessons/forwardDifference.js";
+
 import { eulerLesson } from "./lessons/euler.js";
 
 import { gaussEliminationLesson } from "./lessons/gaussElimination.js";
@@ -55,6 +57,15 @@ export const course = {
 
     {
       id: "m4",
+      title: "Numerical Differentiation",
+
+      lessons: [
+        forwardDifferenceLesson
+      ]
+    },
+
+    {
+      id: "m5",
       title: "Numerical Integration",
 
       lessons: [
@@ -64,7 +75,7 @@ export const course = {
     },
 
     {
-      id: "m5",
+      id: "m6",
       title: "Differential Equations",
 
       lessons: [
@@ -73,7 +84,7 @@ export const course = {
     },
 
     {
-      id: "m6",
+      id: "m7",
       title: "Linear Algebraic Equations",
 
       lessons: [
