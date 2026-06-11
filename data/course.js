@@ -14,6 +14,8 @@ import { simpson13Lesson } from "./lessons/simpson13.js";
 
 import { eulerLesson } from "./lessons/euler.js";
 
+import { gaussEliminationLesson } from "./lessons/gaussElimination.js";
+
 export const course = {
   title: "Numerical Methods",
 
@@ -67,6 +69,15 @@ export const course = {
 
       lessons: [
         eulerLesson
+      ]
+    },
+
+    {
+      id: "m6",
+      title: "Linear Algebraic Equations",
+
+      lessons: [
+        gaussEliminationLesson
       ]
     }
 
