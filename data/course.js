@@ -41,38 +41,30 @@ import { gaussSeidelLesson } from "./lessons/gaussSeidel.js";
 
 import { introductionToRegressionLesson } from "./lessons/introductionToRegression.js";
 import { leastSquaresLineLesson } from "./lessons/leastSquaresLine.js";
-import { polynomialRegressionLesson } from "./lessons/polynomialRegression.js";
-import { correlationLesson } from "./lessons/correlation.js";
-import { linearCorrelationCoefficientLesson } from "./lessons/linearCorrelationCoefficient.js";
-import { coefficientOfDeterminationLesson } from "./lessons/coefficientOfDetermination.js";
-import { residualAnalysisLesson } from "./lessons/residualAnalysis.js";
 
 export const course = {
 title: "Numerical Methods",
 
 modules: [
+{
+id: "m1",
+title: "Numbers, Precision & Errors",
+lessons: [
+floatingPointLesson,
+numericalErrorsLesson,
+binaryNumberSystemLesson,
+decimalToBinaryLesson,
+binaryArithmeticLesson,
+fixedPointRepresentationLesson,
+ieee754Lesson,
+machineEpsilonLesson
+]
+},
 
 ```
 {
-  id: "m1",
-  title: "Numbers, Precision & Errors",
-
-  lessons: [
-    floatingPointLesson,
-    numericalErrorsLesson,
-    binaryNumberSystemLesson,
-    decimalToBinaryLesson,
-    binaryArithmeticLesson,
-    fixedPointRepresentationLesson,
-    ieee754Lesson,
-    machineEpsilonLesson
-  ]
-},
-
-{
   id: "m2",
   title: "Root Finding Methods",
-
   lessons: [
     bisectionLesson,
     newtonLesson,
@@ -85,7 +77,6 @@ modules: [
 {
   id: "m3",
   title: "Interpolation",
-
   lessons: [
     lagrangeLesson,
     newtonForwardInterpolationLesson,
@@ -98,7 +89,6 @@ modules: [
 {
   id: "m4",
   title: "Numerical Differentiation",
-
   lessons: [
     forwardDifferenceLesson,
     backwardDifferenceLesson,
@@ -109,7 +99,6 @@ modules: [
 {
   id: "m5",
   title: "Numerical Integration",
-
   lessons: [
     trapezoidalLesson,
     simpson13Lesson,
@@ -120,7 +109,6 @@ modules: [
 {
   id: "m6",
   title: "Differential Equations",
-
   lessons: [
     eulerLesson,
     modifiedEulerLesson,
@@ -132,7 +120,6 @@ modules: [
 {
   id: "m7",
   title: "Linear Algebraic Equations",
-
   lessons: [
     gaussEliminationLesson,
     gaussJordanLesson,
@@ -145,15 +132,9 @@ modules: [
 {
   id: "m8",
   title: "Regression & Curve Fitting",
-
   lessons: [
     introductionToRegressionLesson,
-    leastSquaresLineLesson,
-    polynomialRegressionLesson,
-    correlationLesson,
-    linearCorrelationCoefficientLesson,
-    coefficientOfDeterminationLesson,
-    residualAnalysisLesson
+    leastSquaresLineLesson
   ]
 }
 ```
