@@ -1,5 +1,7 @@
 import { course } from "./data/course.js";
 import { renderLesson } from "./pages/lesson.js";
+import { openQuiz } from "./pages/QuizPage.js";
+
 import {
   getProgress,
   getLastVisited
@@ -34,6 +36,17 @@ function router() {
       lessonId,
       pageIndex
     );
+
+    return;
+  }
+
+  if (parts[0] === "quiz") {
+
+    const quizId = parts[1];
+
+    openQuiz(app, quizId);
+
+    return;
   }
 }
 
@@ -368,6 +381,15 @@ window.openLesson = function(
 
   window.location.hash =
     `lesson-${moduleId}-${lessonId}-${pageIndex}`;
+};
+
+/* -----------------------
+   OPEN QUIZ
+------------------------ */
+window.openQuizPage = function(id) {
+
+  window.location.hash =
+    `quiz-${id}`;
 };
 
 /* -----------------------
