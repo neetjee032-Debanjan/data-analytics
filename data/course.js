@@ -51,10 +51,19 @@ import { multipleRegressionLesson } from "./lessons/multipleRegression.js";
 import { nonlinearRegressionLesson } from "./lessons/nonlinearRegression.js";
 import { logisticRegressionLesson } from "./lessons/logisticRegression.js";
 
+import { fourierTransformFundamentalsLesson } from "./lessons/fourierTransformFundamentals.js";
+import { fourierSeriesLesson } from "./lessons/fourierSeries.js";
+import { continuousFourierTransformLesson } from "./lessons/continuousFourierTransform.js";
+import { discreteFourierTransformLesson } from "./lessons/discreteFourierTransform.js";
+import { fastFourierTransformLesson } from "./lessons/fastFourierTransform.js";
+import { samplingTheoremAliasingLesson } from "./lessons/samplingTheoremAliasing.js";
+import { spectralLeakageWindowFunctionsLesson } from "./lessons/spectralLeakageWindowFunctions.js";
+
 export const course = {
   title: "Numerical Methods",
 
   modules: [
+
     {
       id: "m1",
       title: "Numbers, Precision & Errors",
@@ -161,6 +170,22 @@ export const course = {
         nonlinearRegressionLesson,
         logisticRegressionLesson
       ]
+    },
+
+    {
+      id: "m9",
+      title: "Fourier Analysis & Digital Signal Processing",
+
+      lessons: [
+        fourierTransformFundamentalsLesson,
+        fourierSeriesLesson,
+        continuousFourierTransformLesson,
+        discreteFourierTransformLesson,
+        fastFourierTransformLesson,
+        samplingTheoremAliasingLesson,
+        spectralLeakageWindowFunctionsLesson
+      ]
     }
+
   ]
 };
