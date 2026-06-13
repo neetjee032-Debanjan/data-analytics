@@ -1,18 +1,34 @@
-import { quizzes } from "../data/quizzes.js";
-import { renderQuiz } from "../components/Quiz.js";
+import { quizzes }
+from "../data/quizzes.js";
 
-export function openQuiz(container,id){
+import {
+  renderQuiz
+}
+from "../components/Quiz.js";
 
-  if(!quizzes[id]){
+export function openQuiz(
+  container,
+  lessonId
+){
+
+  const questions =
+    quizzes[lessonId];
+
+  if(!questions){
 
     container.innerHTML =
-      "<h2>No quiz available.</h2>";
+      `
+      <h2>
+        No quiz available.
+      </h2>
+      `;
 
     return;
   }
 
   renderQuiz(
     container,
-    quizzes[id]
+    questions,
+    lessonId
   );
 }
