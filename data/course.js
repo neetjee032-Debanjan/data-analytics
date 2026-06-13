@@ -48,12 +48,12 @@ import { coefficientOfDeterminationLesson } from "./lessons/coefficientOfDetermi
 import { residualAnalysisLesson } from "./lessons/residualAnalysis.js";
 import { goodnessOfFitLesson } from "./lessons/goodnessOfFit.js";
 import { multipleRegressionLesson } from "./lessons/multipleRegression.js";
+import { nonlinearRegressionLesson } from "./lessons/nonlinearRegression.js";
 
 export const course = {
   title: "Numerical Methods",
 
   modules: [
-
     {
       id: "m1",
       title: "Numbers, Precision & Errors",
@@ -156,9 +156,9 @@ export const course = {
         coefficientOfDeterminationLesson,
         residualAnalysisLesson,
         goodnessOfFitLesson,
-        multipleRegressionLesson
+        multipleRegressionLesson,
+        nonlinearRegressionLesson
       ]
     }
-
   ]
 };
