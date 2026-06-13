@@ -675,4 +675,464 @@ export const quizzes = {
 
   ]
 
-};
+},
+
+  l9: [
+
+    {
+      question: "The Bisection Method requires:",
+      options: [
+        "Derivative of the function",
+        "Two points with opposite signs",
+        "A matrix",
+        "Interpolation table"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "The condition f(a)f(b) < 0 implies:",
+      options: [
+        "No root exists",
+        "At least one root lies in [a,b]",
+        "Derivative is zero",
+        "Function is linear"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Bisection Method is based on:",
+      options: [
+        "Taylor Series",
+        "Intermediate Value Theorem",
+        "Lagrange Interpolation",
+        "Euler Method"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Convergence of Bisection Method is:",
+      options: [
+        "Quadratic",
+        "Linear",
+        "Cubic",
+        "Exponential"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "The interval length after one iteration becomes:",
+      options: [
+        "Double",
+        "Half",
+        "Same",
+        "Zero"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Main advantage of Bisection Method:",
+      options: [
+        "Guaranteed convergence",
+        "Fastest convergence",
+        "No function evaluation",
+        "Uses matrices"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Main disadvantage of Bisection Method:",
+      options: [
+        "May diverge",
+        "Slow convergence",
+        "Needs matrices",
+        "Requires interpolation"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Midpoint formula is:",
+      options: [
+        "(a+b)/2",
+        "(a-b)/2",
+        "ab",
+        "a+b"
+      ],
+      answer: 0
+    }
+
+  ],
+
+  l10: [
+
+    {
+      question: "Newton-Raphson Method uses:",
+      options: [
+        "Derivative information",
+        "Matrices only",
+        "Interpolation only",
+        "Integration"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Newton iteration formula is:",
+      options: [
+        "xₙ₊₁ = xₙ − f(xₙ)/f'(xₙ)",
+        "xₙ₊₁ = xₙ + f(xₙ)",
+        "xₙ₊₁ = xₙ²",
+        "xₙ₊₁ = xₙ/2"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Newton Method is derived from:",
+      options: [
+        "Taylor expansion",
+        "Fourier Series",
+        "DFT",
+        "Euler Integration"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Convergence near root is usually:",
+      options: [
+        "Linear",
+        "Quadratic",
+        "Constant",
+        "Cubic"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Newton Method may fail when:",
+      options: [
+        "Derivative is near zero",
+        "Function is continuous",
+        "Root exists",
+        "Initial guess is exact"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Newton Method generally converges:",
+      options: [
+        "Faster than Bisection",
+        "Slower than Bisection",
+        "Never",
+        "Only for polynomials"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "A poor initial guess may cause:",
+      options: [
+        "Divergence",
+        "Guaranteed convergence",
+        "No iterations",
+        "Matrix inversion"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Newton-Raphson primarily finds:",
+      options: [
+        "Roots",
+        "Integrals",
+        "Derivatives",
+        "Matrices"
+      ],
+      answer: 0
+    }
+
+  ],
+
+  l11: [
+
+    {
+      question: "Secant Method approximates:",
+      options: [
+        "Derivative",
+        "Integral",
+        "Matrix",
+        "Spline"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Secant Method requires:",
+      options: [
+        "One initial guess",
+        "Two initial guesses",
+        "Derivative",
+        "Matrix"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Secant Method is similar to:",
+      options: [
+        "Newton Method",
+        "Euler Method",
+        "Gauss Elimination",
+        "FFT"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Advantage over Newton Method:",
+      options: [
+        "No derivative required",
+        "Always faster",
+        "Uses matrices",
+        "Guaranteed convergence"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Convergence rate of Secant Method is:",
+      options: [
+        "Superlinear",
+        "Linear",
+        "Constant",
+        "Zero"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Secant Method uses:",
+      options: [
+        "Tangent line",
+        "Secant line",
+        "Spline",
+        "Circle"
+      ],
+      answer: 1
+    },
+
+    {
+      question: "Secant Method can:",
+      options: [
+        "Diverge",
+        "Never diverge",
+        "Find integrals",
+        "Compute matrices"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Secant Method is generally:",
+      options: [
+        "Faster than Bisection",
+        "Slower than Bisection",
+        "Identical to Bisection",
+        "Not iterative"
+      ],
+      answer: 0
+    }
+
+  ],
+
+  l12: [
+
+    {
+      question: "False Position Method is also called:",
+      options: [
+        "Regula Falsi",
+        "Euler Method",
+        "Newton Method",
+        "FFT"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "False Position combines ideas from:",
+      options: [
+        "Bisection and Secant",
+        "DFT and FFT",
+        "Euler and RK4",
+        "Spline and Regression"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "False Position requires:",
+      options: [
+        "Sign change interval",
+        "Derivative",
+        "Matrix",
+        "Interpolation table"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Advantage over Secant Method:",
+      options: [
+        "Maintains bracketing",
+        "Needs derivative",
+        "Uses matrices",
+        "Never evaluates function"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "False Position convergence is generally:",
+      options: [
+        "Faster than Bisection",
+        "Instant",
+        "Not iterative",
+        "Always quadratic"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Root estimate comes from:",
+      options: [
+        "Line joining endpoints",
+        "Midpoint only",
+        "Derivative",
+        "Matrix inversion"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "False Position preserves:",
+      options: [
+        "Sign-change interval",
+        "Derivative value",
+        "Matrix rank",
+        "Integral"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "False Position is mainly used for:",
+      options: [
+        "Root finding",
+        "Integration",
+        "Differentiation",
+        "Regression"
+      ],
+      answer: 0
+    }
+
+  ],
+
+  l13: [
+
+    {
+      question: "Fixed Point Iteration uses:",
+      options: [
+        "x = g(x)",
+        "f'(x)",
+        "Matrices",
+        "Interpolation"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Iteration formula is:",
+      options: [
+        "xₙ₊₁ = g(xₙ)",
+        "xₙ₊₁ = f(xₙ)",
+        "xₙ₊₁ = xₙ²",
+        "xₙ₊₁ = 0"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "A fixed point satisfies:",
+      options: [
+        "x = g(x)",
+        "x = 0",
+        "g(x)=0",
+        "x=1"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Convergence depends on:",
+      options: [
+        "|g'(x)|",
+        "Matrix rank",
+        "Integral value",
+        "FFT size"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Convergence is likely when:",
+      options: [
+        "|g'(x)| < 1",
+        "|g'(x)| > 1",
+        "g'(x)=10",
+        "g'(x)=100"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "If |g'(x)| > 1 near root:",
+      options: [
+        "May diverge",
+        "Guaranteed convergence",
+        "Instant root",
+        "No iterations"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Fixed Point Iteration is used for:",
+      options: [
+        "Root finding",
+        "Integration",
+        "Regression",
+        "DFT"
+      ],
+      answer: 0
+    },
+
+    {
+      question: "Main challenge in Fixed Point Iteration:",
+      options: [
+        "Choosing suitable g(x)",
+        "Finding matrices",
+        "Computing FFT",
+        "Interpolation"
+      ],
+      answer: 0
+    }
+
+  ],
