@@ -3,6 +3,8 @@ export const multipleRegressionLesson = {
 
   title: "Multiple Linear Regression",
 
+  simulation: "multiple-regression",
+
   pages: [
 
     {
