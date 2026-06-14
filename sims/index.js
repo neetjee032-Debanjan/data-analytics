@@ -24,6 +24,7 @@ import { runMultipleRegression } from "./multipleRegression.js";
 import { runFourierSeries } from "./fourierSeries.js";
 import { runFFT } from "./fft.js";
 import { runAliasing } from "./aliasing.js";
+import { runSpectralLeakage } from "./spectralLeakage.js";
 
 export const Simulations = {
 
@@ -105,6 +106,10 @@ export const Simulations = {
 
   "aliasing": runAliasing,
   "sampling-aliasing": runAliasing,
-  "samplingtheoremaliasing": runAliasing
+  "samplingtheoremaliasing": runAliasing,
+
+  "spectralleakage": runSpectralLeakage,
+  "spectral-leakage": runSpectralLeakage,
+  "window-functions": runSpectralLeakage
 
 };
