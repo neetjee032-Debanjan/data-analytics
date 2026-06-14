@@ -22,6 +22,7 @@ import { runCorrelation } from "./correlation.js";
 import { runMultipleRegression } from "./multipleRegression.js";
 
 import { runFourierSeries } from "./fourierSeries.js";
+import { runFFT } from "./fft.js";
 
 export const Simulations = {
 
@@ -96,6 +97,9 @@ export const Simulations = {
   /* Fourier */
 
   "fourierseries": runFourierSeries,
-  "fourier-series": runFourierSeries
+  "fourier-series": runFourierSeries,
+
+  "fft": runFFT,
+  "fast-fourier-transform": runFFT
 
 };
