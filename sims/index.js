@@ -23,6 +23,7 @@ import { runMultipleRegression } from "./multipleRegression.js";
 
 import { runFourierSeries } from "./fourierSeries.js";
 import { runFFT } from "./fft.js";
+import { runAliasing } from "./aliasing.js";
 
 export const Simulations = {
 
@@ -100,6 +101,10 @@ export const Simulations = {
   "fourier-series": runFourierSeries,
 
   "fft": runFFT,
-  "fast-fourier-transform": runFFT
+  "fast-fourier-transform": runFFT,
+
+  "aliasing": runAliasing,
+  "sampling-aliasing": runAliasing,
+  "samplingtheoremaliasing": runAliasing
 
 };
