@@ -1,5 +1,5 @@
 export const secantLesson = {
-  id: "l8",
+  id: "l11",
   title: "Secant Method",
 
   simulation: "secant",
