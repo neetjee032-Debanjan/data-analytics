@@ -512,6 +512,346 @@ export const quizzes = {
       explanation: "Numerical accuracy is limited by machine precision."
     }
 
+  ],
+
+  /* =========================
+     l3 - Bisection Method
+  ========================= */
+
+  l3: [
+
+    {
+      question: "The Bisection Method is based on:",
+      options: [
+        "Taylor Series",
+        "Intermediate Value Theorem",
+        "Least Squares",
+        "Fourier Analysis"
+      ],
+      answer: 1,
+      explanation: "The method relies on the Intermediate Value Theorem."
+    },
+
+    {
+      question: "For Bisection Method to work, f(a) and f(b) must:",
+      options: [
+        "Be equal",
+        "Be positive",
+        "Have opposite signs",
+        "Be derivatives"
+      ],
+      answer: 2,
+      explanation: "A sign change indicates a root in the interval."
+    },
+
+    {
+      question: "Each iteration of Bisection:",
+      options: [
+        "Doubles interval size",
+        "Halves interval size",
+        "Squares interval size",
+        "Keeps interval unchanged"
+      ],
+      answer: 1,
+      explanation: "The interval is repeatedly halved."
+    },
+
+    {
+      question: "Bisection Method convergence is:",
+      options: [
+        "Linear",
+        "Quadratic",
+        "Cubic",
+        "Exponential"
+      ],
+      answer: 0,
+      explanation: "Bisection converges linearly."
+    },
+
+    {
+      question: "Main advantage of Bisection Method:",
+      options: [
+        "Fastest method",
+        "Guaranteed convergence",
+        "No function evaluation",
+        "No interval needed"
+      ],
+      answer: 1,
+      explanation: "It converges whenever assumptions are satisfied."
+    }
+
+  ],
+
+  /* =========================
+     l4 - Newton Raphson Method
+  ========================= */
+
+  l4: [
+
+    {
+      question: "Newton-Raphson Method uses:",
+      options: [
+        "Integrals",
+        "Derivatives",
+        "Matrices",
+        "Fourier Series"
+      ],
+      answer: 1,
+      explanation: "Derivative information is required."
+    },
+
+    {
+      question: "Newton-Raphson iteration formula is:",
+      options: [
+        "x + f(x)",
+        "x - f(x)",
+        "x - f(x)/f'(x)",
+        "f(x)/x"
+      ],
+      answer: 2,
+      explanation: "This is the standard Newton iteration formula."
+    },
+
+    {
+      question: "Newton-Raphson usually converges:",
+      options: [
+        "Linearly",
+        "Quadratically",
+        "Cubically",
+        "Never"
+      ],
+      answer: 1,
+      explanation: "Near the root, convergence is quadratic."
+    },
+
+    {
+      question: "Newton Method may fail when:",
+      options: [
+        "f'(x)=0",
+        "f(x)>0",
+        "x<0",
+        "x>0"
+      ],
+      answer: 0,
+      explanation: "Division by zero occurs if derivative becomes zero."
+    },
+
+    {
+      question: "Compared to Bisection, Newton is generally:",
+      options: [
+        "Slower",
+        "Faster",
+        "Identical",
+        "Random"
+      ],
+      answer: 1,
+      explanation: "Newton typically converges much faster."
+    }
+
+  ],
+
+  /* =========================
+     l8 - False Position Method
+  ========================= */
+
+  l8: [
+
+    {
+      question: "False Position Method is also known as:",
+      options: [
+        "Newton Method",
+        "Regula Falsi",
+        "Jacobi Method",
+        "Euler Method"
+      ],
+      answer: 1,
+      explanation: "Regula Falsi is another name for False Position."
+    },
+
+    {
+      question: "False Position maintains:",
+      options: [
+        "Bracketing interval",
+        "Derivative table",
+        "Matrix form",
+        "Frequency spectrum"
+      ],
+      answer: 0,
+      explanation: "The root always remains bracketed."
+    },
+
+    {
+      question: "False Position uses:",
+      options: [
+        "Parabolic interpolation",
+        "Linear interpolation",
+        "Spline interpolation",
+        "Cubic interpolation"
+      ],
+      answer: 1,
+      explanation: "A straight line is drawn through interval endpoints."
+    },
+
+    {
+      question: "False Position requires:",
+      options: [
+        "Derivative",
+        "Opposite signs at endpoints",
+        "Matrices",
+        "Taylor series"
+      ],
+      answer: 1,
+      explanation: "A sign change must exist."
+    },
+
+    {
+      question: "Compared with Bisection, False Position is often:",
+      options: [
+        "Faster",
+        "Slower",
+        "Identical",
+        "Impossible"
+      ],
+      answer: 0,
+      explanation: "It often converges faster."
+    }
+
+  ],
+
+  /* =========================
+     l10 - Fixed Point Iteration
+  ========================= */
+
+  l10: [
+
+    {
+      question: "Fixed Point Iteration solves:",
+      options: [
+        "g(x)=x",
+        "Ax=b",
+        "dy/dx=f(x)",
+        "FFT equations"
+      ],
+      answer: 0,
+      explanation: "The root is found from x = g(x)."
+    },
+
+    {
+      question: "Iteration formula is:",
+      options: [
+        "xₙ=g(xₙ)",
+        "xₙ₊₁=g(xₙ)",
+        "g(x)=0",
+        "x=f(x)"
+      ],
+      answer: 1,
+      explanation: "Next approximation is obtained from current one."
+    },
+
+    {
+      question: "Convergence depends largely on:",
+      options: [
+        "|g'(x)|",
+        "|f(x)|",
+        "Matrix rank",
+        "Determinant"
+      ],
+      answer: 0,
+      explanation: "Derivative magnitude controls convergence."
+    },
+
+    {
+      question: "A common convergence condition is:",
+      options: [
+        "|g'(x)| < 1",
+        "|g'(x)| > 1",
+        "g'(x)=5",
+        "g(x)=0"
+      ],
+      answer: 0,
+      explanation: "This condition ensures convergence near the root."
+    },
+
+    {
+      question: "Fixed Point Iteration is also called:",
+      options: [
+        "Successive Approximation",
+        "Gaussian Elimination",
+        "Differentiation",
+        "Interpolation"
+      ],
+      answer: 0,
+      explanation: "It is often known as successive approximation."
+    }
+
+  ],
+
+  /* =========================
+     l11 - Secant Method
+  ========================= */
+
+  l11: [
+
+    {
+      question: "Secant Method requires:",
+      options: [
+        "One initial guess",
+        "Two initial guesses",
+        "Three initial guesses",
+        "No initial guess"
+      ],
+      answer: 1,
+      explanation: "Two starting values are required."
+    },
+
+    {
+      question: "Secant Method approximates:",
+      options: [
+        "Derivative",
+        "Integral",
+        "Matrix inverse",
+        "FFT"
+      ],
+      answer: 0,
+      explanation: "The derivative is approximated numerically."
+    },
+
+    {
+      question: "Secant Method compared to Newton:",
+      options: [
+        "Needs derivative",
+        "Does not need derivative",
+        "Needs matrix",
+        "Needs interpolation table"
+      ],
+      answer: 1,
+      explanation: "No explicit derivative calculation is needed."
+    },
+
+    {
+      question: "Secant Method uses:",
+      options: [
+        "Tangent line",
+        "Secant line",
+        "Parabola",
+        "Spline"
+      ],
+      answer: 1,
+      explanation: "A secant line approximates the tangent."
+    },
+
+    {
+      question: "Secant convergence is generally:",
+      options: [
+        "Superlinear",
+        "Linear",
+        "No convergence",
+        "Constant"
+      ],
+      answer: 0,
+      explanation: "Its convergence rate is superlinear."
+    }
+
   ]
 
 };
