@@ -3,6 +3,8 @@ export const fastFourierTransformLesson = {
 
   title: "Fast Fourier Transform (FFT)",
 
+  simulation: "fft",
+
   pages: [
 
     {
