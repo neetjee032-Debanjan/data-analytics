@@ -3,6 +3,8 @@ export const correlationLesson = {
 
   title: "Correlation",
 
+  simulation: "correlation",
+
   pages: [
 
     {
