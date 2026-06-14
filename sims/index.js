@@ -18,6 +18,8 @@ import { runGaussSeidel } from "./gaussSeidel.js";
 import { runRK2 } from "./rk2.js";
 import { runRK4 } from "./rk4.js";
 
+import { runCorrelation } from "./correlation.js";
+
 export const Simulations = {
 
   /* Root Finding */
@@ -79,6 +81,10 @@ export const Simulations = {
   "jacobi-iteration": runJacobi,
 
   "gaussseidel": runGaussSeidel,
-  "gauss-seidel": runGaussSeidel
+  "gauss-seidel": runGaussSeidel,
+
+  /* Regression */
+
+  "correlation": runCorrelation
 
 };
