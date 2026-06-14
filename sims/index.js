@@ -21,6 +21,8 @@ import { runRK4 } from "./rk4.js";
 import { runCorrelation } from "./correlation.js";
 import { runMultipleRegression } from "./multipleRegression.js";
 
+import { runFourierSeries } from "./fourierSeries.js";
+
 export const Simulations = {
 
   /* Root Finding */
@@ -89,6 +91,11 @@ export const Simulations = {
   "correlation": runCorrelation,
 
   "multiple-regression": runMultipleRegression,
-  "multipleregression": runMultipleRegression
+  "multipleregression": runMultipleRegression,
+
+  /* Fourier */
+
+  "fourierseries": runFourierSeries,
+  "fourier-series": runFourierSeries
 
 };
