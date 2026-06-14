@@ -1,5 +1,5 @@
 export const jacobiIterationLesson = {
-  id: "l20",
+  id: "l51",
 
   title: "Jacobi Iteration Method",
 
