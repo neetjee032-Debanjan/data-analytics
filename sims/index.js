@@ -11,6 +11,8 @@ import { runFixedPoint } from "./fixedPoint.js";
 
 import { runGauss } from "./gauss.js";
 
+import { runRK4 } from "./rk4.js";
+
 export const Simulations = {
 
   /* Root Finding */
@@ -42,6 +44,10 @@ export const Simulations = {
   /* Differential Equations */
   "differential": runDE,
   "euler": runDE,
+
+  "rk4": runRK4,
+  "rungekutta4": runRK4,
+  "runge-kutta-4": runRK4,
 
   /* Linear Algebra */
   "gauss": runGauss,
