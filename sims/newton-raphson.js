@@ -1,3 +1,7 @@
+import {
+  evaluateFunction
+} from "../utils/evaluateFunction.js";
+
 export function runNewton(container) {
 
   container.innerHTML = `
@@ -9,17 +13,48 @@ export function runNewton(container) {
 
         <div>
           <label>f(x)</label><br/>
-          <input id="fn" value="x*x - 4" style="padding:6px;" />
+          <input
+            id="fn"
+            value="x^2 - 4"
+            style="padding:6px;width:220px;"
+          />
         </div>
 
         <div>
           <label>x₀</label><br/>
-          <input id="x0" value="3" type="number" style="padding:6px;" />
+          <input
+            id="x0"
+            value="3"
+            type="number"
+            style="padding:6px;"
+          />
         </div>
 
-        <button id="run">Run</button>
-        <button id="reset">Reset</button>
+        <button id="run">
+          Run
+        </button>
 
+        <button id="reset">
+          Reset
+        </button>
+
+      </div>
+
+      <div
+        style="
+          margin-top:10px;
+          color:#94a3b8;
+          font-size:14px;
+        "
+      >
+        Examples:
+        sin(x),
+        cos(x),
+        exp(-x),
+        x^3-4*x+1,
+        sin(pi*x),
+        sqrt(abs(x)),
+        e^(-x)
       </div>
 
       <canvas
@@ -41,12 +76,14 @@ export function runNewton(container) {
         ">
       </div>
 
-      <table border="1"
+      <table
+        border="1"
         style="
           width:100%;
           margin-top:10px;
           color:white;
-        ">
+        "
+      >
         <thead>
           <tr>
             <th>Step</th>
@@ -64,13 +101,23 @@ export function runNewton(container) {
     </div>
   `;
 
-  const canvas = container.querySelector("#canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas =
+    container.querySelector("#canvas");
 
-  const fn = container.querySelector("#fn");
-  const x0 = container.querySelector("#x0");
-  const table = container.querySelector("#table");
-  const info = container.querySelector("#info");
+  const ctx =
+    canvas.getContext("2d");
+
+  const fn =
+    container.querySelector("#fn");
+
+  const x0 =
+    container.querySelector("#x0");
+
+  const table =
+    container.querySelector("#table");
+
+  const info =
+    container.querySelector("#info");
 
   const W = canvas.width;
   const H = canvas.height;
@@ -82,32 +129,39 @@ export function runNewton(container) {
     y => H/2 - y*40;
 
   function f(expr,x){
-    return Function(
-      "x",
-      `return ${expr}`
-    )(x);
+
+    return evaluateFunction(
+      expr,
+      x
+    );
   }
 
   function df(expr,x){
-    const h = 0.00001;
+
+    const h = 0.000001;
 
     return (
-      f(expr,x+h) -
+
+      f(expr,x+h)
+
+      -
+
       f(expr,x-h)
+
     )/(2*h);
   }
 
-  let expr = "x*x - 4";
+  let expr = "x^2 - 4";
   let x = 3;
+
   let step = 0;
   let rows = [];
+
   let running = false;
 
   function draw(currentX,nextX){
 
     ctx.clearRect(0,0,W,H);
-
-    /* AXES */
 
     ctx.strokeStyle = "#555";
 
@@ -122,44 +176,76 @@ export function runNewton(container) {
     ctx.stroke();
 
     ctx.fillStyle = "#aaa";
-    ctx.fillText("x",W-20,H/2-10);
-    ctx.fillText("y",W/2+10,20);
 
-    /* FUNCTION CURVE */
+    ctx.fillText(
+      "x",
+      W-20,
+      H/2-10
+    );
 
-    ctx.strokeStyle = "#4cc9f0";
+    ctx.fillText(
+      "y",
+      W/2+10,
+      20
+    );
+
+    ctx.strokeStyle =
+      "#4cc9f0";
+
     ctx.lineWidth = 3;
 
     ctx.beginPath();
 
     let first = true;
 
-    for(let i=-5;i<=5;i+=0.05){
+    for(
+      let i=-5;
+      i<=5;
+      i+=0.05
+    ){
 
-      const px = scaleX(i);
-      const py = scaleY(
-        f(expr,i)
-      );
+      let y;
+
+      try{
+
+        y = f(expr,i);
+
+      }catch{
+
+        continue;
+      }
+
+      const px =
+        scaleX(i);
+
+      const py =
+        scaleY(y);
 
       if(first){
+
         ctx.moveTo(px,py);
+
         first=false;
-      }
-      else{
+
+      }else{
+
         ctx.lineTo(px,py);
       }
     }
 
     ctx.stroke();
 
-    const fx = f(expr,currentX);
-    const dfx = df(expr,currentX);
+    const fx =
+      f(expr,currentX);
 
-    /* CURRENT POINT */
+    const dfx =
+      df(expr,currentX);
 
-    ctx.fillStyle = "lime";
+    ctx.fillStyle =
+      "lime";
 
     ctx.beginPath();
+
     ctx.arc(
       scaleX(currentX),
       scaleY(fx),
@@ -167,29 +253,31 @@ export function runNewton(container) {
       0,
       Math.PI*2
     );
+
     ctx.fill();
 
-    ctx.fillText(
-      "xn",
-      scaleX(currentX)+8,
-      scaleY(fx)-8
-    );
+    ctx.strokeStyle =
+      "#ff6b6b";
 
-    /* TANGENT LINE */
-
-    ctx.strokeStyle = "#ff6b6b";
     ctx.lineWidth = 2;
 
     ctx.beginPath();
 
-    const leftX = currentX - 2;
-    const rightX = currentX + 2;
+    const leftX =
+      currentX - 2;
+
+    const rightX =
+      currentX + 2;
 
     const leftY =
-      fx + dfx*(leftX-currentX);
+      fx +
+      dfx*
+      (leftX-currentX);
 
     const rightY =
-      fx + dfx*(rightX-currentX);
+      fx +
+      dfx*
+      (rightX-currentX);
 
     ctx.moveTo(
       scaleX(leftX),
@@ -203,9 +291,8 @@ export function runNewton(container) {
 
     ctx.stroke();
 
-    /* NEXT ESTIMATE */
-
-    ctx.fillStyle = "yellow";
+    ctx.fillStyle =
+      "yellow";
 
     ctx.beginPath();
 
@@ -218,40 +305,6 @@ export function runNewton(container) {
     );
 
     ctx.fill();
-
-    ctx.fillText(
-      "xn+1",
-      scaleX(nextX)+8,
-      H/2-10
-    );
-
-    /* LEGEND */
-
-    ctx.fillStyle = "white";
-
-    ctx.fillText(
-      "Blue = Function",
-      20,
-      25
-    );
-
-    ctx.fillText(
-      "Green = Current Point",
-      20,
-      45
-    );
-
-    ctx.fillText(
-      "Red = Tangent",
-      20,
-      65
-    );
-
-    ctx.fillText(
-      "Yellow = Next Estimate",
-      20,
-      85
-    );
   }
 
   function renderTable(){
@@ -271,103 +324,136 @@ export function runNewton(container) {
 
   function iterate(){
 
-    const fx = f(expr,x);
-    const dfx = df(expr,x);
+    try{
 
-    if(Math.abs(dfx)<1e-10){
+      const fx =
+        f(expr,x);
+
+      const dfx =
+        df(expr,x);
+
+      if(
+        !isFinite(fx)
+      ){
+
+        throw new Error(
+          "Invalid function value"
+        );
+      }
+
+      if(
+        Math.abs(dfx)
+        <
+        1e-10
+      ){
+
+        info.innerHTML =
+          "Derivative too close to zero.";
+
+        running = false;
+
+        return;
+      }
+
+      const next =
+        x - fx/dfx;
+
+      const error =
+        Math.abs(next-x);
+
+      draw(x,next);
+
+      rows.push({
+
+        step,
+
+        x:x.toFixed(6),
+
+        fx:fx.toFixed(6),
+
+        dfx:dfx.toFixed(6),
+
+        next:next.toFixed(6),
+
+        error:error.toFixed(8)
+
+      });
+
+      renderTable();
+
+      info.innerHTML = `
+        Root Approximation:
+        ${next.toFixed(8)}
+        |
+        Error:
+        ${error.toFixed(8)}
+      `;
+
+      x = next;
+
+      step++;
+
+      if(
+        step < 15 &&
+        error > 0.000001 &&
+        running
+      ){
+
+        setTimeout(
+          iterate,
+          700
+        );
+      }
+
+    }catch(err){
 
       info.innerHTML =
-        "Derivative too close to zero.";
+        "Expression Error: "
+        + err.message;
 
       running = false;
-      return;
-    }
-
-    const next =
-      x - fx/dfx;
-
-    const error =
-      Math.abs(next-x);
-
-    draw(x,next);
-
-    rows.push({
-
-      step,
-
-      x:x.toFixed(6),
-
-      fx:fx.toFixed(6),
-
-      dfx:dfx.toFixed(6),
-
-      next:next.toFixed(6),
-
-      error:error.toFixed(8)
-
-    });
-
-    renderTable();
-
-    info.innerHTML = `
-      Current x:
-      ${x.toFixed(6)}
-
-      |
-      Next:
-      ${next.toFixed(6)}
-
-      |
-      Error:
-      ${error.toFixed(8)}
-    `;
-
-    x = next;
-    step++;
-
-    if(
-      step < 10 &&
-      error > 0.0001 &&
-      running
-    ){
-      setTimeout(
-        iterate,
-        800
-      );
     }
   }
 
-  container.querySelector("#run").onclick = () => {
+  container
+    .querySelector("#run")
+    .onclick = () => {
 
-    expr = fn.value;
+      expr =
+        fn.value;
 
-    x =
-      parseFloat(x0.value);
+      x =
+        parseFloat(
+          x0.value
+        );
 
-    step = 0;
+      rows = [];
 
-    rows = [];
+      step = 0;
 
-    running = true;
+      running = true;
 
-    iterate();
-  };
+      iterate();
+    };
 
-  container.querySelector("#reset").onclick = () => {
+  container
+    .querySelector("#reset")
+    .onclick = () => {
 
-    running = false;
+      running = false;
 
-    x = 3;
+      rows = [];
 
-    rows = [];
+      step = 0;
 
-    step = 0;
+      x = 3;
 
-    table.innerHTML = "";
-    info.innerHTML = "";
+      table.innerHTML = "";
 
-    draw(3,3);
-  };
+      info.innerHTML = "";
+
+      draw(3,3);
+    };
 
   draw(3,3);
 }
