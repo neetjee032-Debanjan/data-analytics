@@ -25,7 +25,7 @@ export function runNewton(container) {
           <input
             id="x0"
             value="3"
-            type="number"
+            type="text"
             style="padding:6px;"
           />
         </div>
@@ -47,14 +47,19 @@ export function runNewton(container) {
           font-size:14px;
         "
       >
-        Examples:
-        sin(x),
-        cos(x),
-        exp(-x),
-        x^3-4*x+1,
-        sin(pi*x),
-        sqrt(abs(x)),
-        e^(-x)
+        Functions:
+sin(x), cos(x), exp(-x),
+x^3-4*x+1,
+sin(pi*x),
+sqrt(abs(x)),
+e^(-x)
+
+Initial Guess x₀:
+3, pi, e,
+sqrt(2),
+pi/4,
+2*pi,
+e^2
       </div>
 
       <canvas
@@ -422,10 +427,24 @@ export function runNewton(container) {
       expr =
         fn.value;
 
-      x =
-        parseFloat(
-          x0.value
-        );
+      try {
+
+  x = evaluateFunction(
+    x0.value,
+    0
+  );
+
+  if(!isFinite(x)){
+    throw new Error();
+  }
+
+} catch {
+
+  info.innerHTML =
+    "Invalid initial guess (x₀). Examples: 3, pi, e, sqrt(2), pi/4";
+
+  return;
+}
 
       rows = [];
 
