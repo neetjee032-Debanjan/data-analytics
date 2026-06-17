@@ -16,8 +16,38 @@ function router() {
 
   const hash = window.location.hash.replace("#", "");
 
-  if (!hash) {
+  // Home page anchors
+  if (
+    hash === "" ||
+    hash === "hero" ||
+    hash === "why" ||
+    hash === "applications" ||
+    hash === "roadmap" ||
+    hash === "modules" ||
+    hash === "statistics"
+  ) {
+
     renderHome();
+
+    setTimeout(() => {
+
+      if (hash) {
+
+        const section =
+          document.getElementById(hash);
+
+        if (section) {
+
+          section.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+
+      }
+
+    }, 50);
+
     return;
   }
 
@@ -27,7 +57,8 @@ function router() {
 
     const moduleId = parts[1];
     const lessonId = parts[2];
-    const pageIndex = parseInt(parts[3] || 0);
+    const pageIndex =
+      parseInt(parts[3] || 0);
 
     renderLesson(
       app,
@@ -48,6 +79,10 @@ function router() {
 
     return;
   }
+
+  // fallback
+  renderHome();
+
 }
 
 /* -----------------------
