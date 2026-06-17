@@ -246,7 +246,7 @@ function renderHome() {
 
       <div
         style="
-          font-size:52px;
+          font-size:clamp(2rem,8vw,5rem);
           font-weight:800;
           line-height:1.2;
           margin-bottom:20px;
