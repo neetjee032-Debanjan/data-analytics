@@ -7,6 +7,9 @@ import {
   getLastVisited
 } from "./progress.js";
 
+import { initParticles }
+from "./js/particles.js";
+
 const app = document.getElementById("app");
 
 /* -----------------------
@@ -1212,5 +1215,11 @@ window.addEventListener(
 
 window.addEventListener(
   "load",
-  router
+  () => {
+
+    router();
+
+    initParticles();
+
+  }
 );
