@@ -3,6 +3,8 @@ export const binaryNumberSystemLesson = {
 
   title: "Binary Number System",
 
+  simulation: "binary",
+
   pages: [
 
     {
