@@ -3,6 +3,8 @@ export const decimalToBinaryLesson = {
 
   title: "Decimal to Binary Conversion",
 
+  simulation: "decimaltobinary",
+
   pages: [
 
     {
