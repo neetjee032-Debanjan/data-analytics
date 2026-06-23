@@ -3,7 +3,7 @@ export const cubicSplineLesson = {
 
   title: "Cubic Spline Interpolation",
 
-  simulation: "cubic-spline",
+  simulation: "cubicspline",
 
   pages: [
 
