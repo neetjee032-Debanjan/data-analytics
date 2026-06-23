@@ -2,6 +2,8 @@ export const floatingPointLesson = {
   id: "l1",
   title: "Floating Point Representation",
 
+  simulation: "floatingpoint",
+
   pages: [
 
     {
