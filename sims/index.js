@@ -9,6 +9,7 @@ import { runIEEE754 } from "./ieee754.js";
 import { runIntegration } from "./integration.js";
 import { runLagrange } from "./lagrange.js";
 import { runNewtonForward } from "./newtonForwardInterpolation.js";
+import { runNewtonBackwardInterpolation } from "./newtonBackwardInterpolation.js";
 import { runNewtonDividedDifference } from "./newtonDividedDifference.js";
 import { runDE } from "./differential.js";
 
@@ -89,6 +90,9 @@ export const Simulations = {
 
   "newtondivideddifference": runNewtonDividedDifference,
 "newton-divided-difference": runNewtonDividedDifference,
+
+  "newtonbackward": runNewtonBackwardInterpolation,
+"newton-backward": runNewtonBackwardInterpolation,
 
   /* Integration */
 
