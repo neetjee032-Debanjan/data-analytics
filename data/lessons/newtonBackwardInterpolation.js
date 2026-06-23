@@ -3,7 +3,7 @@ export const newtonBackwardInterpolationLesson = {
 
   title: "Newton Backward Interpolation",
 
-  simulation: "newton-backward",
+  simulation: "newtonbackward",
 
   pages: [
 
