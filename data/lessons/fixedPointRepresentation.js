@@ -3,6 +3,8 @@ export const fixedPointRepresentationLesson = {
 
   title: "Fixed Point Representation",
 
+  simulation: "fixedpointrepresentation",
+
   pages: [
 
     {
