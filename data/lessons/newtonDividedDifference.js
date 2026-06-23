@@ -3,7 +3,7 @@ export const newtonDividedDifferenceLesson = {
 
   title: "Newton Divided Difference Interpolation",
 
-  simulation: "newton-divided-difference",
+  simulation: "newtondivideddifference",
 
   pages: [
 
