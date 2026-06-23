@@ -3,7 +3,7 @@ export const forwardDifferenceLesson = {
 
   title: "Forward Difference Method",
 
-  simulation: "forward-difference",
+  simulation: "forwarddifference",
 
   pages: [
 
