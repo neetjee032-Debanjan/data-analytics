@@ -498,22 +498,48 @@ Extract Fields
 <br><br>
 
 Sign:
-${parts.sign}
 
-<br>
+<span
+style="
+color:#16a34a;
+font-weight:bold;
+font-family:monospace;
+"
+>
+${parts.sign}
+</span>
+
+<br><br>
 
 Exponent:
-${parts.exponent}
 
-<br>
+<span
+style="
+color:#2563eb;
+font-weight:bold;
+font-family:monospace;
+"
+>
+${parts.exponent}
+</span>
+
+<br><br>
 
 Mantissa:
+
+<span
+style="
+color:#9333ea;
+font-weight:bold;
+font-family:monospace;
+"
+>
 ${parts.mantissa}
+</span>
 
 </div>
 
 `;
-
 }
 function renderLayout(binary,precision){
 
@@ -591,16 +617,16 @@ font-size:14px;
 "
 >
 
-<div>
-🟢 Sign
+<div style="color:#16a34a;">
+■ Sign
 </div>
 
-<div>
-🔵 Exponent
+<div style="color:#2563eb;">
+■ Exponent
 </div>
 
-<div>
-🟣 Mantissa
+<div style="color:#9333ea;">
+■ Mantissa
 </div>
 
 </div>
