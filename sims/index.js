@@ -3,6 +3,7 @@ import { runBisection } from "./bisection.js";
 import { runDecimalToBinary } from "./decimalToBinary.js";
 import { runBinaryArithmetic } from "./binaryArithmetic.js";
 import { runFixedPointRepresentation } from "./fixedPointRepresentation.js";
+import { runCubicSpline } from "./cubicSpline.js";
 import { runFloatingPoint } from "./floatingPoint.js";
 import { runIEEE754 } from "./ieee754.js";
 import { runIntegration } from "./integration.js";
@@ -44,6 +45,9 @@ export const Simulations = {
 
   "binaryarithmetic": runBinaryArithmetic,
 "binary-arithmetic": runBinaryArithmetic,
+
+  "cubicspline": runCubicSpline,
+"cubic-spline": runCubicSpline,
 
   "decimaltobinary": runDecimalToBinary,
 "decimal-to-binary": runDecimalToBinary,
