@@ -3,6 +3,7 @@ import { runBisection } from "./bisection.js";
 import { runDecimalToBinary } from "./decimalToBinary.js";
 import { runBinaryArithmetic } from "./binaryArithmetic.js";
 import { runFixedPointRepresentation } from "./fixedPointRepresentation.js";
+import { runFloatingPoint } from "./floatingPoint.js";
 import { runIEEE754 } from "./ieee754.js";
 import { runIntegration } from "./integration.js";
 import { runLagrange } from "./lagrange.js";
@@ -50,6 +51,9 @@ export const Simulations = {
   "fixedpointrepresentation": runFixedPointRepresentation,
 "fixed-point-representation": runFixedPointRepresentation,
 "fixedpoint": runFixedPointRepresentation,
+
+  "floatingpoint": runFloatingPoint,
+"floating-point": runFloatingPoint,
 
   "ieee754": runIEEE754,
 "floatingpoint": runIEEE754,
