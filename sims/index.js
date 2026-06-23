@@ -8,6 +8,7 @@ import { runFloatingPoint } from "./floatingPoint.js";
 import { runIEEE754 } from "./ieee754.js";
 import { runIntegration } from "./integration.js";
 import { runLagrange } from "./lagrange.js";
+import { runNewtonForward } from "./newtonForwardInterpolation.js";
 import { runDE } from "./differential.js";
 
 import { runFalsePosition } from "./falsePosition.js";
@@ -81,6 +82,9 @@ export const Simulations = {
   /* Interpolation */
 
   "lagrange": runLagrange,
+
+  "newtonforward": runNewtonForward,
+"newton-forward": runNewtonForward,
 
   /* Integration */
 
