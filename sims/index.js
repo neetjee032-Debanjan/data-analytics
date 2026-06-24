@@ -10,6 +10,7 @@ import { runIntegration } from "./integration.js";
 import { runForwardDifference }
 from "./forwardDifference.js";
 import { runLagrange } from "./lagrange.js";
+import { runBackwardDifference } from "./backwardDifference.js";
 import { runNewtonForward } from "./newtonForwardInterpolation.js";
 import { runNewtonBackwardInterpolation } from "./newtonBackwardInterpolation.js";
 import { runNewtonDividedDifference } from "./newtonDividedDifference.js";
@@ -110,6 +111,9 @@ export const Simulations = {
   "forwarddifference": runForwardDifference,
 
 "forward-difference": runForwardDifference,
+
+  "backwarddifference": runBackwardDifference,
+"backward-difference": runBackwardDifference,
 
   /* Differential Equations */
 
