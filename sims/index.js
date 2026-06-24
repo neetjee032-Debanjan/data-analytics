@@ -1,4 +1,5 @@
 import { runNewton } from "./newton-raphson.js";
+import { runSimpson38 } from "./simpson38.js";
 import { runBisection } from "./bisection.js";
 import { runDecimalToBinary } from "./decimalToBinary.js";
 import { runBinaryArithmetic } from "./binaryArithmetic.js";
@@ -105,6 +106,9 @@ export const Simulations = {
   "simpson13": runSimpson13,
   "simpson-1-3": runSimpson13,
   "simpson": runSimpson13,
+
+  "simpson38": runSimpson38,
+"simpson-3-8": runSimpson38,
 
   /* Numerical Differentiation */
 
