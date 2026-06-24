@@ -3,7 +3,7 @@ export const centralDifferenceLesson = {
 
   title: "Central Difference Method",
 
-  simulation: "central-difference",
+  simulation: "centraldifference",
 
   pages: [
 
