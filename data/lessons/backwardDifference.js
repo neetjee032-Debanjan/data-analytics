@@ -3,7 +3,7 @@ export const backwardDifferenceLesson = {
 
   title: "Backward Difference Method",
 
-  simulation: "backward-difference",
+  simulation: "backwarddifference"
 
   pages: [
 
