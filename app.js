@@ -1,6 +1,7 @@
 import { course } from "./data/course.js";
 import { renderLesson } from "./pages/lesson.js";
 import { openQuiz } from "./pages/QuizPage.js";
+import { renderResources } from "./pages/ResourcesPage.js";
 
 import {
   getProgress,
@@ -18,6 +19,14 @@ const app = document.getElementById("app");
 function router() {
 
   const hash = window.location.hash.replace("#", "");
+
+  /* Resources Page */
+  if (hash === "resources") {
+
+    renderResources(app);
+
+    return;
+  }
 
   // Home page anchors
   if (
@@ -82,7 +91,7 @@ function router() {
 
     return;
   }
-
+}
   // fallback
   renderHome();
 
@@ -264,6 +273,12 @@ function renderHome() {
          style="color:white;text-decoration:none;">
          Modules
       </a>
+
+      <a href="#resources"
+         style="color:white;text-decoration:none;">
+         Resources
+     </a>
+
     </div>
 
   </div>
