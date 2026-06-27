@@ -156,31 +156,31 @@ simulators: [
 {
 title:"Bisection Method Laboratory",
 type:"simulation",
-hash:"#lesson-module1-bisection-0"
+hash:"#lesson-m2-l3-0"
 },
 
 {
 title:"False Position Laboratory",
 type:"simulation",
-hash:"#lesson-module1-falseposition-0"
+hash:"#lesson-m2-l8-0"
 },
 
 {
 title:"Newton-Raphson Laboratory",
 type:"simulation",
-hash:"#lesson-module1-newtonraphson-0"
+hash:"#lesson-m2-l4-0"
 },
 
 {
 title:"Secant Method Laboratory",
 type:"simulation",
-hash:"#lesson-module1-secant-0"
+hash:"#lesson-m2-l11-0"
 },
 
 {
 title:"Fixed Point Laboratory",
 type:"simulation",
-hash:"#lesson-module1-fixedpoint-0"
+hash:"#lesson-m2-l10-0"
 }
 
 ]
