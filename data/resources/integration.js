@@ -158,13 +158,13 @@ hash:"#lesson-m5-l6-0"
 {
 title:"Simpson's 1/3 Laboratory",
 type:"simulation",
-hash:"#lesson-module4-simpson13-0"
+hash:"#lesson-m5-l9-0"
 },
 
 {
 title:"Simpson's 3/8 Laboratory",
 type:"simulation",
-hash:"#lesson-module4-simpson38-0"
+hash:"#lesson-m5-l26-0"
 }
 
 ]
