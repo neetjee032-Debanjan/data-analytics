@@ -522,29 +522,53 @@ function renderHome() {
 
       <div class="grid">
 
-        <div class="card">✈ Aircraft Design</div>
+        <div class="card" onclick="window.location.hash='application-aircraft'">
+    ✈ Aircraft Design
+  </div>
 
-        <div class="card">🌉 Bridge Analysis</div>
+  <div class="card" onclick="window.location.hash='application-bridge'">
+    🌉 Bridge Analysis
+  </div>
 
-        <div class="card">🌦 Weather Forecasting</div>
+  <div class="card" onclick="window.location.hash='application-weather'">
+    🌦 Weather Forecasting
+  </div>
 
-        <div class="card">🧠 Machine Learning</div>
+  <div class="card" onclick="window.location.hash='application-machinelearning'">
+    🧠 Machine Learning
+  </div>
 
-        <div class="card">🏥 Medical Imaging</div>
+  <div class="card" onclick="window.location.hash='application-medical'">
+    🏥 Medical Imaging
+  </div>
 
-        <div class="card">🚀 Space Missions</div>
+  <div class="card" onclick="window.location.hash='application-space'">
+    🚀 Space Missions
+  </div>
 
-        <div class="card">📈 Stock Prediction</div>
+  <div class="card" onclick="window.location.hash='application-stocks'">
+    📈 Stock Prediction
+  </div>
 
-        <div class="card">🎮 Game Physics</div>
+  <div class="card" onclick="window.location.hash='application-game'">
+    🎮 Game Physics
+  </div>
 
-        <div class="card">🔊 Signal Processing</div>
+  <div class="card" onclick="window.location.hash='application-signal'">
+    🔊 Signal Processing
+  </div>
 
-        <div class="card">🌍 Climate Modelling</div>
+  <div class="card" onclick="window.location.hash='application-climate'">
+    🌍 Climate Modelling
+  </div>
 
-        <div class="card">⚛ Quantum Simulations</div>
+  <div class="card" onclick="window.location.hash='application-quantum'">
+    ⚛ Quantum Simulations
+  </div>
 
-        <div class="card">📡 Telecommunications</div>
+  <div class="card" onclick="window.location.hash='application-telecom'">
+    📡 Telecommunications
+  </div>
 
       </div>
 
