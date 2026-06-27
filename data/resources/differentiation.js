@@ -152,19 +152,19 @@ simulators: [
 {
 title:"Forward Difference Laboratory",
 type:"simulation",
-hash:"#lesson-module3-forwarddifference-0"
+hash:"#lesson-m4-l12-0"
 },
 
 {
 title:"Backward Difference Laboratory",
 type:"simulation",
-hash:"#lesson-module3-backwarddifference-0"
+hash:"#lesson-m4-l13-0"
 },
 
 {
 title:"Central Difference Laboratory",
 type:"simulation",
-hash:"#lesson-module3-centraldifference-0"
+hash:"#lesson-m4-l14-0"
 }
 
 ]
