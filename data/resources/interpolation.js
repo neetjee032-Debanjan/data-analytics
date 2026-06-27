@@ -25,24 +25,24 @@ resources: {
 notes: [
 
 {
-title:"Complete Interpolation Notes",
+title:"NPTEL Numerical Analysis - Polynomial Interpolation Notes",
 type:"pdf",
-url:"",
-description:"Detailed notes covering all interpolation techniques."
+url:"https://nptel.ac.in/courses/111106101",
+description:"Official IIT Madras course covering polynomial interpolation, Lagrange interpolation, divided differences and interpolation error."
 },
 
 {
-title:"Interpolation Formula Sheet",
+title:"Python Numerical Methods - Interpolation Chapter",
 type:"pdf",
-url:"",
-description:"Important interpolation formulas."
+url:"https://pythonnumericalmethods.studentorg.berkeley.edu/notebooks/chapter17.00-Interpolation.html",
+description:"Excellent illustrated chapter covering linear interpolation, cubic splines, Lagrange and Newton interpolation."
 },
 
 {
-title:"Quick Revision Notes",
+title:"First Semester in Numerical Analysis with Python",
 type:"pdf",
-url:"",
-description:"Short notes for revision."
+url:"https://open.umn.edu/opentextbooks/textbooks/925",
+description:"Free open textbook with an entire chapter on interpolation."
 }
 
 ],
@@ -50,24 +50,24 @@ description:"Short notes for revision."
 videos: [
 
 {
-title:"Interpolation - NPTEL",
+title:"NPTEL Numerical Analysis (IIT Madras)",
 type:"video",
-url:"",
-description:"Official NPTEL lecture."
+url:"https://nptel.ac.in/courses/111106101",
+description:"Complete lecture series including interpolation, Lagrange interpolation, divided differences and inverse interpolation."
 },
 
 {
-title:"Interpolation Explained",
+title:"NPTEL Numerical Methods (IIT Roorkee)",
 type:"video",
-url:"",
-description:"Conceptual explanation with examples."
+url:"https://onlinecourses.nptel.ac.in/noc25_ma83/preview",
+description:"Official SWAYAM course covering interpolation and numerical methods."
 },
 
 {
-title:"Worked Numerical Examples",
+title:"Elementary Numerical Analysis (IIT Bombay)",
 type:"video",
-url:"",
-description:"Solved interpolation problems."
+url:"https://nptel.ac.in/courses/111101003",
+description:"Dedicated lectures on interpolating polynomials, divided differences and cubic spline interpolation."
 }
 
 ],
@@ -77,15 +77,15 @@ books: [
 {
 title:"Numerical Analysis — Burden & Faires",
 type:"book",
-url:"",
-description:"Reference chapter."
+url:"https://www.cengage.com/",
+description:"Standard reference textbook."
 },
 
 {
-title:"Applied Numerical Methods — Chapra",
+title:"Applied Numerical Methods — Steven Chapra",
 type:"book",
-url:"",
-description:"Engineering interpolation methods."
+url:"https://www.mheducation.com/",
+description:"Engineering-oriented numerical methods reference."
 }
 
 ],
@@ -93,24 +93,24 @@ description:"Engineering interpolation methods."
 practice: [
 
 {
-title:"Practice Set 1",
+title:"Python Numerical Methods - End of Chapter Problems",
 type:"practice",
-url:"",
-description:"Basic interpolation problems."
+url:"https://pythonnumericalmethods.studentorg.berkeley.edu/notebooks/chapter17.00-Interpolation.html",
+description:"Exercises and worked examples."
 },
 
 {
-title:"Practice Set 2",
+title:"NPTEL Numerical Methods Course",
 type:"practice",
-url:"",
-description:"Advanced interpolation problems."
+url:"https://onlinecourses.nptel.ac.in/noc25_ma83/preview",
+description:"Assignments and practice material from the official course."
 },
 
 {
-title:"University PYQs",
+title:"Open Numerical Analysis Textbook Exercises",
 type:"practice",
-url:"",
-description:"Previous year examination questions."
+url:"https://open.umn.edu/opentextbooks/textbooks/925",
+description:"Practice exercises from the free textbook."
 }
 
 ],
@@ -118,17 +118,17 @@ description:"Previous year examination questions."
 code: [
 
 {
-title:"Python Programs",
+title:"Python Numerical Methods - Interpolation Programs",
 type:"code",
-url:"",
-description:"Python implementation."
+url:"https://pythonnumericalmethods.studentorg.berkeley.edu/notebooks/chapter17.00-Interpolation.html",
+description:"Python implementations of linear, Lagrange, Newton and spline interpolation."
 },
 
 {
-title:"MATLAB Programs",
+title:"SciPy Interpolation Documentation",
 type:"code",
-url:"",
-description:"MATLAB implementation."
+url:"https://docs.scipy.org/doc/scipy/reference/interpolate.html",
+description:"Official SciPy interpolation library documentation."
 }
 
 ],
@@ -136,17 +136,17 @@ description:"MATLAB implementation."
 formulas: [
 
 {
-title:"Interpolation Formula Sheet",
+title:"Interpolation Formula Summary",
 type:"formula",
-url:"",
-description:"Important interpolation formulas."
+url:"https://nptel.ac.in/courses/111106101",
+description:"Lagrange, Newton Forward, Newton Backward and Divided Difference formulas."
 },
 
 {
-title:"Difference Table Summary",
+title:"Interpolation Error Formula",
 type:"formula",
-url:"",
-description:"Forward, backward and divided difference formulas."
+url:"https://pythonnumericalmethods.studentorg.berkeley.edu/notebooks/chapter17.00-Interpolation.html",
+description:"Interpolation error expressions and derivations."
 }
 
 ],
