@@ -1,5 +1,6 @@
 import { course } from "./data/course.js";
 import { renderLesson } from "./pages/lesson.js";
+import { renderApplication } from "./pages/ApplicationPage.js";
 import { openQuiz } from "./pages/QuizPage.js";
 import { renderResources } from "./pages/ResourcesPage.js";
 
@@ -19,6 +20,27 @@ const app = document.getElementById("app");
 function router() {
 
   const hash = window.location.hash.replace("#", "");
+
+  /* -----------------------
+   APPLICATION PAGE
+------------------------ */
+
+if(hash.startsWith("application-")){
+
+const id =
+hash.replace(
+"application-",
+""
+);
+
+renderApplication(
+app,
+id
+);
+
+return;
+
+}
 
   /* Resources Page */
   if (hash === "resources") {
